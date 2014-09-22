@@ -3,8 +3,8 @@ package com.example.hcp.home_control_prototype;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import org.json.JSONArray;
 
 
-public class MainActivity extends Activity {
+public class ToggleSwitchActivity extends Activity implements OnTaskCompleted {
+
+    private static final String TAG = "ToggleSwitchActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_toggle_switch);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -31,7 +34,7 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.toggle_switch, menu);
         return true;
     }
 
@@ -47,6 +50,11 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onTaskCompleted(Object obj) {
+        JSONArray jArray = (JSONArray)obj;
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -58,13 +66,22 @@ public class MainActivity extends Activity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_toggle_switch, container, false);
             return rootView;
         }
     }
 
-    public void switchViewHandler(View v){
-        Intent toggleIntent = new Intent(this, ToggleSwitchActivity.class);
-        startActivity(toggleIntent);
+
+    public void turnOnButtonHandler(View v){
+        Log.i(TAG, "turnOnButtonHandler() -> Started.");
+        TurnOnTask on = new TurnOnTask(this);
+        on.execute();
+    }
+
+
+    public void turnOffButtonHandler(View v){
+        Log.i(TAG, "turnOffButtonHandler() -> Started.");
+        TurnOffTask off = new TurnOffTask(this);
+        off.execute();
     }
 }
