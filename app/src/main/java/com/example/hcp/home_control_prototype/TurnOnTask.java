@@ -5,7 +5,7 @@ package com.example.hcp.home_control_prototype;
  * A task to send the Turn On signal to the spark core.
  */
 public class TurnOnTask extends AsyncAPITask {
-    private static final String api_path = "v1/devicename/turn_on";
+    private static final String api_path = "on";
 
     public TurnOnTask(OnTaskCompleted listener) {
         super(listener, TurnOnTask.api_path);

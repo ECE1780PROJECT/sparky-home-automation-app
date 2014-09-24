@@ -3,11 +3,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.client.HttpClient;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -15,6 +18,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by garygraham on 2014-09-22.
@@ -26,7 +31,7 @@ public abstract class AsyncAPITask extends AsyncTask<NameValuePair, Void, JSONAr
 
     private OnTaskCompleted listener;
     public static final String TAG = "AsyncAPITask";
-    private static final String server = "https://api.spark.io/";
+    private static final String server = "https://api.spark.io/v1/devices/53ff70066667574817202567/";
     private String api_path = "";
     private JSONArray jArray;
 
@@ -41,20 +46,29 @@ public abstract class AsyncAPITask extends AsyncTask<NameValuePair, Void, JSONAr
         String result = new String();
         try{
             //Build the URI
-            URI new_fangled_uri = new URI(server + api_path);
-
-
-            //Until I get the actual API up and running I'll use some dummy API.
-            URI uri = new URI("https://www.wanikani.com/api/user/50f4abec6b4afdecdb892938e1193edb/user-information");
+            URI uri = new URI(server + api_path);
 
             //Building the HTTP request.
             HttpClient httpClient = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(uri);
+            HttpPost httpPost = new HttpPost(uri);
 
-            Log.i(TAG, "doInBackground() -> Sending out request: " + server + api_path);
+            List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
+            //woo secret access token written in plain code.
+            parameters.add(new BasicNameValuePair("access_token", "49ebfe28f45764750d954eda9a157352949f0c8b"));
+
+            //in case we want to support posting data in the future
+            for(NameValuePair p : nameValuePairs)
+            {
+                parameters.add(p);
+            }
+            Log.i(TAG, "doInBackground() ->Sending out request: " + server + api_path);
+
+            //tacking the access code and other parameters onto the request.
+            httpPost.setEntity(new UrlEncodedFormEntity(parameters));
+            
             //Getting the HTTP response
-            HttpResponse response = httpClient.execute(httpGet);
+            HttpResponse response = httpClient.execute(httpPost);
             Log.i(TAG, response.toString());
             HttpEntity entity = response.getEntity();
 

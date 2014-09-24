@@ -5,7 +5,7 @@ package com.example.hcp.home_control_prototype;
  * A task to send the shutdown signal to the Spark core.
  */
 public class TurnOffTask extends AsyncAPITask {
-    private static final String api_path = "v1/devicename/turn_off";
+    private static final String api_path = "off";
 
     public TurnOffTask(OnTaskCompleted listener) {
         super(listener, TurnOffTask.api_path);
