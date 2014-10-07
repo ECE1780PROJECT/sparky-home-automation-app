@@ -53,6 +53,7 @@ public class ToggleSwitchActivity extends Activity implements OnTaskCompleted {
     @Override
     public void onTaskCompleted(Object obj) {
         JSONArray jArray = (JSONArray)obj;
+
     }
 
     /**
@@ -83,5 +84,11 @@ public class ToggleSwitchActivity extends Activity implements OnTaskCompleted {
         Log.i(TAG, "turnOffButtonHandler() -> Started.");
         TurnOffTask off = new TurnOffTask(this);
         off.execute();
+    }
+
+    public void statusButtonHandler(View v){
+        Log.i(TAG, "statusButtonHandler() -> Started.");
+        GetStatusTask status = new GetStatusTask(this);
+        status.execute();
     }
 }
