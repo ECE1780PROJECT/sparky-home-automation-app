@@ -13,6 +13,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -92,7 +93,9 @@ public abstract class AsyncAPITask extends AsyncTask<NameValuePair, Void, JSONAr
 
                 //Parse out the JSON Array from the response.
                 try{
-                   jArray = new JSONArray(result);
+                   jArray = new JSONArray();
+                   JSONObject jObject = new JSONObject(result);
+                   jArray.put(jObject);
                    return jArray;
                 }catch(JSONException e){
                     Log.e(TAG, "Error parsing the json! -> " + e.toString());

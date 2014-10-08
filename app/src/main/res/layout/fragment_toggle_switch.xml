@@ -27,4 +27,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
         android:onClick="turnOffButtonHandler" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="status"
+        android:id="@+id/btn_status"
+        android:layout_below="@+id/btn_turn_off"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp"
+        android:onClick="statusButtonHandler" />
 </RelativeLayout>
