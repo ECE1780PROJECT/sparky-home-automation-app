@@ -5,6 +5,10 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,17 +18,20 @@ import android.os.Build;
 
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
+    private static final int pageCount = 2;
+    private ViewPager viewPager;
+    private PagerAdapter pagerAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+
+        viewPager = (ViewPager)findViewById(R.id.pager);
+        pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
+
     }
 
 
@@ -66,5 +73,12 @@ public class MainActivity extends Activity {
     public void switchViewHandler(View v){
         Intent toggleIntent = new Intent(this, ToggleSwitchActivity.class);
         startActivity(toggleIntent);
+    }
+
+    private class SlideViewAdapter extends PagerAdapter {
+        public SlideViewAdapter(FragmentManager supportFragmentManager) {
+
+
+        }
     }
 }
