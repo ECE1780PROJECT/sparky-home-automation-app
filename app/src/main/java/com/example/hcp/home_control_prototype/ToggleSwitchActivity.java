@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
 
 import org.json.JSONArray;
 
@@ -18,6 +19,7 @@ import org.json.JSONArray;
 public class ToggleSwitchActivity extends Activity implements OnTaskCompleted {
 
     private static final String TAG = "ToggleSwitchActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,10 @@ public class ToggleSwitchActivity extends Activity implements OnTaskCompleted {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+
+
+
     }
 
 

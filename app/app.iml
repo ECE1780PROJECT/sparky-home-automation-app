@@ -79,6 +79,8 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 20 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="wiigee-plugin-android-1.0.2a" level="project" />
+    <orderEntry type="library" exported="" name="wiigee-lib-1.5.6" level="project" />
   </component>
 </module>
 
