@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hcp.home_control_prototype.WiiGeeTestActivity"
+    tools:context="com.example.hcp.home_control_prototype.WiigeeTestActivity"
     tools:ignore="MergeRootFrame">
 
 
@@ -16,5 +16,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="66dp"
-        android:layout_gravity="center_horizontal|top" />
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="wiigeeTestHandler"/>
 </FrameLayout>

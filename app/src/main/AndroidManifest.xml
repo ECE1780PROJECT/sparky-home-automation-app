@@ -37,7 +37,7 @@
                 android:value="com.example.hcp.home_control_prototype.MainActivity" />
         </activity>
         <activity
-            android:name=".WiiGeeTestActivity"
+            android:name=".WiigeeTestActivity"
             android:label="@string/title_wiigee_test"
             android:parentActivityName=".MainActivity" >
             <meta-data
