@@ -19,7 +19,7 @@ public class GestureTestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wiigee_test);
+        setContentView(R.layout.gesture_test);
 
     }
     @Override
@@ -30,7 +30,7 @@ public class GestureTestActivity extends Activity {
     }
 
 
-    public void wiigeeTestHandler(View v){
-        Log.i(TAG, "wiigeeTestHandler -> pressed.");
+    public void gestureTestHandler(View v){
+        Log.i(TAG, "gestureTestHandler -> pressed.");
     }
 }

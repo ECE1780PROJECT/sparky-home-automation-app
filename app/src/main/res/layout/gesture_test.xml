@@ -27,7 +27,7 @@
         android:id="@+id/test"
         android:layout_marginTop="36dp"
         android:layout_gravity="left|top"
-        android:onClick="wiigeeTestHandler"
+        android:onClick="gestureTestHandler"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
