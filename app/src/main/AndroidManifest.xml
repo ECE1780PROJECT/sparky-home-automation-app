@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hcp.home_control_prototype" >
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -38,12 +41,21 @@
         </activity>
         <activity
             android:name=".GestureTestActivity"
-            android:label="@string/title_wiigee_test"
+            android:label="@string/title_gesture_test"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hcp.home_control_prototype.MainActivity" />
         </activity>
+        <activity android:name="com.example.hcp.home_control_prototype.GestureOverview"></activity>
+
+        <service android:name="com.example.hcp.home_control_prototype.gesture.GestureRecognitionService"
+            android:enabled="true" android:label="GestureRecognitionService"
+            >
+            <intent-filter>
+                <action android:name="com.example.hcp.home_control_prototype.gesture.GESTURE_RECOGNIZER" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

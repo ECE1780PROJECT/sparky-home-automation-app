@@ -5,4 +5,5 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:title="Edit Gestures" android:id="@+id/edit_gestures" android:icon="@android:drawable/ic_menu_share" />
 </menu>
