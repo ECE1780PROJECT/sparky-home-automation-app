@@ -2,6 +2,7 @@ package com.example.hcp.home_control_prototype;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,9 +57,10 @@ public class ToggleSwitchFragment extends Fragment {
             on.execute();
         }
 
+
         @Override
-        public void onTaskCompleted(Object obj) {
-            Log.i(TAG, "onTaskCompleted() -> Received response from TurnOnTask: " + ((JSONArray) obj).toString());
+        public void onTaskCompleted(Object obj, Context context) {
+            Log.i(TAG, "onTaskCompleted() -> Received response from TurnOnTask: " + obj.toString());
         }
     }
 
@@ -72,8 +74,8 @@ public class ToggleSwitchFragment extends Fragment {
         }
 
         @Override
-        public void onTaskCompleted(Object obj) {
-            Log.i(TAG, "onTaskCompleted() -> Received response from TurnOffTask: " + ((JSONArray) obj).toString());
+        public void onTaskCompleted(Object obj, Context context) {
+            Log.i(TAG, "onTaskCompleted() -> Received response from TurnOffTask: " + obj.toString());
         }
     }
 
@@ -86,8 +88,8 @@ public class ToggleSwitchFragment extends Fragment {
         }
 
         @Override
-        public void onTaskCompleted(Object obj) {
-            Log.i(TAG, "onTaskCompleted() -> Received response from GetStatusTask: " + ((JSONArray) obj).toString());
+        public void onTaskCompleted(Object obj, Context context) {
+            Log.i(TAG, "onTaskCompleted() -> Received response from GetStatusTask: " + obj.toString());
         }
     }
 }

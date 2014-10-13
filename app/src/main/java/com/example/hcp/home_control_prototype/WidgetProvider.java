@@ -48,7 +48,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
 
             awm.updateAppWidget(appWidgetId, views);
         }
-        GetStatusTask status = new GetStatusTask(this);
+        GetStatusTask status = new GetStatusTask(this, context);
         status.execute();
     }
 
@@ -63,17 +63,22 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
         if(intent.getAction().equals(toggleAction)){
             Log.i(TAG, "onReceive() -> received toggleAction from Intent in the widget.");
 
-            ToggleTask toggleTask = new ToggleTask(this);
+            ToggleTask toggleTask = new ToggleTask(this, context);
             toggleTask.execute();
             Log.i(TAG, "onReceive() -> sent off toggle task to AsynAPICall.");
         }
+    }
+
+    @Override
+    public void onTaskCompleted(Object obj) {
+        Log.e(TAG, "onTaskCompleted(Object obj) You must call onTaskCompleted WITH context!!");
     }
 
     /**
      * Handles all API requests in the widget. Essentially just changes the state of the widget based on the return code.
      */
     @Override
-    public void onTaskCompleted(Object obj) {
+    public void onTaskCompleted(Object obj, Context context) {
         Log.i(TAG, "onTaskCompleted() -> received response in the widget class. ");
         JSONArray jArray = (JSONArray)obj;
         try{
@@ -82,11 +87,11 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
             switch(status){
                 case 0:
                     Log.i(TAG, "Light is off!");
-                    lightOff();
+                    lightOff(context);
                     break;
                 case 1:
                     Log.i(TAG, "Light is on!");
-                    lightOn();
+                    lightOn(context);
                     break;
                 default:
                     Log.e(TAG, "Returned a non-standard response!!");
@@ -102,26 +107,26 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
     /**
      * Sets the correct image on all widgets.
      */
-    public void lightOff() {
-        RemoteViews views = new RemoteViews(this.context.getPackageName(), R.layout.app_widget_layout);
+    public void lightOff(Context context) {
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.app_widget_layout);
 
-        for(int i =0 ; i < appWidgetIds.length; i++){
-            int appWidgetId = appWidgetIds[i];
+        for (int appWidgetId : appWidgetIds) {
             views.setImageViewResource(R.id.bulbImg, R.drawable.bulb_off_img);
-            this.awm.updateAppWidget(appWidgetId, views);
+            awm.updateAppWidget(appWidgetId, views);
         }
     }
+
 
     /**
      * Sets the correct image on all widgets.
      */
-    public void lightOn(){
-        RemoteViews views = new RemoteViews(this.context.getPackageName(), R.layout.app_widget_layout);
+    public void lightOn(Context context){
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.app_widget_layout);
 
-        for(int i =0 ; i < appWidgetIds.length; i++){
-            int appWidgetId = appWidgetIds[i];
+        for (int appWidgetId : appWidgetIds) {
             views.setImageViewResource(R.id.bulbImg, R.drawable.bulb_on_img);
-            this.awm.updateAppWidget(appWidgetId, views);
+            awm.updateAppWidget(appWidgetId, views);1
         }
     }
+
 }
