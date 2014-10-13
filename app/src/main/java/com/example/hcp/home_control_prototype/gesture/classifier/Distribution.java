@@ -1,4 +1,4 @@
-package com.example.hcp.home_control_prototype;
+package com.example.hcp.home_control_prototype.gesture.classifier;
 
 import java.util.HashMap;
 import java.util.Map;
