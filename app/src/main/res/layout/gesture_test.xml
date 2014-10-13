@@ -1,0 +1,43 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hcp.home_control_prototype.GestureTestActivity"
+    tools:ignore="MergeRootFrame">
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="train"
+        android:id="@+id/train"
+        android:layout_gravity="center"
+        android:layout_below="@+id/test"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="59dp"
+        android:layout_marginTop="36dp" />
+
+    <Button
+        android:layout_width="184dp"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:id="@+id/test"
+        android:layout_marginTop="36dp"
+        android:layout_gravity="left|top"
+        android:onClick="gestureTestHandler"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="stop"
+        android:id="@+id/stop"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/train"
+        android:layout_alignStart="@+id/train" />
+
+</RelativeLayout>

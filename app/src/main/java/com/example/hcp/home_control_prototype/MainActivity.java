@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
     }
 
     public void switchWiiGeeTestHandler(View v) {
-        Intent toggleIntent = new Intent(this, WiiGeeTestActivity.class);
+        Intent toggleIntent = new Intent(this, GestureTestActivity.class);
         startActivity(toggleIntent);
     }
 
