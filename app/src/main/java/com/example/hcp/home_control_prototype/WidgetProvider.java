@@ -125,7 +125,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
 
         for (int appWidgetId : appWidgetIds) {
             views.setImageViewResource(R.id.bulbImg, R.drawable.bulb_on_img);
-            awm.updateAppWidget(appWidgetId, views);1
+            awm.updateAppWidget(appWidgetId, views);
         }
     }
 
