@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Gestures">
+
+        <CheckBoxPreference
+            android:key="disable_pref"
+            android:title="Disable gestures"
+            android:summary="Removes gesture functionality from the device" />
+        <ListPreference
+            android:key="gesture_select_pref"
+            android:title="Select a gesture"
+            android:summary="Choose which gesture toggles the device"
+            android:entries="@array/possible_gestures"
+            android:entryValues="@array/gesture_values"/>
+
+
+        <ListPreference
+            android:key="background_services_pref"
+            android:title="Background services"
+            android:summary="Choose behaviour when HAC is not in the foreground"
+            android:entries="@array/possible_behaviours"
+            android:entryValues="@array/behaviour_values"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="General">
+
+        <Preference
+            android:key="about_pref"
+            android:title="About"
+            android:summary="Check us out!" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.hcp.home_control_prototype"
+                android:targetClass="com.example.hcp.home_control_prototype.MainActivity" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,5 +1,6 @@
 package com.example.hcp.home_control_prototype;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,7 +14,7 @@ import android.view.View;
 
 
 public class MainActivity extends FragmentActivity {
-    private static final int pageCount = 2;
+    private static final int pageCount = 3;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
 
@@ -67,7 +68,10 @@ public class MainActivity extends FragmentActivity {
                 case 0:
                     return new MainPageFragment();
                 case 1:
-                    return new ToggleSwitchFragment();
+                    return new ToggleLightFragment();
+                case 2:
+                    return new SettingsFragment();
+
             }
             return new MainPageFragment();
         }

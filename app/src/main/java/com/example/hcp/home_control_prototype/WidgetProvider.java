@@ -26,13 +26,12 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
     private static final String TAG = "WidgetProvider";
     private static Context context = null;
     private static AppWidgetManager awm = null;
-    private static int[] appWidgetIds = null;
 
     public void onUpdate(Context context, AppWidgetManager awm, int[] appWidgetIds){
         //god this is a greasy hack but it works.
         this.context = context;
         this.awm = awm;
-        this.appWidgetIds = appWidgetIds;
+
 
         final int N = appWidgetIds.length;
 
@@ -105,7 +104,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
     public void lightOff(Context context) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.app_widget_layout);
 
-        for (int appWidgetId : appWidgetIds) {
+        for (int appWidgetId : awm.getAppWidgetIds(new ComponentName(context.getPackageName(),WidgetProvider.class.getName()))) {
             views.setImageViewResource(R.id.bulbImg, R.drawable.bulb_off_img);
             awm.updateAppWidget(appWidgetId, views);
         }
@@ -118,7 +117,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
     public void lightOn(Context context){
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.app_widget_layout);
 
-        for (int appWidgetId : appWidgetIds) {
+        for (int appWidgetId : awm.getAppWidgetIds(new ComponentName(context.getPackageName(),WidgetProvider.class.getName()))) {
             views.setImageViewResource(R.id.bulbImg, R.drawable.bulb_on_img);
             awm.updateAppWidget(appWidgetId, views);
         }
