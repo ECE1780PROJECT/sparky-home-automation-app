@@ -27,8 +27,8 @@ import com.example.hcp.home_control_prototype.gesture.classifier.Distribution;
 /**
  * Created by ansonliang55 on 2014-10-10.
  */
-public class GestureTestActivity extends Activity {
-    private static final String TAG = "GestureTestActivity";
+public class AddGestureActivity extends Activity {
+    private static final String TAG = "AddGestureActivity";
 
 
     IGestureRecognitionService recognitionService;
@@ -59,13 +59,13 @@ public class GestureTestActivity extends Activity {
 
         @Override
         public void onGestureLearned(String gestureName) throws RemoteException {
-            Toast.makeText(GestureTestActivity.this, String.format("Gesture %s learned", gestureName), Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddGestureActivity.this, String.format("Gesture %s learned", gestureName), Toast.LENGTH_SHORT).show();
             System.err.println("Gesture %s learned");
         }
 
         @Override
         public void onTrainingSetDeleted(String trainingSet) throws RemoteException {
-            Toast.makeText(GestureTestActivity.this, String.format("Training set %s deleted", trainingSet), Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddGestureActivity.this, String.format("Training set %s deleted", trainingSet), Toast.LENGTH_SHORT).show();
             System.err.println(String.format("Training set %s deleted", trainingSet));
         }
 
@@ -74,7 +74,7 @@ public class GestureTestActivity extends Activity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(GestureTestActivity.this, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()), Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddGestureActivity.this, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()), Toast.LENGTH_LONG).show();
                     System.err.println(String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
                 }
             });
@@ -84,7 +84,7 @@ public class GestureTestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.gesture_test);
+        setContentView(R.layout.add_gesture);
         final TextView activeTrainingSetText = (TextView) findViewById(R.id.activeTrainingSet);
         final EditText trainingSetText = (EditText) findViewById(R.id.trainingSetName);
         final EditText editText = (EditText) findViewById(R.id.gestureName);
@@ -171,7 +171,7 @@ public class GestureTestActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(GestureTestActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddGestureActivity.this);
                 builder.setMessage("You really want to delete the training set?").setCancelable(true).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         if (recognitionService != null) {

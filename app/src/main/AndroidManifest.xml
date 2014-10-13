@@ -45,7 +45,7 @@
             android:label="@string/title_activity_settings_fragment" >
         </activity>
         <activity
-            android:name=".GestureTestActivity"
+            android:name=".AddGestureActivity"
             android:label="@string/title_gesture_test"
             android:parentActivityName=".MainActivity" >
             <meta-data

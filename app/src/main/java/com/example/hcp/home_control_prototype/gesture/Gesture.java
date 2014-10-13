@@ -28,11 +28,13 @@ public class Gesture implements Serializable {
 
 	private static final long serialVersionUID = 7148492971634218981L;
 	private String label;
+    private int id;
 	private List<float[]> values;
 
 	public Gesture(List<float[]> values, String label) {
 		setValues(values);
 		setLabel(label);
+        setID(99);
 	}
 
 	public void setValues(List<float[]> values) {
@@ -58,6 +60,13 @@ public class Gesture implements Serializable {
 	public void setValue(int index, int dim, float f) {
 		values.get(index)[dim] = f;
 	}
+
+    public void setID(int idValue) {
+        id = idValue;
+    }
+    public int getID() {
+        return id;
+    }
 
 	public int length() {
 		return values.size();
