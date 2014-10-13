@@ -1,21 +1,15 @@
 package com.example.hcp.home_control_prototype;
 
-import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-
 
 
 public class MainActivity extends FragmentActivity {
@@ -27,11 +21,11 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.pager_root);
 
         viewPager = (ViewPager)findViewById(R.id.pager);
         pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
-
+        viewPager.setAdapter(pagerAdapter);
     }
 
 
@@ -54,31 +48,34 @@ public class MainActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
 
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-    }
 
     public void switchViewHandler(View v){
-        Intent toggleIntent = new Intent(this, ToggleSwitchActivity.class);
+        Intent toggleIntent = new Intent(this, ToggleSwitchFragment.class);
         startActivity(toggleIntent);
     }
 
-    private class SlideViewAdapter extends PagerAdapter {
+    private class SlideViewAdapter extends FragmentStatePagerAdapter {
         public SlideViewAdapter(FragmentManager supportFragmentManager) {
+            super(supportFragmentManager);
+
+        }
+
+        @Override
+        public android.support.v4.app.Fragment getItem(int i) {
+            switch(i){
+                case 0:
+                    return new MainPageFragment();
+                case 1:
+                    return new ToggleSwitchFragment();
+            }
+            return new MainPageFragment();
+        }
 
 
+        @Override
+        public int getCount() {
+            return pageCount;
         }
     }
 }
