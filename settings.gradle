@@ -1,1 +1,1 @@
-include ':app', ':wiigee-plugin-android-1.0.2a'
+include ':app'
