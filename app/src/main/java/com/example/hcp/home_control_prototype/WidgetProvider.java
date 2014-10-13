@@ -65,13 +65,8 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
 
             ToggleTask toggleTask = new ToggleTask(this, context);
             toggleTask.execute();
-            Log.i(TAG, "onReceive() -> sent off toggle task to AsynAPICall.");
+            Log.i(TAG, "onReceive() -> sent off toggle task to AsyncAPICall.");
         }
-    }
-
-    @Override
-    public void onTaskCompleted(Object obj) {
-        Log.e(TAG, "onTaskCompleted(Object obj) You must call onTaskCompleted WITH context!!");
     }
 
     /**
