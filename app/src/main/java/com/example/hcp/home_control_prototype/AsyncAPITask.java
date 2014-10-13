@@ -1,4 +1,5 @@
 package com.example.hcp.home_control_prototype;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -30,7 +31,8 @@ import java.util.List;
  */
 public abstract class AsyncAPITask extends AsyncTask<NameValuePair, Void, JSONArray>{
 
-    private OnTaskCompleted listener;
+    private final Context context;
+    protected OnTaskCompleted listener;
     public static final String TAG = "AsyncAPITask";
     private static final String server = "https://api.spark.io/v1/devices/53ff70066667574817202567/";
     private String api_path = "";
@@ -40,6 +42,12 @@ public abstract class AsyncAPITask extends AsyncTask<NameValuePair, Void, JSONAr
     public AsyncAPITask(OnTaskCompleted listener, String api_path){
         this.listener = listener;
         this.api_path = api_path;
+        this.context = null;
+    }
+    public AsyncAPITask(OnTaskCompleted listener, String api_path, Context context){
+        this.listener = listener;
+        this.api_path = api_path;
+        this.context = context;
     }
 
     @Override
@@ -112,6 +120,6 @@ public abstract class AsyncAPITask extends AsyncTask<NameValuePair, Void, JSONAr
 
     @Override
     protected void onPostExecute(JSONArray jArray){
-        this.listener.onTaskCompleted(jArray);
+            this.listener.onTaskCompleted(jArray, this.context);
     }
 }

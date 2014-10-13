@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="possible_gestures">
+        <item>Bump Right</item>
+        <item>Bump Left</item>
+        <item>Bump Front</item>
+    </string-array>
+
+
+    <string-array name="gesture_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="possible_behaviours">
+        <item>Always on</item>
+        <item>Always off</item>
+        <item>Hold both volume buttons to activate</item>
+    </string-array>
+
+    <string-array name="behaviour_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>

@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hcp.home_control_prototype" >
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-        <receiver android:name="WidgetProvider">
+        <receiver android:name=".WidgetProvider" >
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"></action>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/homecontrol_appwidget_info">
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/homecontrol_appwidget_info" >
             </meta-data>
         </receiver>
 
-
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Holo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,12 +35,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ToggleSwitchActivity"
+            android:name=".ToggleSwitchFragment"
             android:label="@string/title_activity_toggle_switch"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hcp.home_control_prototype.MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@android:style/Theme.Holo" >
+        </activity>
+        <activity
+            android:name=".SettingsFragment"
+            android:label="@string/title_activity_settings_fragment" >
         </activity>
         <activity
             android:name=".GestureTestActivity"
@@ -47,7 +52,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hcp.home_control_prototype.MainActivity" />
         </activity>
-        <activity android:name="com.example.hcp.home_control_prototype.GestureOverview"></activity>
+        <activity android:name="com.example.hcp.home_control_prototype.GestureOverview"/>
 
         <service android:name="com.example.hcp.home_control_prototype.gesture.GestureRecognitionService"
             android:enabled="true" android:label="GestureRecognitionService"
