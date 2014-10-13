@@ -6,11 +6,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
+
+
 /**
  * Created by ansonliang55 on 2014-10-10.
  */
-public class WiigeeTestActivity extends Activity {
-    private static final String TAG = "WiigeeTestActivity";
+public class GestureTestActivity extends Activity {
+    private static final String TAG = "GestureTestActivity";
+
+
+    String activeTrainingSet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
