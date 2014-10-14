@@ -44,7 +44,7 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.example.hcp.home_control_prototype"
-                android:targetClass="com.example.hcp.home_control_prototype.MainActivity" />
+                android:targetClass="com.example.hcp.home_control_prototype.AboutActivity" />
         </Preference>
 
     </PreferenceCategory>

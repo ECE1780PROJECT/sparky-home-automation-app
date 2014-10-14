@@ -59,7 +59,7 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
      * Handles all API requests in the widget. Essentially just changes the state of the widget based on the return code.
      */
     @Override
-    public void onTaskCompleted(Object obj, Context context) {  
+    public void onTaskCompleted(Object obj, Context context) {
         Log.i(TAG, "onTaskCompleted() -> received response in the widget class. ");
         JSONArray jArray = (JSONArray)obj;
         try{

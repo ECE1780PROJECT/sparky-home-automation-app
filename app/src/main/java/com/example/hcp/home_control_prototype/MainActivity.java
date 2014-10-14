@@ -12,7 +12,7 @@ import android.view.View;
 
 
 public class MainActivity extends FragmentActivity {
-    private static final int pageCount = 3;
+    private static final int pageCount = 2;
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
 
@@ -44,14 +44,12 @@ public class MainActivity extends FragmentActivity {
         public android.support.v4.app.Fragment getItem(int i) {
             switch(i){
                 case 0:
-                    return new MainPageFragment();
-                case 1:
                     return new ToggleLightFragment();
-                case 2:
+                case 1:
                     return new SettingsFragment();
-
+                default:
+                    return new ToggleLightFragment();
             }
-            return new MainPageFragment();
         }
 
 

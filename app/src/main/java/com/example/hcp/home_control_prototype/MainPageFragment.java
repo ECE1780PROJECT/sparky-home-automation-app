@@ -24,6 +24,7 @@ import android.widget.Toast;
  * Use the {@link MainPageFragment#newInstance} factory method to
  * create an instance of this fragment.
  *
+ * DEPRECATED.
  */
 public class MainPageFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
