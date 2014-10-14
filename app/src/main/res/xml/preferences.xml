@@ -35,6 +35,23 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="Spark">
+
+        <EditTextPreference
+            android:key="access_token"
+            android:title="Access Token"
+            android:summary="Check us out!" >
+        </EditTextPreference>
+
+        <EditTextPreference
+            android:key="device_id"
+            android:title="Device ID" >
+        </EditTextPreference>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
         android:title="General">
 
         <Preference
