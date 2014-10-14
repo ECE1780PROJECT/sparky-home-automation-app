@@ -38,22 +38,24 @@
         <activity
             android:name=".ToggleSwitchFragment"
             android:label="@string/title_activity_toggle_switch"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".SettingsFragment"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_settings_fragment" >
         </activity>
         <activity
             android:name=".AddGestureActivity"
             android:label="@string/title_gesture_test"
             android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hcp.home_control_prototype.MainActivity" />
         </activity>
-        <activity android:name=".GestureOverview" />
 
         <service
             android:name=".gesture.GestureRecognitionService"

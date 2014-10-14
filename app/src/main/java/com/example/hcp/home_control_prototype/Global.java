@@ -10,6 +10,7 @@ import android.widget.Toast;
  * This is a global glass that has function that is used globally (singleton software design pattern)
  */
 public class Global {
+    public static String trainingSet = "gesturelist";
     public static void showToast(Context applicationContext, CharSequence text, int duration){
         // Usage Global.showToast(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_LONG);
         Toast toast = Toast.makeText(applicationContext, text, duration);

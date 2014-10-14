@@ -40,7 +40,6 @@ public class AddGestureActivity extends ListActivity {
 
 
     IGestureRecognitionService recognitionService;
-    String activeTrainingSet;
     ArrayAdapter<String> adapter;
 
     private final ServiceConnection serviceConnection = new ServiceConnection() {
@@ -49,9 +48,9 @@ public class AddGestureActivity extends ListActivity {
         public void onServiceConnected(ComponentName className, IBinder service) {
             recognitionService = IGestureRecognitionService.Stub.asInterface(service);
             try {
-                recognitionService.startClassificationMode(activeTrainingSet);
+                recognitionService.startClassificationMode(Global.trainingSet);
                 recognitionService.registerListener(IGestureRecognitionListener.Stub.asInterface(gestureListenerStub));
-                List<String> items = recognitionService.getGestureList(activeTrainingSet);
+                List<String> items = recognitionService.getGestureList(Global.trainingSet);
                 setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, R.layout.gesture_item, items));
             } catch (RemoteException e1) {
                 // TODO Auto-generated catch block
@@ -110,7 +109,6 @@ public class AddGestureActivity extends ListActivity {
         //final TextView activeTrainingSetText = (TextView) findViewById(R.id.activeTrainingSet);
         //final EditText trainingSetText = (EditText) findViewById(R.id.trainingSetName);
         //final EditText editText = (EditText) findViewById(R.id.gestureName);
-        activeTrainingSet = "default";//editText.getText().toString();
         final Button startTrainButton = (Button) findViewById(R.id.trainButton);
         //final Button deleteTrainingSetButton = (Button) findViewById(R.id.deleteTrainingSetButton);
         //final Button changeTrainingSetButton = (Button) findViewById(R.id.startNewSetButton);
@@ -154,7 +152,7 @@ public class AddGestureActivity extends ListActivity {
 //                            deleteTrainingSetButton.setEnabled(false);
 //                            changeTrainingSetButton.setEnabled(false);
 //                            trainingSetText.setEnabled(false);
-                            String value;
+
                             final AlertDialog.Builder alert = new AlertDialog.Builder(AddGestureActivity.this);
                             alert.setTitle("Gesture Name");
                             alert.setMessage("Please enter a gesture name");
@@ -164,12 +162,12 @@ public class AddGestureActivity extends ListActivity {
                             alert.setView(input);
                             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                    String value = input.getText().toString();
-                                    if(value!=null && !value.isEmpty()) {
+                                    String gestureName = input.getText().toString();
+                                    if(gestureName!=null && !gestureName.isEmpty()) {
                                         try {
                                             Global.showToast(AddGestureActivity.this, "Listening Gesture, please make a gesture", Toast.LENGTH_LONG);
                                             startTrainButton.setText("Stop Training");
-                                            recognitionService.startLearnMode(activeTrainingSet, value);//editText.getText().toString());
+                                            recognitionService.startLearnMode(Global.trainingSet, gestureName);//editText.getText().toString());
                                         } catch (RemoteException e) {
                                             e.printStackTrace();
                                         }
@@ -198,7 +196,7 @@ public class AddGestureActivity extends ListActivity {
 
 
                             recognitionService.stopLearnMode();
-                            List<String> items = recognitionService.getGestureList(activeTrainingSet);
+                            List<String> items = recognitionService.getGestureList(Global.trainingSet);
                             setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, R.layout.gesture_item, items));
                         }
                     } catch (RemoteException e) {
@@ -279,8 +277,8 @@ public class AddGestureActivity extends ListActivity {
 
         if (item.getItemId() == 0) {
             try {
-                recognitionService.deleteGesture(activeTrainingSet, getListAdapter().getItem(info.position).toString());
-                List<String> items = recognitionService.getGestureList(activeTrainingSet);
+                recognitionService.deleteGesture(Global.trainingSet, getListAdapter().getItem(info.position).toString());
+                List<String> items = recognitionService.getGestureList(Global.trainingSet);
                 setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, R.layout.gesture_item, items));
             } catch (RemoteException e) {
                 // TODO Auto-generated catch block
