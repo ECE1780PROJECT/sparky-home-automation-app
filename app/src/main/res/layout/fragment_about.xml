@@ -21,14 +21,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/aboutPlaceholder"
         android:id="@+id/aboutTextView"
-
         android:gravity="center" />
 
     <ImageButton
-
         android:layout_height="150dp"
         android:layout_width="match_parent"
         android:id="@+id/sendMailImageButton"
         android:src="@drawable/ic_action_mail_add"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter" />
 </LinearLayout>
