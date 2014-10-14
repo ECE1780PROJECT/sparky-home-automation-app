@@ -47,7 +47,8 @@
         <activity
             android:name=".AddGestureActivity"
             android:label="@string/title_gesture_test"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:theme="@android:style/Theme.Holo">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hcp.home_control_prototype.MainActivity" />

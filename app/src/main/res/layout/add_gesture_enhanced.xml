@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="400dp">
+
+        <ListView
+            android:id="@android:id/list"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textAlignment="center"
+            android:textFilterEnabled="false">
+        </ListView>
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">>
+
+        <Button android:id="@+id/trainButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Start Training"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_gravity="center" />
+
+    </GridLayout>
+
+
+</LinearLayout>
