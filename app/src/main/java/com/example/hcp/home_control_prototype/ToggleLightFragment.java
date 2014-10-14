@@ -46,6 +46,7 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
         View rootView = inflater.inflate(R.layout.fragment_toggle_light_page, container, false);
         ImageView bulbImg = (ImageView)rootView.findViewById(R.id.bulbImgFragment);
         bulbImg.setOnClickListener(this);
+        ToggleTask.registerForToggleEvent(this, this.getActivity().getBaseContext());
         return rootView;
     }
 

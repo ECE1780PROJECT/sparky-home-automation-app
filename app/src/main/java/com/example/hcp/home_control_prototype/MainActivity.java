@@ -63,9 +63,5 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    public void switchWiiGeeTestHandler(View v) {
-        Intent toggleIntent = new Intent(this, AddGestureActivity.class);
-        startActivity(toggleIntent);
-    }
 
 }

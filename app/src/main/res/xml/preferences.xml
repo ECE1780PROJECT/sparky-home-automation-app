@@ -40,7 +40,7 @@
         <EditTextPreference
             android:key="access_token"
             android:title="Access Token"
-            android:summary="Check us out!" >
+            android:summary="" >
         </EditTextPreference>
 
         <EditTextPreference

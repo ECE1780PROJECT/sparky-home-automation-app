@@ -82,17 +82,11 @@ public class LoginTask extends AsyncTask<String, Void, ArrayList<Token>> {
 
     }
 
-
     @Override
     public void onPostExecute(ArrayList<Token> result) {
-        for(Token token: result){
-            if(!this.listener.getTokens().contains(token)){
-                this.listener.addTokenToList(token);
-            }
-
-        }
-        if(this.listener.getTokens().size() > 0){
-            this.listener.rotateToken();
+        listener.replaceAllTokens(result);
+        if(listener.getTokens().size() > 0){
+            listener.rotateToken();
         }
         listener.findDevices();
     }

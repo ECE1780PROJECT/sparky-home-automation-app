@@ -49,6 +49,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
         }
         GetStatusTask status = new GetStatusTask(this, context);
         status.execute();
+        ToggleTask.registerForToggleEvent(this, this.context);
     }
 
     /**
@@ -76,6 +77,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
         Log.i(TAG, "onTaskCompleted() -> received response in the widget class. ");
         JSONArray jArray = (JSONArray)obj;
         try{
+            //TODO CATCH EMPTY JSON ARRAYS
             JSONObject jObject = jArray.getJSONObject(0);
             int status = jObject.getInt("return_value");
             switch(status){

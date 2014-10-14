@@ -80,6 +80,7 @@ public class Spark {
             return false;
         }
     }
+
     public void replaceAllTokens(ArrayList<Token> newTokens){
         Log.i(TAG, "Wiping out old token set: ->" + access_tokens.toString());
         this.access_tokens.clear();
@@ -111,7 +112,7 @@ public class Spark {
         if(!devices.contains(device)){
             devices.add(device);
         }
-        }
+    }
 
     public void addDeviceByID(String id){
         //Device new_device = new Device(id);
@@ -121,5 +122,16 @@ public class Spark {
     public void findDevices() {
         GetDevicesTask gdt = new GetDevicesTask(this);
         gdt.execute(current_token.getValue());
+    }
+
+    public Device getDeviceByName(String name){
+        for(Device device: devices){
+            if (device.getName().equals(name)){
+                Log.i(TAG, "getDeviceByName() -> found device by name: " + name + ", returning it...");
+                return device;
+            }
+        }
+        Log.i(TAG, "getDeviceByName() -> Couldn't find device by the name: " + name);
+        return null;
     }
 }

@@ -28,9 +28,7 @@ public class Device {
         return name;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
     @Override
     public String toString(){

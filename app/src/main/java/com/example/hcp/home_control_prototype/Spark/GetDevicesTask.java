@@ -93,6 +93,7 @@ public class GetDevicesTask extends AsyncTask<String, Void, ArrayList<Device>> {
             }
 
         }
+        Log.i(TAG, "onPostExecute() -> " + "Current Devices list:" + listener.getDevices());
     }
 }
 

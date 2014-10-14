@@ -11,4 +11,6 @@
         android:id="@+id/bulbImgFragment"
         android:layout_gravity="center"
         android:src="@drawable/bulb_off_img" />
+
+
 </FrameLayout>
