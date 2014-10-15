@@ -75,29 +75,30 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
     @Override
     public void onTaskCompleted(Object obj, Context context) {
         Log.i(TAG, "onTaskCompleted() -> received response in the widget class. ");
-        JSONArray jArray = (JSONArray)obj;
-        try{
-            //TODO CATCH EMPTY JSON ARRAYS
-            JSONObject jObject = jArray.getJSONObject(0);
-            int status = jObject.getInt("return_value");
-            switch(status){
-                case 0:
-                    Log.i(TAG, "Light is off!");
-                    lightOff(context);
-                    break;
-                case 1:
-                    Log.i(TAG, "Light is on!");
-                    lightOn(context);
-                    break;
-                default:
-                    Log.e(TAG, "Returned a non-standard response!!");
-                    break;
+        if(obj != null) {
+            JSONArray jArray = (JSONArray) obj;
+            try {
+                //TODO CATCH EMPTY JSON ARRAYS
+                JSONObject jObject = jArray.getJSONObject(0);
+                int status = jObject.getInt("return_value");
+                switch (status) {
+                    case 0:
+                        Log.i(TAG, "Light is off!");
+                        lightOff(context);
+                        break;
+                    case 1:
+                        Log.i(TAG, "Light is on!");
+                        lightOn(context);
+                        break;
+                    default:
+                        Log.e(TAG, "Returned a non-standard response!!");
+                        break;
+                }
+            } catch (JSONException e) {
+                Log.e(TAG, "onTaskCompleted() -> Couldn't pull JSONObject from jArray : " + jArray.toString());
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            Log.e(TAG, "onTaskCompleted() -> Couldn't pull JSONObject from jArray : " + jArray.toString());
-            e.printStackTrace();
         }
-
     }
 
     /**
