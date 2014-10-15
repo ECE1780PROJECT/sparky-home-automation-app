@@ -9,6 +9,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.example.hcp.home_control_prototype.Spark.Spark;
 
 
 public class MainActivity extends FragmentActivity {
@@ -26,6 +27,9 @@ public class MainActivity extends FragmentActivity {
         viewPager = (ViewPager)findViewById(R.id.pager);
         pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+
+        Spark spark = new Spark("garygrantgraham@gmail.com", "coin0nioc");
+
     }
 
 
@@ -59,9 +63,5 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    public void switchWiiGeeTestHandler(View v) {
-        Intent toggleIntent = new Intent(this, AddGestureActivity.class);
-        startActivity(toggleIntent);
-    }
 
 }
