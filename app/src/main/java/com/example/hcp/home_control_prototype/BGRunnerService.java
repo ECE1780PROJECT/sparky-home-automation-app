@@ -18,6 +18,7 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
     private long lastUpdate=0;
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD=50;
+    private static final String TAG = "Gesture Type";
     private Date date;
 
     public BGRunnerService() {
@@ -33,14 +34,14 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
         senSensorManager=(SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer=senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i("Status","SENSOR STARTED");
+        Log.i(TAG,"SENSOR STARTED");
     }
     @Override
     public void onDestroy()
     {
         //super.onDestroy();
         senSensorManager.unregisterListener(this, senAccelerometer);
-        Log.i("Status","SENSOR STOPPED");
+        Log.i(TAG,"SENSOR STOPPED");
     }
     @Override
     public int onStartCommand(Intent intent,int flags, int startId)
@@ -87,7 +88,7 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
                         if(set1==2)
                         {
                             //Insert action here for Gesture 1
-                            Log.i("Gesture Type","Type 1");
+                            Log.i(TAG,"Type 1 gesture found.");
                             toggle=new ToggleTask(this);
                            toggle.execute();
                             flag = 1;
@@ -112,7 +113,7 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
                         {
                             //Insert action here for Gesture 2
                            //Log.i("speed1", Float.toString(speed1));
-                            Log.i("Gesture type", "Type 2");
+                            Log.i(TAG, "Type 2 gesture found.");
                             toggle=new ToggleTask(this);
                             toggle.execute();
                             flag = 1;
@@ -125,12 +126,14 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
                 {
                     try
                     {
-                        Thread.sleep(1200);
+                        Log.i(TAG, "Gesture found, task executed, going to sleep...");
+                        Thread.sleep(2000);
                     }
                     catch (Exception e)
                     {
                         e.printStackTrace();
                     }
+                    Log.i(TAG, "Waking up!");
                     flag=0;
                     set1=0;
                     set2=0;
