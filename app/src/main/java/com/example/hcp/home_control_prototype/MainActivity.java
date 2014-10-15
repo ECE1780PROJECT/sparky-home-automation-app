@@ -22,7 +22,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pager_root);
-
+        startService(new Intent(this,BGRunnerService.class));
         viewPager = (ViewPager)findViewById(R.id.pager);
         pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
