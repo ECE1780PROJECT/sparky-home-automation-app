@@ -87,6 +87,7 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
                         if(set1==2)
                         {
                             //Insert action here for Gesture 1
+                            Log.i("Gesture Type","Type 1");
                             toggle=new ToggleTask(this);
                            toggle.execute();
                             flag = 1;
@@ -110,8 +111,8 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
                         if(set2==2)
                         {
                             //Insert action here for Gesture 2
-                           /* Log.i("speed1", Float.toString(speed1));
-                            Log.i("Gesture type", "Type 2");*/
+                           //Log.i("speed1", Float.toString(speed1));
+                            Log.i("Gesture type", "Type 2");
                             toggle=new ToggleTask(this);
                             toggle.execute();
                             flag = 1;
