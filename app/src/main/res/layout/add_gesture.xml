@@ -37,6 +37,11 @@
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_below="@id/gestureName" android:layout_toRightOf="@id/trainButton"
         android:text="Delete Training Set" />
+    <Button android:id="@+id/showTrainingSet"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_below="@id/trainButton" android:layout_toRightOf="@id/trainButton"
+        android:text="Show Training Set"
+        android:onClick="showTrainingSetHandler"/>
 
 
 </RelativeLayout>

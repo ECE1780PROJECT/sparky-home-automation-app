@@ -118,12 +118,12 @@ public class GestureClassifier {
 		if (activeTrainingSet != null && activeTrainingSet.equals(trainingSetName)) {
 			trainingSet = new ArrayList<Gesture>();
 		}
-		// File file = new File("\\sdcard\\" + activeTrainingSet + ".gst");
-		// if (file.exists()) {
-		// file.delete();
-		// return true;
-		// }
-		// return false;
+		File file = new File(context.getExternalFilesDir(null),  activeTrainingSet + ".gst");
+		if (file.exists()) {
+		    file.delete();
+		    return true;
+		}
+		//return false;
 		return context.deleteFile(activeTrainingSet + ".gst");
 
 	}
