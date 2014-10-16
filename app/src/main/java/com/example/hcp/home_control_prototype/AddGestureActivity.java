@@ -51,7 +51,7 @@ public class AddGestureActivity extends ListActivity {
                 recognitionService.startClassificationMode(Global.trainingSet);
                 recognitionService.registerListener(IGestureRecognitionListener.Stub.asInterface(gestureListenerStub));
                 List<String> items = recognitionService.getGestureList(Global.trainingSet);
-                setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, R.layout.gesture_item, items));
+                setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, android.R.layout.simple_list_item_single_choice, items));
             } catch (RemoteException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
@@ -66,6 +66,8 @@ public class AddGestureActivity extends ListActivity {
                     // When clicked, show a toast with the TextView text
                     //Global.showToast(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_LONG);
                     System.err.println(((TextView) view).getText());
+                    GlobalPreference.setPreference("gesture_pref", String.valueOf(1));
+                    System.err.println(GlobalPreference.getPreference("gesture_pref"));
                 }
             });
         }
@@ -197,7 +199,7 @@ public class AddGestureActivity extends ListActivity {
 
                             recognitionService.stopLearnMode();
                             List<String> items = recognitionService.getGestureList(Global.trainingSet);
-                            setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, R.layout.gesture_item, items));
+                            setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, android.R.layout.simple_list_item_single_choice, items));
                         }
                     } catch (RemoteException e) {
                         // TODO Auto-generated catch block
@@ -279,7 +281,7 @@ public class AddGestureActivity extends ListActivity {
             try {
                 recognitionService.deleteGesture(Global.trainingSet, getListAdapter().getItem(info.position).toString());
                 List<String> items = recognitionService.getGestureList(Global.trainingSet);
-                setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, R.layout.gesture_item, items));
+                setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, android.R.layout.simple_list_item_single_choice, items));
             } catch (RemoteException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
