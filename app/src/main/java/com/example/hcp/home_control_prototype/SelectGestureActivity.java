@@ -3,6 +3,7 @@ package com.example.hcp.home_control_prototype;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,7 +22,7 @@ public class SelectGestureActivity extends Activity {
     Integer[] imageId = {
             R.drawable.bumpr,
             R.drawable.bumpl,
-            R.drawable.handshake,
+            R.drawable.shake,
     };
     ListView list;
     @Override
@@ -29,9 +30,9 @@ public class SelectGestureActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_gesture);
         gSharedPreferences = getSharedPreferences(Global.PREFERENCE_GLOBAL, MODE_PRIVATE);
-
         final CustomList adapter = new CustomList(SelectGestureActivity.this, default_gesture_list, imageId);
         adapter.setSelectedIndex(gSharedPreferences.getInt(Global.PREFERENCE_GESTURE_SELECT, 0));
+
         list=(ListView)findViewById(R.id.list);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
