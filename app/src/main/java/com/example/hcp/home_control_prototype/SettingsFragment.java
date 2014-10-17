@@ -21,6 +21,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
+
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("disable_pref");
         Preference gestureSelect = findPreference("gesture_select_pref");
         Preference addGestures = findPreference("gesture_add_pref");
