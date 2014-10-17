@@ -29,9 +29,9 @@ public class SelectGestureActivity extends Activity {
             "BUMP UP",
     } ;
     Integer[] imageId = {
-            R.drawable.bump_r,
-            R.drawable.bump_r,
-            R.drawable.bump_r,
+            R.drawable.BumpR,
+            R.drawable.BumpL,
+            R.drawable.Handshake,
     };
     ListView list;
     @Override
