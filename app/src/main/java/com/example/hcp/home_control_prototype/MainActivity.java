@@ -24,7 +24,6 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pager_root);
         startService(new Intent(this,BGRunnerService.class));
-        GlobalPreference.getInstance().Initialize(getApplicationContext());
         viewPager = (ViewPager)findViewById(R.id.pager);
         pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);

@@ -56,6 +56,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hcp.home_control_prototype.MainActivity" />
         </activity>
+        <activity
+            android:name=".SelectGestureActivity"
+            android:label="@string/title_gesture_test"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hcp.home_control_prototype.MainActivity" />
+        </activity>
 
         <service
             android:name=".gesture.GestureRecognitionService"

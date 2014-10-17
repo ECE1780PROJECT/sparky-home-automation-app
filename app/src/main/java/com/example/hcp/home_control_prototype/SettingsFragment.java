@@ -22,7 +22,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         addPreferencesFromResource(R.xml.preferences);
 
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("disable_pref");
-        ListPreference gestureSelect = (ListPreference) findPreference("gesture_select_pref");
+        Preference gestureSelect = findPreference("gesture_select_pref");
         Preference addGestures = findPreference("gesture_add_pref");
 
         boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("disable_pref", false);

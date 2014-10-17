@@ -66,8 +66,6 @@ public class AddGestureActivity extends ListActivity {
                     // When clicked, show a toast with the TextView text
                     //Global.showToast(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_LONG);
                     System.err.println(((TextView) view).getText());
-                    GlobalPreference.setPreference("gesture_pref", String.valueOf(1));
-                    System.err.println(GlobalPreference.getPreference("gesture_pref"));
                 }
             });
         }

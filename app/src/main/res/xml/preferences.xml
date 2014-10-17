@@ -9,12 +9,17 @@
             android:key="disable_pref"
             android:title="Disable gestures"
             android:summary="Removes gesture functionality from the device" />
-        <ListPreference
+        <Preference
             android:key="gesture_select_pref"
             android:title="Select a gesture"
-            android:summary="Choose which gesture toggles the device"
-            android:entries="@array/possible_gestures"
-            android:entryValues="@array/gesture_values"/>
+            android:summary="Choose which gesture toggles the device">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.hcp.home_control_prototype"
+                android:targetClass="com.example.hcp.home_control_prototype.SelectGestureActivity" />
+        </Preference>
+
+
         <Preference
             android:key="gesture_add_pref"
             android:title="Add gestures"
