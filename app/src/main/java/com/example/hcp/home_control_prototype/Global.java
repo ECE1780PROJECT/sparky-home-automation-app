@@ -14,6 +14,7 @@ public class Global {
     public static int selectedIndex = 0;
     public static final String PREFERENCE_GLOBAL = "hcp_home_control_prototype";
     public static final String PREFERENCE_GESTURE_SELECT = "gesture_select";
+    public static final String PREFERENCE_GESTURE_LIST = "gesture_list";
     public static void showToast(Context applicationContext, CharSequence text, int duration){
         // Usage Global.showToast(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_LONG);
         Toast toast = Toast.makeText(applicationContext, text, duration);
