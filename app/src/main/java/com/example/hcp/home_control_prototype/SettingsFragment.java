@@ -40,7 +40,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Log.i(TAG, "onPreferenceChange() -> (DisableGesturesPref)");
-                ListPreference gestureSelect = (ListPreference) findPreference("gesture_select_pref");
+                Preference gestureSelect = findPreference("gesture_select_pref");
                 Preference addGestures = findPreference("gesture_add_pref");
 
                 boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("disable_pref", false);

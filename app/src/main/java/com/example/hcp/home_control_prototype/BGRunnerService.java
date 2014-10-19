@@ -1,8 +1,10 @@
 package com.example.hcp.home_control_prototype;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.SensorEventListener;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -11,14 +13,16 @@ import android.hardware.SensorManager;
 import java.util.Date;
 
 
-public class BGRunnerService extends Service implements SensorEventListener,OnTaskCompleted{
+public class BGRunnerService extends Service implements SensorEventListener,OnTaskCompleted, SharedPreferences.OnSharedPreferenceChangeListener{
     ToggleTask toggle;
     private SensorManager senSensorManager;
     private Sensor senAccelerometer;
     private long lastUpdate=0;
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD=50;
-    private static final String TAG = "Gesture Type";
+    private static final String TAG = "GestureService";
+    private boolean enabled;
+
     private Date date;
 
     public BGRunnerService() {
@@ -33,8 +37,16 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
     {
         senSensorManager=(SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer=senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(TAG,"SENSOR STARTED");
+
+        //DEFAULTING THE GESTURES TO OFF IF WE CANT READ THE VALUE.
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(this);
+
+
+        this.enabled = !prefs.getBoolean("disable_pref", false);
+        Log.i(TAG, "BGRunnerService() -> grabbing disabled preference. Status of the service should be: " + enabled);
+        this.handleSensors();
+
     }
     @Override
     public void onDestroy()
@@ -42,7 +54,9 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
         //super.onDestroy();
         senSensorManager.unregisterListener(this, senAccelerometer);
         Log.i(TAG,"SENSOR STOPPED");
+
     }
+
     @Override
     public int onStartCommand(Intent intent,int flags, int startId)
     {
@@ -156,5 +170,32 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
     }
 
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Log.i(TAG, "onSharedPreferenceChanged() -> Received Changed Preference, key is: " + key);
+        boolean isEnabled = !sharedPreferences.getBoolean("disable_pref", false);
+        this.setEnabled(isEnabled);
+    }
+
+
+    public void setEnabled(boolean isEnabled) {
+        if (this.enabled != isEnabled){
+            this.enabled = isEnabled;
+            this.handleSensors();
+        }
+
+    }
+
+    private void handleSensors() {
+        if(this.enabled){
+            senSensorManager.registerListener(this, senAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+            Log.i(TAG, "handleSensors() -> Registered Listener.");
+            Log.i(TAG,"handleSensors() -> SENSOR STARTED");
+        }else {
+            senSensorManager.unregisterListener(this);
+            Log.i(TAG, "handleSensors() -> Unregistered Listener.");
+            Log.i(TAG,"handleSensors() -> SENSOR STOPPED");
+        }
+    }
 }
 
