@@ -3,6 +3,7 @@ package com.example.hcp.home_control_prototype;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,7 +34,7 @@ public class SelectGestureActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_gesture);
-        gSharedPreferences = getSharedPreferences(Global.PREFERENCE_GLOBAL, MODE_PRIVATE);
+        gSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         final CustomList adapter = new CustomList(SelectGestureActivity.this, default_gesture_list, imageId);
         adapter.setSelectedIndex(gSharedPreferences.getInt(Global.PREFERENCE_GESTURE_SELECT, 0));
         //Set<String> stringS = gSharedPreferences.getStringSet(Global.PREFERENCE_GESTURE_LIST, null);
