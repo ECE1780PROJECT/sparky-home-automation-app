@@ -78,17 +78,18 @@ public class LoginTask extends AsyncTask<String, Void, ArrayList<Token>> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            listener.replaceAllTokens(resultantTokens);
+            if(listener.getTokens().size() > 0){
+                listener.rotateToken();
+            }
             return resultantTokens;
 
     }
 
     @Override
     public void onPostExecute(ArrayList<Token> result) {
-        listener.replaceAllTokens(result);
-        if(listener.getTokens().size() > 0){
-            listener.rotateToken();
-        }
-        listener.findDevices();
+
+        //listener.findDevices();
     }
 
 }

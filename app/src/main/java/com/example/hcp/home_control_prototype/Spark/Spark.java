@@ -2,7 +2,12 @@ package com.example.hcp.home_control_prototype.Spark;
 
 import android.util.Log;
 
+import com.example.hcp.home_control_prototype.OnTaskCompleted;
+
+import org.json.JSONArray;
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by garygraham on 2014-10-13.
@@ -10,38 +15,26 @@ import java.util.ArrayList;
  */
 public class Spark {
     private static final String TAG = "Spark";
+    private static Spark instance = null;
     private String username;
     private String password;
     private ArrayList<Token> access_tokens;
     private ArrayList<Device> devices;
     private Token current_token;
 
+    public static Spark getInstance() {
+        if(instance == null){
+            return new Spark();
+        }else {
+            return instance;
+        }
+    }
     //User provides nothing.
-    public Spark() {
-        access_tokens = new ArrayList<Token>();
-
-    }
-
-    //User just straight-up provides access token
-    public Spark(String access_token_value) {
-        current_token = new Token(access_token_value, null);
-        access_tokens = new ArrayList<Token>();
-        access_tokens.add(current_token);
-
-    }
-
-    //User provides Username and Password.
-    public Spark(String username, String password) {
+    protected Spark() {
         access_tokens = new ArrayList<Token>();
         devices = new ArrayList<Device>();
-        login(username, password);
-
     }
 
-    public ArrayList<Device> listDevices(){
-        Log.i(TAG, "listDevices() -> " + devices.toString());
-        return devices;
-     }
 
     public ArrayList<String> listDeviceNames(){
         ArrayList<String> dev_names = new ArrayList<String>();
@@ -56,10 +49,22 @@ public class Spark {
     public boolean login(String username, String password) {
 
         LoginTask loginTask = new LoginTask(this);
-        loginTask.execute(username, password);
+
+        try {
+            loginTask.execute(username, password).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 
+
+    public Token getCurrentToken(){
+        Log.i(TAG, "getCurrentToken() -> providing token: " + current_token);
+        return current_token;
+    }
 
     public void setCurrentToken(Token token) {
         current_token = token;
@@ -105,18 +110,13 @@ public class Spark {
 
 
     public ArrayList<Device> getDevices() {
-        Log.i(TAG, "getDevices() -> " + devices.toString());
+        Log.i(TAG, "getDevices() -> " + devices);
         return devices;
     }
     public void addDevice(Device device) {
         if(!devices.contains(device)){
             devices.add(device);
         }
-    }
-
-    public void addDeviceByID(String id){
-        //Device new_device = new Device(id);
-
     }
 
     public void findDevices() {
@@ -133,5 +133,11 @@ public class Spark {
         }
         Log.i(TAG, "getDeviceByName() -> Couldn't find device by the name: " + name);
         return null;
+    }
+
+    public void makeAPICall(Device device, String apiPath, OnTaskCompleted listener){
+        if (devices.contains(device)){
+            new SparkAPITask(device.getId(), apiPath, listener );
+        }
     }
 }

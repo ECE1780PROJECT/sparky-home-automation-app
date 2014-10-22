@@ -1,9 +1,12 @@
 package com.example.hcp.home_control_prototype.Spark;
 
+import android.util.Log;
+
 /**
  * Created by garygraham on 2014-10-14.
  */
 public class Device {
+    private static final String TAG = "Device";
     private String id;
     private String name;
     private boolean connected;
@@ -14,6 +17,7 @@ public class Device {
         this.name = name;
         this.connected = connected;
         this.lastHeard = lastHeard;
+        Log.i(TAG, "Constructor() -> " + this.id + " -- " + this.name);
     }
 
     public String getLastHeard() {

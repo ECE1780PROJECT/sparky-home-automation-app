@@ -28,8 +28,9 @@ public class MainActivity extends FragmentActivity {
         pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
-        Spark spark = new Spark("garygrantgraham@gmail.com", "coin0nioc");
-
+        Spark spark = Spark.getInstance();
+        spark.login("garygrantgraham@gmail.com", "coin0nioc");
+        spark.findDevices();
     }
 
 
