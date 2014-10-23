@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.hcp.home_control_prototype.Spark.Device;
 import com.example.hcp.home_control_prototype.Spark.LightGetStatusTask;
@@ -70,28 +71,36 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
     @Override
     public void onTaskCompleted(Object obj, Context context) {
         Log.i(TAG, "onTaskCompleted() -> received response in the widget class. ");
-        JSONArray jArray = (JSONArray)obj;
-        try{
-            JSONObject jObject = jArray.getJSONObject(0);
-            int status = jObject.getInt("return_value");
-            switch(status){
-                case 0:
-                    Log.i(TAG, "Light is off!");
-                    lightOff();
-                    break;
-                case 1:
-                    Log.i(TAG, "Light is on!");
-                    lightOn();
-                    break;
-                default:
-                    Log.e(TAG, "Returned a non-standard response!!");
-                    break;
-            }
-        } catch (JSONException e) {
-            Log.e(TAG, "onTaskCompleted() -> Couldn't pull JSONObject from jArray : " + jArray.toString());
-            e.printStackTrace();
-        }
+        if(obj == null){
+            showTimeOutToast();
+        }else {
 
+            JSONArray jArray = (JSONArray) obj;
+            try {
+                JSONObject jObject = jArray.getJSONObject(0);
+                int status = jObject.getInt("return_value");
+                switch (status) {
+                    case 0:
+                        Log.i(TAG, "Light is off!");
+                        lightOff();
+                        break;
+                    case 1:
+                        Log.i(TAG, "Light is on!");
+                        lightOn();
+                        break;
+                    default:
+                        Log.e(TAG, "Returned a non-standard response!!");
+                        break;
+                }
+            } catch (JSONException e) {
+                Log.e(TAG, "onTaskCompleted() -> Couldn't pull JSONObject from jArray : " + jArray.toString());
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void showTimeOutToast() {
+        Global.showToast(this.getActivity(), "Couldn't communicate with Spark core!!", Toast.LENGTH_SHORT);
     }
 
     private void lightOn() {

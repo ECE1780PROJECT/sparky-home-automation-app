@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.example.hcp.home_control_prototype.Spark.Device;
 import com.example.hcp.home_control_prototype.Spark.LightGetStatusTask;
@@ -85,8 +86,12 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
      */
     @Override
     public void onTaskCompleted(Object obj, Context context) {
+
         Log.i(TAG, "onTaskCompleted() -> received response in the widget class. ");
-        if(obj != null) {
+        if(obj == null) {
+            showTimeOutToast();
+        }else{
+
             JSONArray jArray = (JSONArray) obj;
             try {
                 //TODO CATCH EMPTY JSON ARRAYS
@@ -110,6 +115,9 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
                 e.printStackTrace();
             }
         }
+    }
+    private void showTimeOutToast() {
+        Global.showToast(this.context, "Couldn't communicate with Spark core!!", Toast.LENGTH_SHORT);
     }
 
     /**

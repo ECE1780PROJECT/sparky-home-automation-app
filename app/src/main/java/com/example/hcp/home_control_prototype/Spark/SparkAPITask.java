@@ -15,6 +15,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public  class SparkAPITask extends AsyncTask<NameValuePair, Void, JSONArray>{
     private static final String server = "https://api.spark.io/v1/devices/";
     private String api_path = "";
     private JSONArray jArray;
+    private static final String TIMEOUT_MESSAGE = "Timed out.";
 
 
     public SparkAPITask(String deviceID, String api_path, OnTaskCompleted listener){
@@ -84,7 +87,12 @@ public  class SparkAPITask extends AsyncTask<NameValuePair, Void, JSONArray>{
             //Attempting to read the API response into a JSON Array for returning.
             if(entity != null){
                 jArray = ResponseParser.parseEntityToJSON(entity);
-                return jArray;
+                if(timedOut(jArray)){
+                    return null;
+                }else{
+                    return jArray;
+                }
+
             }
 
         }catch (Exception e){
@@ -92,6 +100,18 @@ public  class SparkAPITask extends AsyncTask<NameValuePair, Void, JSONArray>{
             return null;
         }
         return null;
+    }
+    private boolean timedOut(JSONArray jArray){
+        try{
+            JSONObject obj = jArray.getJSONObject(0);
+            if(obj.getString("error").equals(TIMEOUT_MESSAGE)){
+                Log.i(TAG, "timedOut() -> Request timed out! : " + jArray.toString());
+                return true;
+            }
+        } catch (JSONException e) {
+            return false;
+        }
+        return false;
     }
 
 

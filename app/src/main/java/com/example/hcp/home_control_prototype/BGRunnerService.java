@@ -10,6 +10,7 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
+import android.widget.Toast;
 
 import com.example.hcp.home_control_prototype.Spark.Device;
 import com.example.hcp.home_control_prototype.Spark.LightToggleTask;
@@ -175,9 +176,15 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
     @Override
     public void onTaskCompleted(Object obj,Context context)
     {
-        //
-    }
+        if(obj == null){
+                showTimeOutToast();
+            }
+     }
 
+
+    private void showTimeOutToast() {
+        Global.showToast(this.getApplicationContext(), "Couldn't communicate with Spark core!!", Toast.LENGTH_SHORT);
+    }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
