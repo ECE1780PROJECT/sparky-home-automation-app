@@ -10,12 +10,18 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
+
+import com.example.hcp.home_control_prototype.Spark.Device;
+import com.example.hcp.home_control_prototype.Spark.LightToggleTask;
+import com.example.hcp.home_control_prototype.Spark.Spark;
+
 import java.util.Date;
 
 
 public class BGRunnerService extends Service implements SensorEventListener,OnTaskCompleted, SharedPreferences.OnSharedPreferenceChangeListener{
-    ToggleTask toggle;
+    LightToggleTask toggle;
     private SensorManager senSensorManager;
+    private Device device;
     private Sensor senAccelerometer;
     private long lastUpdate=0;
     private float last_x, last_y, last_z;
@@ -37,6 +43,7 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
     {
         senSensorManager=(SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer=senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        device = Spark.getInstance().getDeviceByName("Tadgh");
 
         //DEFAULTING THE GESTURES TO OFF IF WE CANT READ THE VALUE.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -103,8 +110,9 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
                         {
                             //Insert action here for Gesture 1
                             Log.i(TAG,"Type 1 gesture found.");
-                            toggle=new ToggleTask(this);
-                           toggle.execute();
+                            device = Spark.getInstance().getDeviceByName("Tadgh");
+                            toggle = new LightToggleTask(device.getId(), this);
+                            toggle.execute();
                             flag = 1;
                         }
                     } else if (speed1 > speed && x > z) {
@@ -128,7 +136,8 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
                             //Insert action here for Gesture 2
                            //Log.i("speed1", Float.toString(speed1));
                             Log.i(TAG, "Type 2 gesture found.");
-                            toggle=new ToggleTask(this);
+                            device = Spark.getInstance().getDeviceByName("Tadgh");
+                            toggle=new LightToggleTask(device.getId(), this);
                             toggle.execute();
                             flag = 1;
                         }

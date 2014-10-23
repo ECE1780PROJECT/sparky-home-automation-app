@@ -23,11 +23,10 @@ public class Spark {
     private Token current_token;
 
     public static Spark getInstance() {
-        if(instance == null){
-            return new Spark();
-        }else {
-            return instance;
+        if(instance == null) {
+            instance = new Spark();
         }
+        return instance;
     }
     //User provides nothing.
     protected Spark() {
@@ -126,6 +125,7 @@ public class Spark {
 
     public Device getDeviceByName(String name){
         for(Device device: devices){
+            Log.i(TAG, "Comparing :"+ name + " to known device: " + device.getName());
             if (device.getName().equals(name)){
                 Log.i(TAG, "getDeviceByName() -> found device by name: " + name + ", returning it...");
                 return device;

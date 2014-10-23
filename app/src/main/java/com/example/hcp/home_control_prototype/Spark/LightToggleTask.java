@@ -1,31 +1,30 @@
-package com.example.hcp.home_control_prototype;
+package com.example.hcp.home_control_prototype.Spark;
 
 import android.content.Context;
 
+import com.example.hcp.home_control_prototype.OnTaskCompleted;
+
 import org.json.JSONArray;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by Master on 9/24/2014.
+ * Created by Master on 10/22/2014.
  */
-public class ToggleTask extends AsyncAPITask {
-    private static final String api_path = "toggle";
+public class LightToggleTask extends SparkAPITask {
+    private static String api_path = "toggle";
     private static HashMap<OnTaskCompleted, Context> statusListeners = new HashMap<OnTaskCompleted, Context>();
-
-
-    public ToggleTask(OnTaskCompleted listener) {
-        super(listener, api_path);
+    
+    
+    public LightToggleTask(String deviceID, OnTaskCompleted listener) {
+        super(deviceID, api_path, listener);
         statusListeners.put(listener, null);
-
     }
-
-    public ToggleTask(OnTaskCompleted listener, Context context) {
-        super(listener, api_path, context);
+    public LightToggleTask(String deviceID,OnTaskCompleted listener, Context context) {
+        super(deviceID, api_path, listener, context);
         statusListeners.put(listener, context);
     }
 

@@ -23,7 +23,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pager_root);
-        startService(new Intent(this,BGRunnerService.class));
+
         viewPager = (ViewPager)findViewById(R.id.pager);
         pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
@@ -31,13 +31,10 @@ public class MainActivity extends FragmentActivity {
         Spark spark = Spark.getInstance();
         spark.login("garygrantgraham@gmail.com", "coin0nioc");
         spark.findDevices();
+        startService(new Intent(this,BGRunnerService.class));
     }
 
 
-    public void switchViewHandler(View v){
-        Intent toggleIntent = new Intent(this, ToggleSwitchFragment.class);
-        startActivity(toggleIntent);
-    }
 
     private class SlideViewAdapter extends FragmentStatePagerAdapter {
         public SlideViewAdapter(FragmentManager supportFragmentManager) {

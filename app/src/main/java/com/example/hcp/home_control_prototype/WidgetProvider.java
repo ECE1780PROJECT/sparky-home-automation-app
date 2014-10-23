@@ -9,6 +9,11 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.example.hcp.home_control_prototype.Spark.Device;
+import com.example.hcp.home_control_prototype.Spark.LightGetStatusTask;
+import com.example.hcp.home_control_prototype.Spark.LightToggleTask;
+import com.example.hcp.home_control_prototype.Spark.Spark;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,16 +29,15 @@ import java.util.ArrayList;
 public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted {
     public final static String toggleAction = "toggle";
     private static final String TAG = "WidgetProvider";
-    private static Context context = null;
-    private static AppWidgetManager awm = null;
-
+    private  static Context context = null;
+    private  static AppWidgetManager awm = null;
+    Device device;
     public void onUpdate(Context context, AppWidgetManager awm, int[] appWidgetIds){
         //god this is a greasy hack but it works.
         this.context = context;
         this.awm = awm;
-
-
         final int N = appWidgetIds.length;
+        device = Spark.getInstance().getDeviceByName("Tadgh");
 
         for(int i = 0; i < N ; i++){
             int appWidgetId = appWidgetIds[i];
@@ -47,9 +51,11 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
 
             awm.updateAppWidget(appWidgetId, views);
         }
-        GetStatusTask status = new GetStatusTask(this, context);
-        status.execute();
-        ToggleTask.registerForToggleEvent(this, this.context);
+        if(device != null) {
+            LightGetStatusTask status = new LightGetStatusTask(device.getId(), this, context);
+            status.execute();
+        }
+        LightToggleTask.registerForToggleEvent(this, this.context);
     }
 
     /**
@@ -62,10 +68,15 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
         super.onReceive(context, intent);
         if(intent.getAction().equals(toggleAction)){
             Log.i(TAG, "onReceive() -> received toggleAction from Intent in the widget.");
+            device = Spark.getInstance().getDeviceByName("Tadgh");
+            if(device != null) {
+                LightToggleTask toggleTask = new LightToggleTask(device.getId(), this, context);
+                Log.i(TAG, "onReceive() -> sent off toggle task to AsyncAPICall.");
+                toggleTask.execute();
+            }else{
+                Log.e(TAG, "Couldn't locate device!!!! not sending API call.");
+            }
 
-            ToggleTask toggleTask = new ToggleTask(this, context);
-            toggleTask.execute();
-            Log.i(TAG, "onReceive() -> sent off toggle task to AsyncAPICall.");
         }
     }
 

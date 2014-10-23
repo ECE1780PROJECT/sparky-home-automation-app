@@ -12,6 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.hcp.home_control_prototype.Spark.Device;
+import com.example.hcp.home_control_prototype.Spark.LightGetStatusTask;
+import com.example.hcp.home_control_prototype.Spark.LightToggleTask;
+import com.example.hcp.home_control_prototype.Spark.Spark;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,14 +51,17 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
         View rootView = inflater.inflate(R.layout.fragment_toggle_light_page, container, false);
         ImageView bulbImg = (ImageView)rootView.findViewById(R.id.bulbImgFragment);
         bulbImg.setOnClickListener(this);
-        ToggleTask.registerForToggleEvent(this, this.getActivity().getBaseContext());
+        LightToggleTask.registerForToggleEvent(this, this.getActivity().getBaseContext());
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        GetStatusTask gst = new GetStatusTask(this);
-        gst.execute();
+        Device outlet = Spark.getInstance().getDeviceByName("Tadgh");
+        if (outlet != null) {
+            LightGetStatusTask gst = new LightGetStatusTask(outlet.getId(), this);
+            gst.execute();
+        }
     }
 
     /**
@@ -99,7 +107,8 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
     @Override
     public void onClick(View view) {
         Log.i(TAG,"onClick() -> Entering Click handler for image bulb.");
-        ToggleTask toggleTask = new ToggleTask(this);
+        Device outlet = Spark.getInstance().getDeviceByName("Tadgh");
+        LightToggleTask toggleTask = new LightToggleTask(outlet.getId(), this);
         toggleTask.execute();
 
     }

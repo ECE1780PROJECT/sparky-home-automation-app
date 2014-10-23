@@ -68,6 +68,7 @@ public class GetDevicesTask extends AsyncTask<String, Void, ArrayList<Device>> {
                 boolean connected = jObject.getBoolean("connected");
                 resultantDevices.add(new Device(device_id, device_name, connected, last_heard));
                 Log.i(TAG, "login() -> " + "Found new device! -> " + device_name);
+
             }
 
         } catch (UnsupportedEncodingException e) {
@@ -80,6 +81,11 @@ public class GetDevicesTask extends AsyncTask<String, Void, ArrayList<Device>> {
             e.printStackTrace();
         }
 
+        for(Device device: resultantDevices) {
+            if (!this.listener.getDevices().contains(device)) {
+                this.listener.addDevice(device);
+            }
+        }
         return resultantDevices;
 
 
@@ -87,12 +93,6 @@ public class GetDevicesTask extends AsyncTask<String, Void, ArrayList<Device>> {
 
     @Override
     public void onPostExecute(ArrayList<Device> result) {
-        for(Device device: result){
-            if(!this.listener.getDevices().contains(device)){
-                this.listener.addDevice(device);
-            }
-
-        }
     }
 }
 
