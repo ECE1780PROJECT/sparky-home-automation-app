@@ -1,5 +1,7 @@
 package com.example.hcp.home_control_prototype;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -7,16 +9,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
+import com.example.hcp.home_control_prototype.Spark.GetDevicesTask;
 import com.example.hcp.home_control_prototype.Spark.Spark;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OnTaskCompleted {
     private static final int pageCount = 2;
+    private static final String TAG = "MainActivity";
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
-
+    private ProgressDialog dialog;
 
 
     @Override
@@ -28,13 +33,29 @@ public class MainActivity extends FragmentActivity {
         pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
-        Spark spark = Spark.getInstance();
-        spark.login("garygrantgraham@gmail.com", "coin0nioc");
-        spark.findDevices();
+        GetDevicesTask gdt = new GetDevicesTask(this);
+        showProgressSpinner();
+        gdt.execute(Spark.getInstance().getCurrentToken().getValue());
+
+    }
+
+    @Override
+    public void onTaskCompleted(Object obj, Context context) {
+        Log.i(TAG, "SHIT SON I RECEIVED THE DEVICES ALREADY.");
+        hideProgressSpinner();
         startService(new Intent(this,BGRunnerService.class));
     }
 
-
+    private void showProgressSpinner(){
+        dialog = new ProgressDialog(this, ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Discovering devices...");
+        dialog.setCancelable(false);
+        dialog.setInverseBackgroundForced(false);
+        dialog.show();
+    }
+    private void hideProgressSpinner(){
+        dialog.hide();
+    }
 
     private class SlideViewAdapter extends FragmentStatePagerAdapter {
         public SlideViewAdapter(FragmentManager supportFragmentManager) {

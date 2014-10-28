@@ -10,5 +10,6 @@
     <string name="title_activity_settings_fragment">Uhh test</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="aboutPlaceholder">Placeholder</string>
+    <string name="title_activity_logout">LogoutActivity</string>
 
 </resources>

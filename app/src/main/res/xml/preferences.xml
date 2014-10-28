@@ -69,6 +69,15 @@
                 android:targetClass="com.example.hcp.home_control_prototype.AboutActivity" />
         </Preference>
 
+        <Preference
+            android:key="signout_pref"
+            android:title="Sign out">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.hcp.home_control_prototype"
+                android:targetClass="com.example.hcp.home_control_prototype.LogoutActivity" />
+        </Preference>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

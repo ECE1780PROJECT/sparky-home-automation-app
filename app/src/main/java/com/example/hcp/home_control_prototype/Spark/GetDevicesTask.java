@@ -3,6 +3,9 @@ package com.example.hcp.home_control_prototype.Spark;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.hcp.home_control_prototype.OnTaskCompleted;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -26,9 +29,9 @@ import java.util.ArrayList;
 public class GetDevicesTask extends AsyncTask<String, Void, ArrayList<Device>> {
     private static final String URL = "https://api.spark.io/v1/devices";
     private static final String TAG = "GetDevicesTask";
-    private Spark listener;
+    private OnTaskCompleted listener;
 
-    public GetDevicesTask(Spark listener){
+    public GetDevicesTask(OnTaskCompleted listener){
         this.listener = listener;
     }
 
@@ -82,8 +85,8 @@ public class GetDevicesTask extends AsyncTask<String, Void, ArrayList<Device>> {
         }
 
         for(Device device: resultantDevices) {
-            if (!this.listener.getDevices().contains(device)) {
-                this.listener.addDevice(device);
+            if (!Spark.getInstance().getDevices().contains(device)) {
+                Spark.getInstance().addDevice(device);
             }
         }
         return resultantDevices;
@@ -93,6 +96,7 @@ public class GetDevicesTask extends AsyncTask<String, Void, ArrayList<Device>> {
 
     @Override
     public void onPostExecute(ArrayList<Device> result) {
+        this.listener.onTaskCompleted(result, null);
     }
 }
 
