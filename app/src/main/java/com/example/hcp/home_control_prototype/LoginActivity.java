@@ -241,12 +241,19 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
     @Override
     public void onTaskCompleted(Object obj, Context context) {
         Log.i(TAG, "onTaskCompleted() -> received :" + obj.toString());
-        if (obj != null){
-            Log.i(TAG, "onTaskCompleted() -> pulled non-null array of tokens. Entering Main activity");
+        if (((ArrayList)obj).size() > 0){
+            Log.i(TAG, "onTaskCompleted() -> pulled non-null array of tokens. Entering Main activity: " + obj.toString());
             Intent mainIntent = new Intent(this, MainActivity.class);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean("logged_in", true);
+            edit.commit();
             startActivity(mainIntent);
             finish();
 
+        }
+        else{
+            Log.e(TAG, "onTaskCompleted() -> Received Null object from login task.");
         }
     }
 

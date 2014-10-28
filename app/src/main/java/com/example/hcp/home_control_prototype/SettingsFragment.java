@@ -25,8 +25,11 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("disable_pref");
         Preference gestureSelect = findPreference("gesture_select_pref");
         Preference addGestures = findPreference("gesture_add_pref");
+        Preference signOut = findPreference("signout_pref");
+
 
         boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("disable_pref", false);
+
         if (isDisabled) {
             gestureSelect.setEnabled(false);
             addGestures.setEnabled(false);
@@ -34,7 +37,17 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             gestureSelect.setEnabled(true);
             addGestures.setEnabled(true);
         }
+        signOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
 
+                SharedPreferences.Editor edit = getPreferenceManager().getSharedPreferences().edit();
+                edit.putBoolean("logged_in", false);
+                edit.commit();
+                getActivity().finish();
+                return false;
+            }
+        });
         disableGestures.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
