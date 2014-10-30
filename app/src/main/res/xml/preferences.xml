@@ -29,12 +29,10 @@
                 android:targetPackage="com.example.hcp.home_control_prototype"
                 android:targetClass="com.example.hcp.home_control_prototype.AddGestureActivity" />
         </Preference>
-        <ListPreference
+        <CheckBoxPreference
             android:key="background_services_pref"
-            android:title="Background services"
-            android:summary="Choose behaviour when HAC is not in the foreground"
-            android:entries="@array/possible_behaviours"
-            android:entryValues="@array/behaviour_values"/>
+            android:title="Work in Background"
+            android:summary="Choose behaviour when sparky is not in the foreground"/>
 
 
     </PreferenceCategory>

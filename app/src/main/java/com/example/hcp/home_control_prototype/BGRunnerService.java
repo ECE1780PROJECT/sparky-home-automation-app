@@ -39,6 +39,7 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
     public IBinder onBind(Intent intent) {
         return null;
     }
+
     @Override
     public void onCreate()
     {
