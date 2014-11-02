@@ -1,13 +1,32 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="1">
 
     tools:context=".MainActivity" >
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:choiceMode="singleChoice">
-    </ListView>
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="400dp">
+        <ListView
+            android:id="@+id/list"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:choiceMode="singleChoice">
+        </ListView>
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">>
+
+        <Button android:id="@+id/trainButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Start Training"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_gravity="center" />
+
+    </GridLayout>
+</LinearLayout>
