@@ -95,7 +95,7 @@ public class AddGestureActivity extends ListActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Global.showToast(AddGestureActivity.this, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()), Toast.LENGTH_LONG);
+                    Global.showToast(AddGestureActivity.this, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()), Toast.LENGTH_SHORT);
                     System.err.println(String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
                 }
             });
@@ -165,14 +165,14 @@ public class AddGestureActivity extends ListActivity {
                                     String gestureName = input.getText().toString();
                                     if(gestureName!=null && !gestureName.isEmpty()) {
                                         try {
-                                            Global.showToast(AddGestureActivity.this, "Listening Gesture, please make a gesture", Toast.LENGTH_LONG);
+                                            Global.showToast(AddGestureActivity.this, "Listening Gesture, please make a gesture", Toast.LENGTH_SHORT);
                                             startTrainButton.setText("Stop Training");
                                             recognitionService.startLearnMode(Global.trainingSet, gestureName);//editText.getText().toString());
                                         } catch (RemoteException e) {
                                             e.printStackTrace();
                                         }
                                     } else {
-                                        Global.showToast(AddGestureActivity.this, "Please enter a none empty string", Toast.LENGTH_LONG);
+                                        Global.showToast(AddGestureActivity.this, "Please enter a none empty string", Toast.LENGTH_SHORT);
 
                                     }
 
