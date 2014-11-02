@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import android.content.Context;
+import android.util.Log;
 
 
 import com.example.hcp.home_control_prototype.gesture.Gesture;
@@ -56,7 +57,7 @@ public class GestureClassifier {
 		if (activeTrainingSet != null && activeTrainingSet != "") {
 			try {
 				FileOutputStream fos = new FileOutputStream(new File(context.getExternalFilesDir(null), activeTrainingSet + ".gst").toString());
-				ObjectOutputStream o = new ObjectOutputStream(fos);
+                ObjectOutputStream o = new ObjectOutputStream(fos);
 				o.writeObject(trainingSet);
 				o.close();
 				fos.close();

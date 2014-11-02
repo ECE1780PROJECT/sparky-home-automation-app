@@ -18,6 +18,8 @@ import java.util.Set;
  */
 public class SelectGestureActivity extends Activity {
 
+
+    private static final String TAG = "SelectGestureActivity";
     private SharedPreferences gSharedPreferences;
     String[] default_gesture_list = {
             "BUMP RIGHT",
