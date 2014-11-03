@@ -33,6 +33,7 @@ import com.example.hcp.home_control_prototype.gesture.classifier.Distribution;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -58,7 +59,8 @@ public class SelectGestureActivity extends Activity {
                 recognitionService.startClassificationMode(Global.trainingSet);
                 recognitionService.registerListener(IGestureRecognitionListener.Stub.asInterface(gestureListenerStub));
                 List<String> items = recognitionService.getGestureList(Global.trainingSet);
-                updateListView(items);
+                default_gesture_list = items;
+                updateListView(default_gesture_list);
 
             } catch (RemoteException e1) {
                 // TODO Auto-generated catch block
@@ -117,10 +119,7 @@ public class SelectGestureActivity extends Activity {
         image_list.add(R.drawable.bumpl);
         adapter = new CustomList(SelectGestureActivity.this, default_gesture_list, image_list);
         adapter.setSelectedIndex(gSharedPreferences.getInt(Global.PREFERENCE_GESTURE_SELECT, 0));
-        //Set<String> stringS = gSharedPreferences.getStringSet(Global.PREFERENCE_GESTURE_LIST, null);
-       // if (stringS != null) {
-        //    Log.i("TEST", stringS.toArray().toString());
-        //}
+
         list=(ListView)findViewById(R.id.list);
         list.setAdapter(adapter);
         list.setTextFilterEnabled(true);
@@ -129,12 +128,7 @@ public class SelectGestureActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                SharedPreferences.Editor editor = gSharedPreferences.edit();
-                editor.clear();
-                editor.putInt(Global.PREFERENCE_GESTURE_SELECT, position);
-                Set<String> stringSet = new HashSet<String>(default_gesture_list);
-                editor.putStringSet(Global.PREFERENCE_GESTURE_LIST, stringSet);
-                editor.commit();
+                commitPreferenceChoice(position);
                 adapter.setSelectedIndex(position);
                 adapter.notifyDataSetChanged();
             }
@@ -158,6 +152,28 @@ public class SelectGestureActivity extends Activity {
                 }
             }
         });
+
+    }
+
+    private void commitPreferenceChoice(int position){
+        SharedPreferences.Editor editor = gSharedPreferences.edit();
+        editor.clear();
+        editor.putInt(Global.PREFERENCE_GESTURE_SELECT, position);
+
+        String name = "";
+        if(!default_gesture_list.isEmpty()) {
+            name = default_gesture_list.get(position);
+        }
+        //Log.i("TEST1", name);
+        //Log.i("TEST2", default_gesture_list.toString());
+        editor.putString(Global.PREFERENCE_GESTURE_SELECT_NAME, name);
+        editor.commit();
+
+        //String sName = gSharedPreferences.getString(Global.PREFERENCE_GESTURE_SELECT_NAME, null);
+        //int positionS = gSharedPreferences.getInt(Global.PREFERENCE_GESTURE_SELECT,0);
+        //if (sName != null) {
+        //    Log.i("TEST", sName);
+        //}
 
     }
 
@@ -209,7 +225,10 @@ public class SelectGestureActivity extends Activity {
         try {
             recognitionService.stopLearnMode();
             List<String> items = recognitionService.getGestureList(Global.trainingSet);
-            updateListView(items);
+            default_gesture_list = items;
+            updateListView(default_gesture_list);
+            commitPreferenceChoice(adapter.getSelectedIndex());
+
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -255,17 +274,23 @@ public class SelectGestureActivity extends Activity {
 
         if (item.getItemId() == 0) {
             try {
+                int position = adapter.getSelectedIndex();
                 recognitionService.deleteGesture(Global.trainingSet, adapter.getGestureName(info.position));
                 if(info.position < adapter.getSelectedIndex()) {
                     adapter.setSelectedIndex(adapter.getSelectedIndex()-1);
-                    SharedPreferences.Editor editor = gSharedPreferences.edit();
-                    editor.clear();
-                    editor.putInt(Global.PREFERENCE_GESTURE_SELECT, adapter.getSelectedIndex());
-                    editor.commit();
+                    position = adapter.getSelectedIndex();
+                    adapter.notifyDataSetChanged();
+                }
+                if(info.position == adapter.getSelectedIndex()) {
+                    adapter.setSelectedIndex(0);
+                    position = adapter.getSelectedIndex();
                     adapter.notifyDataSetChanged();
                 }
                 List<String> items = recognitionService.getGestureList(Global.trainingSet);
-                updateListView(items);
+                default_gesture_list=items;
+                updateListView(default_gesture_list);
+
+                commitPreferenceChoice(position);
             } catch (RemoteException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

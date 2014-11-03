@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class Global {
     public static String trainingSet = "gesturelist";
     public static final String PREFERENCE_GESTURE_SELECT = "gesture_select";
-    public static final String PREFERENCE_GESTURE_LIST = "gesture_list";
+    public static final String PREFERENCE_GESTURE_SELECT_NAME = "gesture_select_name";
     public static void showToast(Context applicationContext, CharSequence text, int duration){
         // Usage Global.showToast(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_LONG);
         Toast toast = Toast.makeText(applicationContext, text, duration);
