@@ -45,8 +45,8 @@ public class MainActivity extends FragmentActivity {
         Spark spark = Spark.getInstance();
         spark.login("garygrantgraham@gmail.com", "coin0nioc");
         spark.findDevices();
-        //startService(new Intent(this,BGRunnerService.class));
-        startService(new Intent(this,BGGestureService.class));
+        startService(new Intent(this,BGRunnerService.class));
+        //startService(new Intent(this,BGGestureService.class));
     }
 
 

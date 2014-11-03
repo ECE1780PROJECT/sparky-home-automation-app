@@ -25,7 +25,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">>
 
-        <Button android:id="@+id/trainButton"
+        <Button android:id="@+id/trainButton2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:text="Start Training"

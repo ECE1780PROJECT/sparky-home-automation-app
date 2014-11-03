@@ -20,15 +20,6 @@
         </Preference>
 
 
-        <Preference
-            android:key="gesture_add_pref"
-            android:title="Add gestures"
-            android:summary="Adding new customer gesture toggles the device">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.hcp.home_control_prototype"
-                android:targetClass="com.example.hcp.home_control_prototype.AddGestureActivity" />
-        </Preference>
         <ListPreference
             android:key="background_services_pref"
             android:title="Background services"

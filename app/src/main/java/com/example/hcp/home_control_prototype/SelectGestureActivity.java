@@ -1,17 +1,27 @@
 package com.example.hcp.home_control_prototype;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +30,7 @@ import com.example.hcp.home_control_prototype.gesture.IGestureRecognitionListene
 import com.example.hcp.home_control_prototype.gesture.IGestureRecognitionService;
 import com.example.hcp.home_control_prototype.gesture.classifier.Distribution;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -33,19 +44,10 @@ public class SelectGestureActivity extends Activity {
 
     private static final String TAG = "SelectGestureActivity";
     private SharedPreferences gSharedPreferences;
-    String[] default_gesture_list = {
-            "BUMP RIGHT",
-            "BUMP LEFT",
-            "BUMP UP",
-    } ;
-    Integer[] imageId = {
-            R.drawable.bumpr,
-            R.drawable.bumpl,
-            R.drawable.shake,
-    };
+    List<String> default_gesture_list = new ArrayList<String>();
+    List<Integer> image_list = new ArrayList<Integer>();
 
     IGestureRecognitionService recognitionService;
-    ArrayAdapter<String> adapter;
 
     private final ServiceConnection serviceConnection = new ServiceConnection() {
 
@@ -56,23 +58,12 @@ public class SelectGestureActivity extends Activity {
                 recognitionService.startClassificationMode(Global.trainingSet);
                 recognitionService.registerListener(IGestureRecognitionListener.Stub.asInterface(gestureListenerStub));
                 List<String> items = recognitionService.getGestureList(Global.trainingSet);
-                //setListAdapter(new ArrayAdapter<String>(AddGestureActivity.this, android.R.layout.simple_list_item_single_choice, items));
+                updateListView(items);
+
             } catch (RemoteException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-
-            //ListView lv = getListView();
-           // lv.setTextFilterEnabled(true);
-           // registerForContextMenu(lv);
-
-            //lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            //    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-           //         // When clicked, show a toast with the TextView text
-            //        //Global.showToast(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_LONG);
-             //       System.err.println(((TextView) view).getText());
-            //    }
-            //});
         }
 
         @Override
@@ -108,12 +99,23 @@ public class SelectGestureActivity extends Activity {
     };
 
     ListView list;
+    CustomList adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_gesture);
+
         gSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        final CustomList adapter = new CustomList(SelectGestureActivity.this, default_gesture_list, imageId);
+
+
+        Integer[] imageId = {
+                R.drawable.bumpr,
+                R.drawable.bumpl,
+                R.drawable.shake,
+        };
+        image_list.add(R.drawable.bumpr);
+        image_list.add(R.drawable.bumpl);
+        adapter = new CustomList(SelectGestureActivity.this, default_gesture_list, image_list);
         adapter.setSelectedIndex(gSharedPreferences.getInt(Global.PREFERENCE_GESTURE_SELECT, 0));
         //Set<String> stringS = gSharedPreferences.getStringSet(Global.PREFERENCE_GESTURE_LIST, null);
        // if (stringS != null) {
@@ -121,6 +123,8 @@ public class SelectGestureActivity extends Activity {
         //}
         list=(ListView)findViewById(R.id.list);
         list.setAdapter(adapter);
+        list.setTextFilterEnabled(true);
+        registerForContextMenu(list);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -128,7 +132,7 @@ public class SelectGestureActivity extends Activity {
                 SharedPreferences.Editor editor = gSharedPreferences.edit();
                 editor.clear();
                 editor.putInt(Global.PREFERENCE_GESTURE_SELECT, position);
-                Set<String> stringSet = new HashSet<String>(Arrays.asList(default_gesture_list));
+                Set<String> stringSet = new HashSet<String>(default_gesture_list);
                 editor.putStringSet(Global.PREFERENCE_GESTURE_LIST, stringSet);
                 editor.commit();
                 adapter.setSelectedIndex(position);
@@ -137,6 +141,139 @@ public class SelectGestureActivity extends Activity {
         });
 
 
+        final Button trainButton = (Button) findViewById(R.id.trainButton);
+        trainButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (recognitionService != null) {
+                    try {
+                        if (!recognitionService.isLearning()) {
+                            startTrainingButton(trainButton);
+                        } else {
+                            stopTrainingButton(trainButton);
+                        }
+                    } catch (RemoteException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
     }
+
+    private void startTrainingButton(final Button trainButton) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(SelectGestureActivity.this);
+        alert.setTitle("Gesture Name");
+        alert.setMessage("Please enter a gesture name");
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(SelectGestureActivity.this);
+        alert.setView(input);
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String gestureName = input.getText().toString();
+                if(gestureName!=null && !gestureName.isEmpty()) {
+                    try {
+                        Global.showToast(SelectGestureActivity.this, "Listening Gesture, please make a gesture", Toast.LENGTH_SHORT);
+                        trainButton.setText("Stop Training");
+                        recognitionService.startLearnMode(Global.trainingSet, gestureName);//editText.getText().toString());
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Global.showToast(SelectGestureActivity.this, "Please enter a none empty string", Toast.LENGTH_SHORT);
+
+                }
+
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+        alert.show();
+    }
+
+    private void updateListView(List<String> items) {
+
+        adapter.clear();
+        adapter.setList(items);
+        list=(ListView)findViewById(R.id.list);
+        list.setAdapter(adapter);
+    }
+
+    private void stopTrainingButton(final Button trainButton){
+        trainButton.setText("Start Training");
+        try {
+            recognitionService.stopLearnMode();
+            List<String> items = recognitionService.getGestureList(Global.trainingSet);
+            updateListView(items);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        try {
+            recognitionService.unregisterListener(IGestureRecognitionListener.Stub.asInterface(gestureListenerStub));
+        } catch (RemoteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        recognitionService = null;
+        unbindService(serviceConnection);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        Intent bindIntent = new Intent("com.example.hcp.home_control_prototype.gesture.GESTURE_RECOGNIZER");
+        bindService(bindIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+        super.onResume();
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        menu.setHeaderTitle(adapter.getGestureName(info.position));
+        String[] menuItems = {"Delete"};
+
+        for (int i = 0; i < menuItems.length; i++) {
+            menu.add(Menu.NONE, i, i, menuItems[i]);
+        }
+
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        if (item.getItemId() == 0) {
+            try {
+                recognitionService.deleteGesture(Global.trainingSet, adapter.getGestureName(info.position));
+                if(info.position < adapter.getSelectedIndex()) {
+                    adapter.setSelectedIndex(adapter.getSelectedIndex()-1);
+                    SharedPreferences.Editor editor = gSharedPreferences.edit();
+                    editor.clear();
+                    editor.putInt(Global.PREFERENCE_GESTURE_SELECT, adapter.getSelectedIndex());
+                    editor.commit();
+                    adapter.notifyDataSetChanged();
+                }
+                List<String> items = recognitionService.getGestureList(Global.trainingSet);
+                updateListView(items);
+            } catch (RemoteException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        return true;
+
+    }
+
 }

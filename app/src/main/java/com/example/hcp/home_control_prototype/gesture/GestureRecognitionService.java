@@ -55,7 +55,7 @@ public class GestureRecognitionService extends Service implements GestureRecorde
 
 		@Override
 		public void deleteTrainingSet(String trainingSetName) throws RemoteException {
-			if (classifier.deleteTrainingSet(trainingSetName)) {
+			/*if (classifier.deleteTrainingSet(trainingSetName)) {
 				for (IGestureRecognitionListener listener : listeners) {
 					try {
 						listener.onTrainingSetDeleted(trainingSetName);
@@ -64,7 +64,7 @@ public class GestureRecognitionService extends Service implements GestureRecorde
 						e.printStackTrace();
 					}
 				}
-			}
+			}*/
 		}
 
 		@Override

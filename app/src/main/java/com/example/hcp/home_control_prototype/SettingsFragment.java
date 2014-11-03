@@ -24,15 +24,15 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("disable_pref");
         Preference gestureSelect = findPreference("gesture_select_pref");
-        Preference addGestures = findPreference("gesture_add_pref");
+        //Preference addGestures = findPreference("gesture_add_pref");
 
         boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("disable_pref", false);
         if (isDisabled) {
             gestureSelect.setEnabled(false);
-            addGestures.setEnabled(false);
+        //    addGestures.setEnabled(false);
         } else {
             gestureSelect.setEnabled(true);
-            addGestures.setEnabled(true);
+        //    addGestures.setEnabled(true);
         }
 
         disableGestures.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
