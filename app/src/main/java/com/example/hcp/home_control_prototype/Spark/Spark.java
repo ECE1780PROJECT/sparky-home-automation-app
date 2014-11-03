@@ -63,7 +63,9 @@ public class Spark implements OnTaskCompleted {
 
     public Token getCurrentToken(){
         Log.i(TAG, "getCurrentToken() -> providing token: " + current_token);
-
+        if(current_token == null){
+            rotateToken();
+        }
         return current_token;
     }
 

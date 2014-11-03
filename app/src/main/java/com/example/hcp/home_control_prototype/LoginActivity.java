@@ -170,7 +170,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
     }
 
     /**
-     * Shows the progress UI and hides the login form.
+     * Shows the progre ss UI and hides the login form.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     public void showProgress(final boolean show) {
@@ -260,8 +260,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
 
             //adding tokens to sharedprefs. stupid preferences demands sets instead of lists.
             edit.putStringSet("tokens", tokenStrings);
-
-
             edit.commit();
             startActivity(mainIntent);
             finish();

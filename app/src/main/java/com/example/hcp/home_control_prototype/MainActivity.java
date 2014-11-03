@@ -45,7 +45,7 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
 
         //grab tokens from prefs.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        ArrayList<String> tokenStrings = new ArrayList<String>(prefs.getStringSet("tokens", new HashSet<String>()));
+        Set<String> tokenStrings = prefs.getStringSet("tokens", new HashSet<String>());
 
         //if we have no tokens, we need to log back in. TODO eventually replace with a custom token generator on the API.
         if (tokenStrings.size() < 1) {
