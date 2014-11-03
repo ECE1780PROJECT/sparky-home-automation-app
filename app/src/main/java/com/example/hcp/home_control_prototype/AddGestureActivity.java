@@ -95,7 +95,7 @@ public class AddGestureActivity extends ListActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Global.showToast(AddGestureActivity.this, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()), Toast.LENGTH_SHORT);
+                    Global.showToast(AddGestureActivity.this, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()), Toast.LENGTH_LONG);
                     System.err.println(String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
                 }
             });
@@ -109,7 +109,7 @@ public class AddGestureActivity extends ListActivity {
         //final TextView activeTrainingSetText = (TextView) findViewById(R.id.activeTrainingSet);
         //final EditText trainingSetText = (EditText) findViewById(R.id.trainingSetName);
         //final EditText editText = (EditText) findViewById(R.id.gestureName);
-        final Button startTrainButton = (Button) findViewById(R.id.trainButton);
+        final Button startTrainButton = (Button) findViewById(R.id.trainButton2);
         //final Button deleteTrainingSetButton = (Button) findViewById(R.id.deleteTrainingSetButton);
         //final Button changeTrainingSetButton = (Button) findViewById(R.id.startNewSetButton);
         //final SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar1);
@@ -165,14 +165,14 @@ public class AddGestureActivity extends ListActivity {
                                     String gestureName = input.getText().toString();
                                     if(gestureName!=null && !gestureName.isEmpty()) {
                                         try {
-                                            Global.showToast(AddGestureActivity.this, "Listening Gesture, please make a gesture", Toast.LENGTH_SHORT);
+                                            Global.showToast(AddGestureActivity.this, "Listening Gesture, please make a gesture", Toast.LENGTH_LONG);
                                             startTrainButton.setText("Stop Training");
                                             recognitionService.startLearnMode(Global.trainingSet, gestureName);//editText.getText().toString());
                                         } catch (RemoteException e) {
                                             e.printStackTrace();
                                         }
                                     } else {
-                                        Global.showToast(AddGestureActivity.this, "Please enter a none empty string", Toast.LENGTH_SHORT);
+                                        Global.showToast(AddGestureActivity.this, "Please enter a none empty string", Toast.LENGTH_LONG);
 
                                     }
 
