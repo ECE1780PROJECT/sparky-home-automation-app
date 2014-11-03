@@ -55,7 +55,6 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
         this.enabled = !prefs.getBoolean("disable_pref", false);
         Log.i(TAG, "BGRunnerService() -> grabbing disabled preference. Status of the service should be: " + enabled);
         this.handleSensors();
-
     }
     @Override
     public void onDestroy()

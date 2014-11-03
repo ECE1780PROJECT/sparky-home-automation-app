@@ -14,7 +14,6 @@ public class Global {
     public static final String PREFERENCE_GESTURE_SELECT = "gesture_select";
     public static final String PREFERENCE_GESTURE_LIST = "gesture_list";
     public static void showToast(Context applicationContext, CharSequence text, int duration){
-        // Usage Global.showToast(getApplicationContext(), ((TextView) view).getText(), Toast.LENGTH_LONG);
         Toast toast = Toast.makeText(applicationContext, text, duration);
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();

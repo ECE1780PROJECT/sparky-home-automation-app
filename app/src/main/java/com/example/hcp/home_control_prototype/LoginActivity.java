@@ -1,5 +1,4 @@
 package com.example.hcp.home_control_prototype;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -12,10 +11,9 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
@@ -29,10 +27,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.hcp.home_control_prototype.Spark.LoginTask;
-
+import com.example.hcp.home_control_prototype.Spark.Token;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -59,17 +57,20 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private ListPreference tokensPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if(prefs.getBoolean("logged_in", false)){
+        //if(prefs.getBoolean("logged_in", false)){
+        //TODO test this when i get off the airplane. removes the need for the logged in thing.
+        if(prefs.getStringSet("tokens", new HashSet<String>()).size() > 0 ){
             Intent mainIntent = new Intent(this, MainActivity.class);
             startActivity(mainIntent);
             finish();
-        }
+        }   
         setContentView(R.layout.activity_login);
 
         // Set up the login form.
@@ -246,7 +247,21 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
             Intent mainIntent = new Intent(this, MainActivity.class);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor edit = prefs.edit();
-            edit.putBoolean("logged_in", true);
+
+            //TODO may need to remove this if the tokens pref covers the functionality I want.
+            //edit.putBoolean("logged_in", true);
+
+            //Man i hate this.
+            HashSet<String> tokenStrings = new HashSet<String>();
+            for(Token token: (ArrayList<Token>)obj){
+                tokenStrings.add(token.getValue());
+
+            }
+
+            //adding tokens to sharedprefs. stupid preferences demands sets instead of lists.
+            edit.putStringSet("tokens", tokenStrings);
+
+
             edit.commit();
             startActivity(mainIntent);
             finish();
