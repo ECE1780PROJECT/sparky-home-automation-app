@@ -191,40 +191,37 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
                     @Override
                     public void onGestureRecognized(final Distribution distribution) throws RemoteException {
                         idfier=prefs.getInt(Global.PREFERENCE_GESTURE_SELECT,0);
+                        String s=prefs.getStringSet(Global.PREFERENCE_GESTURE_LIST,null).toArray()[0].toString();
+                        Log.i("STRING S",s);
                         switch (idfier)
                         {
                             case 0:
-                                if(distribution.getBestMatch().equals("gest1")&&distribution.getBestDistance()<gestError) {
-                                    Log.i(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
-                                    device = Spark.getInstance().getDeviceByName("Tadgh");
-                                    toggle = new LightToggleTask(device.getId(),BGRunnerService.this);
-                                    toggle.execute();
-                                    Log.i("IDFIER", "BUMP RIGHT");
-                                }
+                               toggleDevice(0,distribution);
                                 break;
                             case 1:
-                                if(distribution.getBestMatch().equals("gest2")&&distribution.getBestDistance()<gestError) {
-                                   Log.i(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
-                                    device = Spark.getInstance().getDeviceByName("Tadgh");
-                                    toggle = new LightToggleTask(device.getId(),BGRunnerService.this);
-                                    toggle.execute();
-                                    Log.i("IDFIER", "BUMP LEFT");
-                                }
+                               toggleDevice(1,distribution);
                                 break;
                             case 2:
-                                if(distribution.getBestMatch().equals("gest3")&&distribution.getBestDistance()<gestError) {
-                                    Log.i(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
-                                    device = Spark.getInstance().getDeviceByName("Tadgh");
-                                    toggle = new LightToggleTask(device.getId(),BGRunnerService.this);
-                                    toggle.execute();
-                                    Log.i("IDFIER", "BUMP UP");
-                                }
+                               toggleDevice(2,distribution);
+                                break;
+                            case 3:
+                               toggleDevice(3,distribution);
                                 break;
                             default:
                                 break;
                         }
 
                   }
+            private void toggleDevice(int i,Distribution distribution)
+            {
+                if(distribution.getBestMatch().equals(prefs.getStringSet(Global.PREFERENCE_GESTURE_LIST,null).toArray()[i].toString())&&distribution.getBestDistance()<gestError) {
+                    Log.i(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
+                    device = Spark.getInstance().getDeviceByName("Tadgh");
+                    toggle = new LightToggleTask(device.getId(),BGRunnerService.this);
+                    toggle.execute();
+                    Log.i("IDFIER", "BUMP RIGHT");
+                }
+            }
 
                     @Override
                     public void onGestureLearned(String gestureName) throws RemoteException {
