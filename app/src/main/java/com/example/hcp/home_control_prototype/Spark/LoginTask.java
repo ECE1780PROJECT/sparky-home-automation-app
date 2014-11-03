@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 
+import com.example.hcp.home_control_prototype.OnTaskCompleted;
 import com.example.hcp.home_control_prototype.Spark.Spark;
 
 import org.apache.http.HttpEntity;
@@ -30,9 +31,9 @@ import java.util.ArrayList;
 public class LoginTask extends AsyncTask<String, Void, ArrayList<Token>> {
     private static final String URL = "https://api.spark.io/v1/access_tokens";
     private static final String TAG = "LoginTask";
-    private Spark listener;
+    private OnTaskCompleted listener;
 
-    public LoginTask(Spark listener) {
+    public LoginTask(OnTaskCompleted listener) {
         this.listener = listener;
     }
 
@@ -78,9 +79,9 @@ public class LoginTask extends AsyncTask<String, Void, ArrayList<Token>> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            listener.replaceAllTokens(resultantTokens);
-            if(listener.getTokens().size() > 0){
-                listener.rotateToken();
+            Spark.getInstance().replaceAllTokens(resultantTokens);
+            if(Spark.getInstance().getTokens().size() > 0){
+                Spark.getInstance().rotateToken();
             }
             return resultantTokens;
 
@@ -89,7 +90,7 @@ public class LoginTask extends AsyncTask<String, Void, ArrayList<Token>> {
     @Override
     public void onPostExecute(ArrayList<Token> result) {
 
-        //listener.findDevices();
+        listener.onTaskCompleted(result, null);
     }
 
 }

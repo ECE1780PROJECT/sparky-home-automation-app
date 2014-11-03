@@ -12,6 +12,8 @@ import android.util.Log;
 
 import com.github.machinarius.preferencefragment.PreferenceFragment;
 
+import java.util.List;
+
 public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = "SettingsFragment";
@@ -21,12 +23,15 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("disable_pref");
+        CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("background_services_pref");
         Preference gestureSelect = findPreference("gesture_select_pref");
         //Preference addGestures = findPreference("gesture_add_pref");
+        //Preference addGestures = findPreference("gesture_add_pref");
+        Preference signOut = findPreference("signout_pref");
 
         boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("disable_pref", false);
+
         if (isDisabled) {
             gestureSelect.setEnabled(false);
         //    addGestures.setEnabled(false);
@@ -34,6 +39,29 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             gestureSelect.setEnabled(true);
         //    addGestures.setEnabled(true);
         }
+
+
+
+
+        backgroundPrefs.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                Log.i(TAG, "backgroundprefs changed! Current value is " + o.toString());
+                return true;
+            }
+        });
+
+        signOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                SharedPreferences.Editor edit = getPreferenceManager().getSharedPreferences().edit();
+                edit.putBoolean("logged_in", false);
+                edit.commit();
+                getActivity().finish();
+                return true;
+            }
+        });
 
         disableGestures.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 

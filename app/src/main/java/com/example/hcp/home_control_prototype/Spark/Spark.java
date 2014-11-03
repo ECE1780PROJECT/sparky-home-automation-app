@@ -1,5 +1,6 @@
 package com.example.hcp.home_control_prototype.Spark;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.hcp.home_control_prototype.OnTaskCompleted;
@@ -13,7 +14,7 @@ import java.util.concurrent.ExecutionException;
  * Created by garygraham on 2014-10-13.
  * A library to handle spark login and communications
  */
-public class Spark {
+public class Spark implements OnTaskCompleted {
     private static final String TAG = "Spark";
     private static Spark instance = null;
     private String username;
@@ -62,6 +63,9 @@ public class Spark {
 
     public Token getCurrentToken(){
         Log.i(TAG, "getCurrentToken() -> providing token: " + current_token);
+        if(current_token == null){
+            rotateToken();
+        }
         return current_token;
     }
 
@@ -139,5 +143,10 @@ public class Spark {
         if (devices.contains(device)){
             new SparkAPITask(device.getId(), apiPath, listener );
         }
+    }
+
+    @Override
+    public void onTaskCompleted(Object obj, Context context) {
+
     }
 }

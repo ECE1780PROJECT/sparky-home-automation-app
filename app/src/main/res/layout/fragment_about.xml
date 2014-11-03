@@ -13,7 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:src="@drawable/bump_r" />
+        android:src="@drawable/bumpr" />
 
     <TextView
         android:layout_width="fill_parent"

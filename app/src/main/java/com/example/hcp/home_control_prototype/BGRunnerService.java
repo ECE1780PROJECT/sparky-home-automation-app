@@ -53,6 +53,7 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
     public IBinder onBind(Intent intent) {
         return null;
     }
+
     @Override
     public void onCreate()
     {
