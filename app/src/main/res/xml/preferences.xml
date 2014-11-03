@@ -20,7 +20,7 @@
         </Preference>
 
 
-        <ListPreference
+        <CheckBoxPreference
             android:key="background_services_pref"
             android:title="Work in Background"
             android:summary="Choose behaviour when sparky is not in the foreground"/>

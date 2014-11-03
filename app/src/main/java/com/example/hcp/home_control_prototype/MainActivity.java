@@ -90,7 +90,7 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
         Boolean bgServiceEnabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("background_services_pref", false);
         if(!bgServiceEnabled){
             Log.i(TAG, "onPause() -> Stopping background service due to preference setting...");
-            stopService(new Intent(this, BGRunnerService.class));
+            //stopService(new Intent(this, BGRunnerService.class));
         }
     }
 
@@ -100,7 +100,7 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
         Boolean bgServiceEnabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("background_services_pref", false);
         if (!serviceIsRunning(BGRunnerService.class)){
             Log.i(TAG, "onPause() -> Starting background service based on preference setting...");
-            startService(new Intent(this, BGRunnerService.class));
+            //startService(new Intent(this, BGRunnerService.class));
         }
     }
 

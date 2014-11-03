@@ -29,6 +29,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 import com.example.hcp.home_control_prototype.gesture.classifier.Distribution;
 import com.example.hcp.home_control_prototype.gesture.classifier.GestureClassifier;
@@ -43,7 +44,8 @@ import com.example.hcp.home_control_prototype.gesture.recorder.GestureRecorderLi
 
 public class GestureRecognitionService extends Service implements GestureRecorderListener {
 
-	GestureRecorder recorder;
+    private static final String TAG = "GestureRecognitionService";
+    GestureRecorder recorder;
 	GestureClassifier classifier;
 	String activeTrainingSet;
 	String activeLearnLabel;
@@ -147,6 +149,7 @@ public class GestureRecognitionService extends Service implements GestureRecorde
 
 	@Override
 	public void onCreate() {
+        Log.i(TAG, "onCreate() -> Created GEstureRecognitionService Object...");
 		recorder = new GestureRecorder(this);
 		classifier = new GestureClassifier(new NormedGridExtractor(), this);
 		super.onCreate();

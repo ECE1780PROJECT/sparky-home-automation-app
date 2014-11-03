@@ -26,8 +26,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("disable_pref");
         CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("background_services_pref");
         Preference gestureSelect = findPreference("gesture_select_pref");
-        //Preference addGestures = findPreference("gesture_add_pref");
-        //Preference addGestures = findPreference("gesture_add_pref");
         Preference signOut = findPreference("signout_pref");
 
         boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("disable_pref", false);

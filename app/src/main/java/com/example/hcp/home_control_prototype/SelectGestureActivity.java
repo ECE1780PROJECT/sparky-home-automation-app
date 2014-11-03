@@ -79,13 +79,13 @@ public class SelectGestureActivity extends Activity {
         @Override
         public void onGestureLearned(String gestureName) throws RemoteException {
             Global.showToast(SelectGestureActivity.this, String.format("Gesture %s learned", gestureName), Toast.LENGTH_SHORT);
-            System.err.println("Gesture %s learned");
+            Log.e(TAG, "Gesture %s learned");
         }
 
         @Override
         public void onTrainingSetDeleted(String trainingSet) throws RemoteException {
             Global.showToast(SelectGestureActivity.this, String.format("Training set %s deleted", trainingSet), Toast.LENGTH_SHORT);
-            System.err.println(String.format("Training set %s deleted", trainingSet));
+            Log.e(TAG, String.format("Training set %s deleted", trainingSet));
         }
 
         @Override
@@ -94,7 +94,7 @@ public class SelectGestureActivity extends Activity {
                 @Override
                 public void run() {
                     Global.showToast(SelectGestureActivity.this, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()), Toast.LENGTH_LONG);
-                    System.err.println(String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
+                    Log.e(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
                 }
             });
         }
