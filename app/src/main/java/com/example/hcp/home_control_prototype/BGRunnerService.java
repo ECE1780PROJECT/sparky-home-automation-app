@@ -191,7 +191,7 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
                     @Override
                     public void onGestureRecognized(final Distribution distribution) throws RemoteException {
                         idfier=prefs.getInt(Global.PREFERENCE_GESTURE_SELECT,0);
-                        String s=prefs.getStringSet(Global.PREFERENCE_GESTURE_LIST,null).toArray()[0].toString();
+                        String s=prefs.getString(Global.PREFERENCE_GESTURE_SELECT_NAME,null);
                         Log.i("STRING S",s);
                         switch (idfier)
                         {
@@ -214,7 +214,7 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
                   }
             private void toggleDevice(int i,Distribution distribution)
             {
-                if(distribution.getBestMatch().equals(prefs.getStringSet(Global.PREFERENCE_GESTURE_LIST,null).toArray()[i].toString())&&distribution.getBestDistance()<gestError) {
+                if(distribution.getBestMatch().equals(prefs.getString(Global.PREFERENCE_GESTURE_SELECT_NAME,null))&&distribution.getBestDistance()<gestError) {
                     Log.i(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
                     device = Spark.getInstance().getDeviceByName("Tadgh");
                     toggle = new LightToggleTask(device.getId(),BGRunnerService.this);
