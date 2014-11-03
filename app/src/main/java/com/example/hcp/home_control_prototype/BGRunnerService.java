@@ -17,9 +17,18 @@ import com.example.hcp.home_control_prototype.Spark.LightToggleTask;
 import com.example.hcp.home_control_prototype.Spark.Spark;
 
 import java.util.Date;
+import android.content.ComponentName;
+import android.content.ServiceConnection;
+import android.os.RemoteException;
+
+import com.example.hcp.home_control_prototype.gesture.IGestureRecognitionListener;
+import com.example.hcp.home_control_prototype.gesture.IGestureRecognitionService;
+import com.example.hcp.home_control_prototype.gesture.classifier.Distribution;
+
+import java.util.List;
 
 
-public class BGRunnerService extends Service implements SensorEventListener,OnTaskCompleted, SharedPreferences.OnSharedPreferenceChangeListener{
+public class BGRunnerService extends Service implements Runnable,ServiceConnection,SensorEventListener,OnTaskCompleted, SharedPreferences.OnSharedPreferenceChangeListener{
     LightToggleTask toggle;
     private SensorManager senSensorManager;
     private Device device;
@@ -29,11 +38,16 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
     private static final int SHAKE_THRESHOLD=50;
     private static final String TAG = "GestureService";
     private boolean enabled;
+    private static float gestError=12;
+    private int idfier;
 
     private Date date;
+    SharedPreferences prefs;
+    IBinder gestureListenerStub;
 
     public BGRunnerService() {
     }
+    IGestureRecognitionService recognitionService;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -47,15 +61,18 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
         device = Spark.getInstance().getDeviceByName("Tadgh");
 
         //DEFAULTING THE GESTURES TO OFF IF WE CANT READ THE VALUE.
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
-
 
         this.enabled = !prefs.getBoolean("disable_pref", false);
         Log.i(TAG, "BGRunnerService() -> grabbing disabled preference. Status of the service should be: " + enabled);
         this.handleSensors();
 
+        Intent bindIntent = new Intent("com.example.hcp.home_control_prototype.gesture.GESTURE_RECOGNIZER");
+        bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
+
     }
+
     @Override
     public void onDestroy()
     {
@@ -76,7 +93,7 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
     public void onSensorChanged(SensorEvent event) {
 
         Sensor mySensor = event.sensor;
-        if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+       /* if (mySensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float x = event.values[0];
             float y = event.values[1];
             float z = event.values[2];
@@ -165,8 +182,62 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
                 last_x = x;
                 last_y = y;
                 last_z = z;
-            }
-        }
+            }*/
+           // else
+            //{
+
+        gestureListenerStub  = new IGestureRecognitionListener.Stub(){
+
+                    @Override
+                    public void onGestureRecognized(final Distribution distribution) throws RemoteException {
+                        idfier=prefs.getInt(Global.PREFERENCE_GESTURE_SELECT,0);
+                        switch (idfier)
+                        {
+                            case 0:
+                                if(distribution.getBestMatch().equals("gest1")&&distribution.getBestDistance()<gestError) {
+                                    Log.i(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
+                                    device = Spark.getInstance().getDeviceByName("Tadgh");
+                                    toggle = new LightToggleTask(device.getId(),BGRunnerService.this);
+                                    toggle.execute();
+                                    Log.i("IDFIER", "BUMP RIGHT");
+                                }
+                                break;
+                            case 1:
+                                if(distribution.getBestMatch().equals("gest2")&&distribution.getBestDistance()<gestError) {
+                                   Log.i(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
+                                    device = Spark.getInstance().getDeviceByName("Tadgh");
+                                    toggle = new LightToggleTask(device.getId(),BGRunnerService.this);
+                                    toggle.execute();
+                                    Log.i("IDFIER", "BUMP LEFT");
+                                }
+                                break;
+                            case 2:
+                                if(distribution.getBestMatch().equals("gest3")&&distribution.getBestDistance()<gestError) {
+                                    Log.i(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
+                                    device = Spark.getInstance().getDeviceByName("Tadgh");
+                                    toggle = new LightToggleTask(device.getId(),BGRunnerService.this);
+                                    toggle.execute();
+                                    Log.i("IDFIER", "BUMP UP");
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+
+                  }
+
+                    @Override
+                    public void onGestureLearned(String gestureName) throws RemoteException {
+
+                    }
+
+                    @Override
+                    public void onTrainingSetDeleted(String trainingSet) throws RemoteException {
+
+                    }
+                };;
+            //}
+        //}
     }
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy)
@@ -212,6 +283,36 @@ public class BGRunnerService extends Service implements SensorEventListener,OnTa
             Log.i(TAG, "handleSensors() -> Unregistered Listener.");
             Log.i(TAG,"handleSensors() -> SENSOR STOPPED");
         }
+    }
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        recognitionService = IGestureRecognitionService.Stub.asInterface(service);
+        try {
+            recognitionService.startClassificationMode(Global.trainingSet);
+            recognitionService.registerListener(IGestureRecognitionListener.Stub.asInterface(gestureListenerStub));
+            List<String> items = recognitionService.getGestureList(Global.trainingSet);
+            //Log.i(TAG, items.toString());
+        } catch (RemoteException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+    }
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        //try {
+        //   recognitionService.unregisterListener(IGestureRecognitionListener.Stub.asInterface(gestureListenerStub));
+        //} catch (RemoteException e) {
+        //    // TODO Auto-generated catch block
+        //    e.printStackTrace();
+        //}
+
+        // recognitionService = null;
+        // unbindService(serviceConnection);
+    }
+    @Override
+    public void run() {
+
+
     }
 }
 

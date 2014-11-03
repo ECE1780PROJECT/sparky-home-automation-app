@@ -56,8 +56,6 @@ public class BGGestureService extends Service implements Runnable, ServiceConnec
     @Override
     public IBinder onBind(Intent intent) {
 
-
-
         return null;
     }
 
