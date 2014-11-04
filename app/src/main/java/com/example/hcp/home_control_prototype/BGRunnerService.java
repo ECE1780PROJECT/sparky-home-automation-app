@@ -6,39 +6,28 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.content.Context;
-import android.hardware.SensorManager;
 import android.widget.Toast;
-
 import com.example.hcp.home_control_prototype.Spark.Device;
 import com.example.hcp.home_control_prototype.Spark.LightToggleTask;
 import com.example.hcp.home_control_prototype.Spark.Spark;
-
-import java.util.Date;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.RemoteException;
-
 import com.example.hcp.home_control_prototype.gesture.IGestureRecognitionListener;
 import com.example.hcp.home_control_prototype.gesture.IGestureRecognitionService;
 import com.example.hcp.home_control_prototype.gesture.classifier.Distribution;
-
 import java.util.List;
 
 
 public class BGRunnerService extends Service implements Runnable,ServiceConnection,OnTaskCompleted, SharedPreferences.OnSharedPreferenceChangeListener{
     LightToggleTask toggle;
-    private SensorManager senSensorManager;
     private Device device;
-    private long lastUpdate=0;
-    private float last_x, last_y, last_z;
-    private static final int SHAKE_THRESHOLD = 50;
     private static final String TAG = "GestureService";
     private boolean enabled;
     private static float gestError = 12;
     private int idfier;
     IGestureRecognitionService recognitionService;
 
-    private Date date;
     SharedPreferences prefs;
     IBinder gestureListenerStub  = new IGestureRecognitionListener.Stub(){
 
@@ -127,13 +116,6 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
 
     }
 
-    public void handleSensors(){
-        if(this.enabled){
-
-        }else{
-            //unbindService(this);
-        }
-    }
     @Override
     public void onDestroy()
     {
@@ -148,9 +130,6 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
     {
         return(1);
     }
-    private int flag=0, set1=0,set2=0;
-    private long t1=0,t2=0;
-
 
     @Override
     public void onTaskCompleted(Object obj,Context context)
@@ -159,7 +138,6 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
                 showTimeOutToast();
             }
      }
-
 
     private void showTimeOutToast() {
         Global.showToast(this.getApplicationContext(), "Couldn't communicate with Spark core!!", Toast.LENGTH_SHORT);
