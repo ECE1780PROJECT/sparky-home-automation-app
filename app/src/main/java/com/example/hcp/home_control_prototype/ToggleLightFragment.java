@@ -34,6 +34,7 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
 
 
     private static final String TAG = "ToggleLightPage";
+    private View view;
 
     public ToggleLightFragment() {
         // Required empty public constructor
@@ -53,6 +54,7 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
         ImageView bulbImg = (ImageView)rootView.findViewById(R.id.bulbImgFragment);
         bulbImg.setOnClickListener(this);
         LightToggleTask.registerForToggleEvent(this, this.getActivity().getBaseContext());
+        view = rootView;
         return rootView;
     }
 
@@ -63,6 +65,11 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
             LightGetStatusTask gst = new LightGetStatusTask(outlet.getId(), this);
             gst.execute();
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 
     /**
@@ -100,16 +107,16 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
     }
 
     private void showTimeOutToast() {
-        Global.showToast(this.getActivity(), "Couldn't communicate with Spark core!!", Toast.LENGTH_SHORT);
+        Global.showToast(getActivity(), "Couldn't communicate with Spark core!!", Toast.LENGTH_SHORT);
     }
 
     private void lightOn() {
-        ImageView bulbImg = (ImageView) this.getView().findViewById(R.id.bulbImgFragment);
+        ImageView bulbImg = (ImageView) view.findViewById(R.id.bulbImgFragment);
         bulbImg.setImageResource(R.drawable.bulb_on_img);
     }
 
     private void lightOff() {
-        ImageView bulbImg = (ImageView) this.getView().findViewById(R.id.bulbImgFragment);
+        ImageView bulbImg = (ImageView) view.findViewById(R.id.bulbImgFragment);
         bulbImg.setImageResource(R.drawable.bulb_off_img);
     }
 

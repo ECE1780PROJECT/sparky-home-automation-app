@@ -72,10 +72,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("disable_pref", false);
                 if (isDisabled) {
                     gestureSelect.setEnabled(false);
-                    addGestures.setEnabled(false);
                 } else {
                     gestureSelect.setEnabled(true);
-                    addGestures.setEnabled(true);
                 }
 
                 return false;
