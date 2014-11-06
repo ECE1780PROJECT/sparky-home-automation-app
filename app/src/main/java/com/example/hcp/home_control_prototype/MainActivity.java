@@ -49,11 +49,7 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pager_root);
 
-        viewPager = (ViewPager)findViewById(R.id.pager);
-        pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
 
         //grab tokens from prefs.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -122,6 +118,11 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
     public void onTaskCompleted(Object obj, Context context) {
         Log.i(TAG, "onTaskCompleted () -> Received response: " + obj.toString());
         hideProgressSpinner();
+
+        setContentView(R.layout.pager_root);
+        viewPager = (ViewPager)findViewById(R.id.pager);
+        pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
         if(!serviceIsRunning(BGRunnerService.class)){
             startService(new Intent(this,BGRunnerService.class));
         }

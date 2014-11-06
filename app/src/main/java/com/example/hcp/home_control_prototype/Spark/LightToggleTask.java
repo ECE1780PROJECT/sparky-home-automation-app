@@ -1,6 +1,7 @@
 package com.example.hcp.home_control_prototype.Spark;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.hcp.home_control_prototype.OnTaskCompleted;
 
@@ -21,11 +22,11 @@ public class LightToggleTask extends SparkAPITask {
     
     public LightToggleTask(String deviceID, OnTaskCompleted listener) {
         super(deviceID, api_path, listener);
-        statusListeners.put(listener, null);
+        //statusListeners.put(listener, null);
     }
     public LightToggleTask(String deviceID,OnTaskCompleted listener, Context context) {
         super(deviceID, api_path, listener, context);
-        statusListeners.put(listener, context);
+        //statusListeners.put(listener, context);
     }
 
     @Override
@@ -33,7 +34,9 @@ public class LightToggleTask extends SparkAPITask {
         Set entries = statusListeners.entrySet();
         Iterator i = entries.iterator();
         while(i.hasNext()){
+
             Map.Entry entry = (Map.Entry)i.next();
+            Log.i(TAG, "onPostExecute() -> Notifying observer that task has completed: " + entry.toString());
             ((OnTaskCompleted)entry.getKey()).onTaskCompleted(jsonArray, (Context)entry.getValue());
         }
     }

@@ -33,7 +33,7 @@ import org.json.JSONObject;
 public class ToggleLightFragment extends Fragment implements OnTaskCompleted, View.OnClickListener {
 
 
-    private static final String TAG = "ToggleLightPage";
+    private static final String TAG = "ToggleLightFragment";
     private View view;
 
     public ToggleLightFragment() {
@@ -60,10 +60,14 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        Log.i(TAG, "onViewCreated() -> entering." );
         Device outlet = Spark.getInstance().getDeviceByName("Tadgh");
         if (outlet != null) {
+            Log.i(TAG, "onViewCreated() -> have device, sending off status request.");
             LightGetStatusTask gst = new LightGetStatusTask(outlet.getId(), this);
             gst.execute();
+        }else{
+            Log.e(TAG, "onViewCreated() -> Could not find device, not sending status request.");
         }
     }
 
@@ -77,7 +81,7 @@ public class ToggleLightFragment extends Fragment implements OnTaskCompleted, Vi
      */
     @Override
     public void onTaskCompleted(Object obj, Context context) {
-        Log.i(TAG, "onTaskCompleted() -> received response in the widget class. ");
+        Log.i(TAG, "onTaskCompleted() -> received response in the fragment class. ");
         if(obj == null){
             showTimeOutToast();
         }else {
