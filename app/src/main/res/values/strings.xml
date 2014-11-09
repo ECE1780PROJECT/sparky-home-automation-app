@@ -14,5 +14,6 @@
     <string name="title_activity_test">Test</string>
     <string name="title_activity_asd_main_activity2">asdMainActivity2</string>
     <string name="title_activity_set_preference_activitiy">SetPreferenceActivitiy</string>
+    <string name="bad_creds_message">  Username or password is invalid</string>
 
 </resources>

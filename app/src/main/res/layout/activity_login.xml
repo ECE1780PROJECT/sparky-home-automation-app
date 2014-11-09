@@ -23,7 +23,7 @@
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:fillViewport="false">
 
             <LinearLayout
                 android:id="@+id/email_login_form"
@@ -60,6 +60,33 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/action_sign_in"
                     android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/bad_credentials_layout"
+                    android:visibility="invisible">
+
+                    <ImageView
+                        android:layout_width="@dimen/abc_dropdownitem_icon_width"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/imageView"
+                        android:src="@drawable/badlogin"
+                        android:contentDescription="badCredsWarning" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/bad_creds_message"
+                        android:id="@+id/textView"
+                        android:singleLine="false"
+                        android:textColor="#ffff0001" />
+
+                </LinearLayout>
 
             </LinearLayout>
     </ScrollView>

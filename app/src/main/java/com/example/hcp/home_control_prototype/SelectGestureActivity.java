@@ -93,7 +93,7 @@ public class SelectGestureActivity extends Activity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    //Global.showToast(SelectGestureActivity.this, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()), Toast.LENGTH_LONG);
+                    Global.showToast(SelectGestureActivity.this, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()), Toast.LENGTH_LONG);
                     Log.e(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
                 }
             });

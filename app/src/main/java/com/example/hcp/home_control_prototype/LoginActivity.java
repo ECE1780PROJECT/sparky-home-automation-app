@@ -26,7 +26,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.hcp.home_control_prototype.Spark.LoginTask;
 import com.example.hcp.home_control_prototype.Spark.Token;
 import java.util.ArrayList;
@@ -39,13 +42,6 @@ import java.util.List;
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,OnTaskCompleted {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     private static final String TAG = "LoginActivity";
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -58,14 +54,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
     private View mProgressView;
     private View mLoginFormView;
     private ListPreference tokensPref;
+    private LinearLayout mBadCredentialsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        //if(prefs.getBoolean("logged_in", false)){
-        //TODO test this when i get off the airplane. removes the need for the logged in thing.
         if(prefs.getStringSet("tokens", new HashSet<String>()).size() > 0 ){
             Log.i(TAG, "onCreate() -> Found some tokens in the preferences!");
             Intent mainIntent = new Intent(this, MainActivity.class);
@@ -77,7 +72,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
-
+        mBadCredentialsView = (LinearLayout)findViewById(R.id.bad_credentials_layout);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -118,6 +113,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
         }
 
         // Reset errors.
+        mBadCredentialsView.setVisibility(View.GONE);
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
@@ -130,13 +126,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
 
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
 
         // Check for a valid email address.
+        Log.i(TAG, "attemptLogin() -> Current value in password: " + mPasswordView.getText());
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -171,7 +168,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
     }
 
     /**
-     * Shows the progre ss UI and hides the login form.
+     * Shows the progress UI and hides the login form.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     public void showProgress(final boolean show) {
@@ -242,7 +239,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
 
     @Override
     public void onTaskCompleted(Object obj, Context context) {
+        mAuthTask = null;
         Log.i(TAG, "onTaskCompleted() -> received :" + obj.toString());
+        if(((ArrayList)obj).size() == 0){
+            showProgress(false);
+            mBadCredentialsView.setVisibility(View.VISIBLE);
+            mPasswordView.setText(null);
+
+        }
         if (((ArrayList)obj).size() > 0){
             Log.i(TAG, "onTaskCompleted() -> pulled non-null array of tokens. Entering Main activity: " + obj.toString());
             Intent mainIntent = new Intent(this, MainActivity.class);
