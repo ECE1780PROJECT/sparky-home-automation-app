@@ -22,7 +22,7 @@ public class FanSettingsFragment extends PreferenceFragment implements SharedPre
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("fan_disable_pref");
         CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("fan_background_services_pref");
         Preference gestureSelect = findPreference("fan_gesture_select_pref");
-        Preference signOut = findPreference("signout_pref");
+       // Preference signOut = findPreference("signout_pref");
 
         boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("fan_disable_pref", false);
 
@@ -42,7 +42,7 @@ public class FanSettingsFragment extends PreferenceFragment implements SharedPre
                 return true;
             }
         });
-
+/*
         signOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -54,6 +54,7 @@ public class FanSettingsFragment extends PreferenceFragment implements SharedPre
                 return true;
             }
         });
+        */
 
         disableGestures.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 

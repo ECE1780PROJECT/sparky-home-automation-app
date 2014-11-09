@@ -38,7 +38,7 @@ public class MainActivity extends Activity implements OnTaskCompleted {
 
         //if we have no tokens, we need to log back in. TODO eventually replace with a custom token generator on the API.
         if (tokenStrings.size() < 1) {
-            Log.i(TAG, "onCreate() -> Found no tokens in the shared lightpreferences. Firing application back off to the login.");
+            Log.i(TAG, "onCreate() -> Found no tokens in the sharedpreferences. Firing application back off to the login.");
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
             finish();

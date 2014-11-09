@@ -67,6 +67,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
         //if(prefs.getBoolean("logged_in", false)){
         //TODO test this when i get off the airplane. removes the need for the logged in thing.
         if(prefs.getStringSet("tokens", new HashSet<String>()).size() > 0 ){
+            Log.i(TAG, "onCreate() -> Found some tokens in the preferences!");
             Intent mainIntent = new Intent(this, MainActivity.class);
             startActivity(mainIntent);
             finish();

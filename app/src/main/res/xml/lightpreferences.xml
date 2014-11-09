@@ -42,7 +42,7 @@
         </Preference>
 
         <Preference
-            android:key="signout_pref"
+            android:key="light_signout_pref"
             android:title="Sign out">
             <intent
                 android:action="android.intent.action.VIEW"

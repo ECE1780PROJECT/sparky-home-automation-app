@@ -41,7 +41,7 @@
         android:layout_height="150dp"
         android:id="@+id/fanImage"
         android:layout_gravity="center"
-        android:src="@drawable/bulb_off_img"
+        android:src="@drawable/fan_off_img"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="81dp" />

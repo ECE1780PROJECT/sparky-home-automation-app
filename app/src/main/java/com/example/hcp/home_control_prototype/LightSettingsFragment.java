@@ -22,7 +22,7 @@ public class LightSettingsFragment extends PreferenceFragment implements SharedP
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("light_disable_pref");
         CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("light_background_services_pref");
         Preference gestureSelect = findPreference("light_gesture_select_pref");
-        Preference signOut = findPreference("signout_pref");
+      //  Preference signOut = findPreference("signout_pref");
 
         boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("light_disable_pref", false);
 
@@ -43,17 +43,6 @@ public class LightSettingsFragment extends PreferenceFragment implements SharedP
             }
         });
 
-        signOut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-
-                SharedPreferences.Editor edit = getPreferenceManager().getSharedPreferences().edit();
-                edit.putBoolean("logged_in", false);
-                edit.commit();
-                getActivity().finish();
-                return true;
-            }
-        });
 
         disableGestures.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 

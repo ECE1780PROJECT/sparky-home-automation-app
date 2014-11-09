@@ -9,6 +9,7 @@
             android:key="fan_disable_pref"
             android:title="Disable gestures"
             android:summary="Removes gesture functionality from the device" />
+
         <Preference
             android:key="fan_gesture_select_pref"
             android:title="Select a gesture"
@@ -42,7 +43,7 @@
         </Preference>
 
         <Preference
-            android:key="signout_pref"
+            android:key="fan_signout_pref"
             android:title="Sign out">
             <intent
                 android:action="android.intent.action.VIEW"
