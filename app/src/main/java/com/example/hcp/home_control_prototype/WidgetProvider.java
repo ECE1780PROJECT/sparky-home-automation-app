@@ -30,13 +30,11 @@ import java.util.ArrayList;
 public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted {
     public final static String toggleAction = "toggle";
     private static final String TAG = "WidgetProvider";
-    private  static Context context = null;
     private  static AppWidgetManager awm = null;
     Device device;
     public void onUpdate(Context context, AppWidgetManager awm, int[] appWidgetIds){
         //god this is a greasy hack but it works.
-        this.context = context;
-        this.awm = awm;
+        WidgetProvider.awm = awm;
         final int N = appWidgetIds.length;
         device = Spark.getInstance().getDeviceByName("Tadgh");
 
@@ -56,7 +54,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
             LightGetStatusTask status = new LightGetStatusTask(device.getId(), this, context);
             status.execute();
         }
-        LightToggleTask.registerForToggleEvent(this, this.context);
+        LightToggleTask.registerForToggleEvent(this, context);
     }
 
     /**
@@ -72,7 +70,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
             device = Spark.getInstance().getDeviceByName("Tadgh");
             if(device != null) {
                 LightToggleTask toggleTask = new LightToggleTask(device.getId(), this, context);
-                Log.i(TAG, "onReceive() -> sent off toggle task to AsyncAPICall.");
+                Log.i(TAG, "onReceive() -> sent off toggle task to SparkApiTask.");
                 toggleTask.execute();
             }else{
                 Log.e(TAG, "Couldn't locate device!!!! not sending API call.");
@@ -89,7 +87,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
 
         Log.i(TAG, "onTaskCompleted() -> received response in the widget class. ");
         if(obj == null) {
-            showTimeOutToast();
+            showTimeOutToast(context);
         }else{
 
             JSONArray jArray = (JSONArray) obj;
@@ -116,8 +114,8 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
             }
         }
     }
-    private void showTimeOutToast() {
-        Global.showToast(this.context, "Couldn't communicate with Spark core!!", Toast.LENGTH_SHORT);
+    private void showTimeOutToast(Context context) {
+        Global.showToast(context, "Couldn't communicate with Spark core!!", Toast.LENGTH_SHORT);
     }
 
     /**
@@ -127,6 +125,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.app_widget_layout);
 
         for (int appWidgetId : awm.getAppWidgetIds(new ComponentName(context.getPackageName(),WidgetProvider.class.getName()))) {
+            Log.i(TAG, "lightOff() -> updating widget: " + appWidgetId);
             views.setImageViewResource(R.id.bulbImg, R.drawable.bulb_off_img);
             awm.updateAppWidget(appWidgetId, views);
         }
@@ -140,6 +139,7 @@ public class WidgetProvider extends AppWidgetProvider implements OnTaskCompleted
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.app_widget_layout);
 
         for (int appWidgetId : awm.getAppWidgetIds(new ComponentName(context.getPackageName(),WidgetProvider.class.getName()))) {
+            Log.i(TAG, "lightOn() -> updating widget: " + appWidgetId);
             views.setImageViewResource(R.id.bulbImg, R.drawable.bulb_on_img);
             awm.updateAppWidget(appWidgetId, views);
         }

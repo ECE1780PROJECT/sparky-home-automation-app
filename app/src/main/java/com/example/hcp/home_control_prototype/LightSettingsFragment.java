@@ -6,36 +6,30 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.preference.PreferenceFragment;
 
-import com.github.machinarius.preferencefragment.PreferenceFragment;
 
-import java.util.List;
+public class LightSettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-
-    private static final String TAG = "SettingsFragment";
+    private static final String TAG = "LightSettingsFragment";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);
+        addPreferencesFromResource(R.xml.lightpreferences);
 
-        CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("disable_pref");
-        CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("background_services_pref");
-        Preference gestureSelect = findPreference("gesture_select_pref");
+        CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("light_disable_pref");
+        CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("light_background_services_pref");
+        Preference gestureSelect = findPreference("light_gesture_select_pref");
         Preference signOut = findPreference("signout_pref");
 
-        boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("disable_pref", false);
+        boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("light_disable_pref", false);
 
         if (isDisabled) {
             gestureSelect.setEnabled(false);
-        //    addGestures.setEnabled(false);
         } else {
             gestureSelect.setEnabled(true);
-        //    addGestures.setEnabled(true);
         }
 
 
@@ -66,10 +60,10 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Log.i(TAG, "onPreferenceChange() -> (DisableGesturesPref)");
-                Preference gestureSelect = findPreference("gesture_select_pref");
-                Preference addGestures = findPreference("gesture_add_pref");
+                Preference gestureSelect = findPreference("light_gesture_select_pref");
+                Preference addGestures = findPreference("light_gesture_add_pref");
 
-                boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("disable_pref", false);
+                boolean isDisabled = getPreferenceManager().getSharedPreferences().getBoolean("light_disable_pref", false);
                 if (isDisabled) {
                     gestureSelect.setEnabled(false);
                 } else {

@@ -15,18 +15,17 @@ import java.util.Set;
 /**
  * Created by Master on 10/22/2014.
  */
-public class LightToggleTask extends SparkAPITask {
-    private static String api_path = "toggle";
+public class FanToggleTask extends SparkAPITask {
+    private final String TAG = "FanToggleTAsk";
+    private static String api_path = "toggle2";
     private static HashMap<OnTaskCompleted, Context> statusListeners = new HashMap<OnTaskCompleted, Context>();
-    
-    
-    public LightToggleTask(String deviceID, OnTaskCompleted listener) {
+
+
+    public FanToggleTask(String deviceID, OnTaskCompleted listener) {
         super(deviceID, api_path, listener);
-        //statusListeners.put(listener, null);
     }
-    public LightToggleTask(String deviceID,OnTaskCompleted listener, Context context) {
+    public FanToggleTask(String deviceID, OnTaskCompleted listener, Context context) {
         super(deviceID, api_path, listener, context);
-        //statusListeners.put(listener, context);
     }
 
     @Override

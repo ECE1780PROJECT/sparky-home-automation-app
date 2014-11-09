@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Gestures">
+
+        <CheckBoxPreference
+            android:key="fan_disable_pref"
+            android:title="Disable gestures"
+            android:summary="Removes gesture functionality from the device" />
+        <Preference
+            android:key="fan_gesture_select_pref"
+            android:title="Select a gesture"
+            android:summary="Choose which gesture toggles the device">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.hcp.home_control_prototype"
+                android:targetClass="com.example.hcp.home_control_prototype.SelectGestureActivity" />
+        </Preference>
+
+
+        <CheckBoxPreference
+            android:key="fan_background_services_pref"
+            android:title="Work in Background"
+            android:summary="Choose behaviour when sparky is not in the foreground"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="General">
+
+        <Preference
+            android:key="about_pref"
+            android:title="About"
+            android:summary="Check us out!" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.hcp.home_control_prototype"
+                android:targetClass="com.example.hcp.home_control_prototype.AboutActivity" />
+        </Preference>
+
+        <Preference
+            android:key="signout_pref"
+            android:title="Sign out">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.hcp.home_control_prototype"
+                android:targetClass="com.example.hcp.home_control_prototype.LogoutActivity" />
+        </Preference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

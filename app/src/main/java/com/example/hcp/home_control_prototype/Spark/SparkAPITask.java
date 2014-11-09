@@ -81,7 +81,6 @@ public  class SparkAPITask extends AsyncTask<NameValuePair, Void, JSONArray>{
             
             //Getting the HTTP response
             HttpResponse response = httpClient.execute(httpPost);
-            Log.i(TAG, response.toString());
             HttpEntity entity = response.getEntity();
 
             //Attempting to read the API response into a JSON Array for returning.

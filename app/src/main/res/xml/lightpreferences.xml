@@ -6,11 +6,11 @@
         android:title="Gestures">
 
         <CheckBoxPreference
-            android:key="disable_pref"
+            android:key="light_disable_pref"
             android:title="Disable gestures"
             android:summary="Removes gesture functionality from the device" />
         <Preference
-            android:key="gesture_select_pref"
+            android:key="light_gesture_select_pref"
             android:title="Select a gesture"
             android:summary="Choose which gesture toggles the device">
             <intent
@@ -21,29 +21,12 @@
 
 
         <CheckBoxPreference
-            android:key="background_services_pref"
+            android:key="light_background_services_pref"
             android:title="Work in Background"
             android:summary="Choose behaviour when sparky is not in the foreground"/>
 
 
     </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="Spark">
-
-        <EditTextPreference
-            android:key="access_token"
-            android:title="Access Token"
-            android:summary="" >
-        </EditTextPreference>
-
-        <EditTextPreference
-            android:key="device_id"
-            android:title="Device ID" >
-        </EditTextPreference>
-
-    </PreferenceCategory>
-
 
     <PreferenceCategory
         android:title="General">
