@@ -15,6 +15,7 @@
             android:summary="Choose which gesture toggles the device">
             <intent
                 android:action="android.intent.action.VIEW"
+                android:data="light"
                 android:targetPackage="com.example.hcp.home_control_prototype"
                 android:targetClass="com.example.hcp.home_control_prototype.SelectGestureActivity" />
         </Preference>

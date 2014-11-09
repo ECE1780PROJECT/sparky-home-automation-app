@@ -49,7 +49,9 @@ public class SelectGestureActivity extends Activity {
     List<Integer> image_list = new ArrayList<Integer>();
 
     IGestureRecognitionService recognitionService;
-
+    String globalGesturePrefSelect="";
+    String globalGesturePrefSelectName="";
+    String prefDevice;
     private final ServiceConnection serviceConnection = new ServiceConnection() {
 
         @Override
@@ -107,8 +109,13 @@ public class SelectGestureActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_gesture);
 
+        Intent i = getIntent();
+        prefDevice = i.getDataString();
+        //Log.i(TAG, "#############" + prefDevice);
+        globalGesturePrefSelect = prefDevice + "_" + Global.PREFERENCE_GESTURE_SELECT;
+        globalGesturePrefSelectName = prefDevice + "_" + Global.PREFERENCE_GESTURE_SELECT_NAME;
+        Log.i(TAG, "onCreate() -> SelectGestureActivityPrefName: " + globalGesturePrefSelectName);
         gSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
 
         Integer[] imageId = {
                 R.drawable.bumpr,
@@ -118,12 +125,19 @@ public class SelectGestureActivity extends Activity {
         image_list.add(R.drawable.bumpr);
         image_list.add(R.drawable.bumpl);
         adapter = new CustomList(SelectGestureActivity.this, default_gesture_list, image_list);
-        adapter.setSelectedIndex(gSharedPreferences.getInt(Global.PREFERENCE_GESTURE_SELECT, 0));
+        adapter.setSelectedIndex(gSharedPreferences.getInt(globalGesturePrefSelect, 0));
+
+        String previous_selected_gesture = gSharedPreferences.getString(globalGesturePrefSelectName, null);
+
 
         list=(ListView)findViewById(R.id.list);
         list.setAdapter(adapter);
         list.setTextFilterEnabled(true);
         registerForContextMenu(list);
+        if(previous_selected_gesture==null){
+            list.clearChoices();
+            Log.i(TAG, "onCreate() -> previous_selected_gesture is null");
+        }
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -155,25 +169,58 @@ public class SelectGestureActivity extends Activity {
 
     }
 
+
+
     private void commitPreferenceChoice(int position){
         SharedPreferences.Editor editor = gSharedPreferences.edit();
-        editor.clear();
-        editor.putInt(Global.PREFERENCE_GESTURE_SELECT, position);
 
+        editor.putInt(globalGesturePrefSelect, position);
+
+        Log.i(TAG, "commitPreferenceChoice() -> " + globalGesturePrefSelect + " " + position);
         String name = "";
         if(!default_gesture_list.isEmpty()) {
             name = default_gesture_list.get(position);
         }
         //Log.i("TEST1", name);
         //Log.i("TEST2", default_gesture_list.toString());
-        editor.putString(Global.PREFERENCE_GESTURE_SELECT_NAME, name);
+        editor.putString(globalGesturePrefSelectName, name);
+        Log.i(TAG, "commitPreferenceChoice() -> " + globalGesturePrefSelectName + " " + name);
         editor.commit();
 
-        //String sName = gSharedPreferences.getString(Global.PREFERENCE_GESTURE_SELECT_NAME, null);
-        //int positionS = gSharedPreferences.getInt(Global.PREFERENCE_GESTURE_SELECT,0);
-        //if (sName != null) {
-        //    Log.i("TEST", sName);
-        //}
+
+    }
+
+
+    private void updateOtherPreferenceChoice(int removedPosition) {
+        SharedPreferences.Editor editor = gSharedPreferences.edit();
+
+        editor.putInt(globalGesturePrefSelect, removedPosition);
+
+        if(!globalGesturePrefSelect.contains(Global.FAN_NAME)) {
+            String otherPrefSelectStr = Global.FAN_NAME + "_" + Global.PREFERENCE_GESTURE_SELECT;
+            String otherPrefSelectNameStr  = Global.FAN_NAME + "_" + Global.PREFERENCE_GESTURE_SELECT_NAME;
+            int prefSelected = gSharedPreferences.getInt(otherPrefSelectStr, 0);
+            if(removedPosition < prefSelected) {
+                editor.putInt(otherPrefSelectStr, prefSelected-1);
+            } else if (removedPosition == prefSelected) {
+                editor.remove(otherPrefSelectStr);
+                editor.remove(otherPrefSelectNameStr);
+            }
+        }
+        if (!globalGesturePrefSelect.contains(Global.LIGHT_NAME)) {
+            String otherPrefSelectStr = Global.LIGHT_NAME + "_" + Global.PREFERENCE_GESTURE_SELECT;
+            String otherPrefSelectNameStr  = Global.LIGHT_NAME + "_" + Global.PREFERENCE_GESTURE_SELECT_NAME;
+            int prefSelected = gSharedPreferences.getInt(otherPrefSelectStr, 0);
+            if(removedPosition < prefSelected) {
+                editor.putInt(otherPrefSelectStr, prefSelected-1);
+            } else if (removedPosition == prefSelected) {
+                editor.remove(otherPrefSelectStr);
+                editor.remove(otherPrefSelectNameStr);
+            }
+        }
+        Log.i(TAG, "updateOtherPreferenceChoice() -> removedPosition: " +  removedPosition);
+
+        editor.commit();
 
     }
 
@@ -247,6 +294,17 @@ public class SelectGestureActivity extends Activity {
         super.onPause();
     }
 
+    /*
+    @Override
+    public void onBackPressed() {
+        Log.i(TAG,"onBackPressed() -> Entering Settings for " + prefDevice);
+        Intent settingsIntent = new Intent(this, SetPreferenceActivitiy.class);
+        settingsIntent.putExtra("device", prefDevice);
+        startActivity(settingsIntent);
+    }*/
+
+
+
     @Override
     protected void onResume() {
         Intent bindIntent = new Intent("com.example.hcp.home_control_prototype.gesture.GESTURE_RECOGNIZER");
@@ -289,8 +347,8 @@ public class SelectGestureActivity extends Activity {
                 List<String> items = recognitionService.getGestureList(Global.trainingSet);
                 default_gesture_list=items;
                 updateListView(default_gesture_list);
-
                 commitPreferenceChoice(position);
+                updateOtherPreferenceChoice(info.position);
             } catch (RemoteException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

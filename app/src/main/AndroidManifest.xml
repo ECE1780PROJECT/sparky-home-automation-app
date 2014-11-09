@@ -42,7 +42,6 @@
         <activity
             android:name="com.example.hcp.home_control_prototype.AddGestureActivity"
             android:label="@string/title_gesture_test"
-            android:parentActivityName="com.example.hcp.home_control_prototype.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo" >
             <meta-data
@@ -53,7 +52,6 @@
         <activity
             android:name="com.example.hcp.home_control_prototype.SelectGestureActivity"
             android:label="@string/title_gesture_test"
-            android:parentActivityName="com.example.hcp.home_control_prototype.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo" >
             <meta-data

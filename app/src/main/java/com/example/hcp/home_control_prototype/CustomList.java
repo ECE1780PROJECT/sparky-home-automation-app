@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CustomList extends ArrayAdapter<String>{
     private final Activity context;
-    private List<String> gestureList = new ArrayList<String>();
+    List<String> gestureList = new ArrayList<String>();
     private List<Integer> imageId = new ArrayList<Integer>();
     int selectedIndex = -1;
     public CustomList(Activity context,
