@@ -23,7 +23,8 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
     LightToggleTask toggle;
     private Device device;
     private static final String TAG = "GestureService";
-    private boolean enabled;
+    private boolean fan_enabled;
+    private boolean light_enabled;
     private static float gestError = 12;
     private int idfier;
     IGestureRecognitionService recognitionService;
@@ -33,7 +34,7 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
 
         @Override
         public void onGestureRecognized(final Distribution distribution) throws RemoteException {
-            if (enabled) {
+            if (fan_enabled || light_enabled) {
                 idfier = prefs.getInt(Global.PREFERENCE_GESTURE_SELECT, 0);
                 String s = prefs.getString(Global.PREFERENCE_GESTURE_SELECT_NAME, null);
                 Log.i(TAG, "onGestureRecognized() -> " + s);
@@ -60,10 +61,13 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
     private void toggleDevice(int i, Distribution distribution)
     {
         Log.i(TAG, "toggleDevice() -> toggling device");
+
         String gestName = prefs.getString(Global.PREFERENCE_GESTURE_SELECT_NAME, "Couldn't find the preference!");
         String bestMatch = distribution.getBestMatch();
         double bestDist = distribution.getBestDistance();
         Log.i(TAG, "toggleDevice():\ngesture name: " + gestName + "\nbest Match: " + bestMatch + "\nbest distnace: " + Double.toString(bestDist) + "\nallowable error: " + gestError);
+
+
         if(gestName.equals(bestMatch) && bestDist < gestError) {
             Log.i(TAG, String.format("%s: %f", distribution.getBestMatch(), distribution.getBestDistance()));
             device = Spark.getInstance().getDeviceByName("Tadgh");
@@ -74,7 +78,6 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
                 Log.e(TAG, "toggleDevice() -> Couldnt make call! device not known!");
             }
 
-            Log.i(TAG, "BUMP RIGHT");
         }
     }
 
@@ -105,8 +108,8 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
 
-        this.enabled = !prefs.getBoolean("disable_pref", false);
-        Log.i(TAG, "BGRunnerService() -> grabbing disabled preference. Status of the service should be: " + enabled);
+        this.fan_enabled = !prefs.getBoolean("disable_pref", false);
+        Log.i(TAG, "BGRunnerService() -> grabbing disabled preference. Status of the service should be: " + fan_enabled);
         //this.handleSensors();
         Log.i(TAG, "onCreate() -> About to create bindIntent");
         Intent bindIntent = new Intent("com.example.hcp.home_control_prototype.gesture.GESTURE_RECOGNIZER");
@@ -152,8 +155,8 @@ public class BGRunnerService extends Service implements Runnable,ServiceConnecti
 
 
     public void setEnabled(boolean isEnabled) {
-        if (this.enabled != isEnabled){
-            this.enabled = isEnabled;
+        if (this.fan_enabled != isEnabled){
+            this.fan_enabled = isEnabled;
         }
 
     }

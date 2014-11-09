@@ -1,47 +1,28 @@
 package com.example.hcp.home_control_prototype;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.PreferenceManager;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-import android.widget.CheckBox;
 
 import com.example.hcp.home_control_prototype.Spark.GetDevicesTask;
 import com.example.hcp.home_control_prototype.Spark.Spark;
-import com.example.hcp.home_control_prototype.gesture.IGestureRecognitionListener;
-import com.example.hcp.home_control_prototype.gesture.IGestureRecognitionService;
-import com.example.hcp.home_control_prototype.gesture.classifier.Distribution;
 import com.example.hcp.home_control_prototype.Spark.Token;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 
 
-public class MainActivity extends FragmentActivity implements OnTaskCompleted {
+public class MainActivity extends Activity implements OnTaskCompleted {
     private static final int pageCount = 2;
     private static final String TAG = "MainActivity";
-    private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
     private ProgressDialog dialog;
 
 
@@ -57,7 +38,7 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
 
         //if we have no tokens, we need to log back in. TODO eventually replace with a custom token generator on the API.
         if (tokenStrings.size() < 1) {
-            Log.i(TAG, "onCreate() -> Found no tokens in the shared preferences. Firing application back off to the login.");
+            Log.i(TAG, "onCreate() -> Found no tokens in the shared lightpreferences. Firing application back off to the login.");
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
             finish();
@@ -76,6 +57,7 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
             showProgressSpinner();
             gdt.execute(Spark.getInstance().getCurrentToken().getValue());
         }
+
 
 
     }
@@ -118,11 +100,15 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
     public void onTaskCompleted(Object obj, Context context) {
         Log.i(TAG, "onTaskCompleted () -> Received response: " + obj.toString());
         hideProgressSpinner();
-
+        setContentView(R.layout.activity_main);
+        getFragmentManager().beginTransaction().add(R.id.container, new ToggleFragment())
+                .commit();
+        /*
         setContentView(R.layout.pager_root);
         viewPager = (ViewPager)findViewById(R.id.pager);
         pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+        */
         if(!serviceIsRunning(BGRunnerService.class)){
             startService(new Intent(this,BGRunnerService.class));
         }
@@ -140,6 +126,7 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
         dialog.dismiss();
     }
 
+    /*
     private class SlideViewAdapter extends FragmentStatePagerAdapter {
         public SlideViewAdapter(FragmentManager supportFragmentManager) {
             super(supportFragmentManager);
@@ -163,6 +150,7 @@ public class MainActivity extends FragmentActivity implements OnTaskCompleted {
             return pageCount;
         }
     }
+    */
 
 
 }

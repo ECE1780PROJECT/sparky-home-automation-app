@@ -1,16 +1,49 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hcp.home_control_prototype.ToggleLightFragment">
+    tools:context="com.example.hcp.home_control_prototype.ToggleFragment">
 
 
     <ImageView
-        android:layout_width="292dp"
-        android:layout_height="292dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:id="@+id/bulbImgFragment"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/bulb_off_img"
+        android:layout_above="@+id/fan_settings"
+        android:layout_toLeftOf="@+id/bulb_settings"
+        android:layout_toStartOf="@+id/bulb_settings"
+        android:layout_marginBottom="54dp" />
+
+    <ImageView
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:id="@+id/bulb_settings"
+        android:layout_gravity="right|top"
+        android:src="@drawable/abc_ic_menu_moreoverflow_normal_holo_dark"
+        android:layout_toEndOf="@+id/fanImage"
+        android:layout_alignTop="@+id/bulbImgFragment"
+        android:layout_toRightOf="@+id/fanImage" />
+
+    <ImageView
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:id="@+id/fan_settings"
+        android:layout_gravity="right|center_vertical"
+        android:src="@drawable/abc_ic_menu_moreoverflow_normal_holo_dark"
+        android:layout_toEndOf="@+id/fanImage"
+        android:layout_alignTop="@+id/fanImage"
+        android:layout_toRightOf="@+id/fanImage" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/fanImage"
         android:layout_gravity="center"
-        android:src="@drawable/bulb_off_img" />
+        android:src="@drawable/bulb_off_img"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="81dp" />
 
-
-</FrameLayout>
+</RelativeLayout>

@@ -258,7 +258,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>,O
 
             }
 
-            //adding tokens to sharedprefs. stupid preferences demands sets instead of lists.
+            //adding tokens to sharedprefs. stupid lightpreferences demands sets instead of lists.
             edit.putStringSet("tokens", tokenStrings);
             edit.commit();
             startActivity(mainIntent);

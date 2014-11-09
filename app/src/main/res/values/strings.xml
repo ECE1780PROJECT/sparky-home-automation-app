@@ -11,5 +11,8 @@
     <string name="title_activity_about">AboutActivity</string>
     <string name="aboutPlaceholder">Placeholder</string>
     <string name="title_activity_logout">LogoutActivity</string>
+    <string name="title_activity_test">Test</string>
+    <string name="title_activity_asd_main_activity2">asdMainActivity2</string>
+    <string name="title_activity_set_preference_activitiy">SetPreferenceActivitiy</string>
 
 </resources>

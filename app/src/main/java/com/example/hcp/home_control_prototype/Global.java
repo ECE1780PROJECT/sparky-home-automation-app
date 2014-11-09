@@ -13,6 +13,8 @@ public class Global {
     public static String trainingSet = "gesturelist";
     public static final String PREFERENCE_GESTURE_SELECT = "gesture_select";
     public static final String PREFERENCE_GESTURE_SELECT_NAME = "gesture_select_name";
+    public static final String FAN_NAME = "fan";
+    public static final String LIGHT_NAME = "light";
     public static void showToast(Context applicationContext, CharSequence text, int duration){
         Toast toast = Toast.makeText(applicationContext, text, duration);
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
