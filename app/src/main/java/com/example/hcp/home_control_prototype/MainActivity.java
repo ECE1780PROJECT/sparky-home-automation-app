@@ -36,6 +36,7 @@ public class MainActivity extends Activity implements OnTaskCompleted {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         Set<String> tokenStrings = prefs.getStringSet("tokens", new HashSet<String>());
 
+        Log.i(TAG, Spark.getInstance().getTokenValues().toString());
         //if we have no tokens, we need to log back in. TODO eventually replace with a custom token generator on the API.
         if (tokenStrings.size() < 1) {
             Log.i(TAG, "onCreate() -> Found no tokens in the sharedpreferences. Firing application back off to the login.");
