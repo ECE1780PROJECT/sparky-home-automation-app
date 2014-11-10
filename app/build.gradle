@@ -5,7 +5,7 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "com.example.hcp.home_control_prototype"
+        applicationId "com.aga.hcp.home_control_prototype"
         minSdkVersion 15
         targetSdkVersion 20
         versionCode 1

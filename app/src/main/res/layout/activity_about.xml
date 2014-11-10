@@ -3,5 +3,5 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hcp.home_control_prototype.AboutActivity"
+    tools:context="com.aga.hcp.home_control_prototype.AboutActivity"
     tools:ignore="MergeRootFrame" />
