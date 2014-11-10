@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -151,12 +153,15 @@ public class ToggleFragment extends Fragment {
 
     private void fanOn() {
         ImageView bulbImg = (ImageView) view.findViewById(R.id.fanImage);
+        Animation rotate = AnimationUtils.loadAnimation(this.getActivity(), R.anim.clockwise_anim);
         bulbImg.setImageResource(R.drawable.fan_on_img);
+        bulbImg.startAnimation(rotate);
     }
 
     private void fanOff() {
         ImageView bulbImg = (ImageView) view.findViewById(R.id.fanImage);
         bulbImg.setImageResource(R.drawable.fan_off_img);
+        bulbImg.clearAnimation();
     }
 
     private class FanToggleListener implements OnTaskCompleted {
