@@ -104,12 +104,7 @@ public class MainActivity extends Activity implements OnTaskCompleted {
         setContentView(R.layout.activity_main);
         getFragmentManager().beginTransaction().add(R.id.container, new ToggleFragment())
                 .commit();
-        /*
-        setContentView(R.layout.pager_root);
-        viewPager = (ViewPager)findViewById(R.id.pager);
-        pagerAdapter = new SlideViewAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-        */
+
         if(!serviceIsRunning(BGRunnerService.class)){
             startService(new Intent(this,BGRunnerService.class));
         }

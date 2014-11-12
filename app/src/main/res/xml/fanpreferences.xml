@@ -17,8 +17,8 @@
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="fan"
-                android:targetPackage="com.example.hcp.home_control_prototype"
-                android:targetClass="com.example.hcp.home_control_prototype.SelectGestureActivity" />
+                android:targetPackage="com.aga.hcp.home_control_prototype"
+                android:targetClass="com.aga.hcp.home_control_prototype.SelectGestureActivity" />
         </Preference>
 
 
@@ -39,8 +39,8 @@
             android:summary="Check us out!" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.hcp.home_control_prototype"
-                android:targetClass="com.example.hcp.home_control_prototype.AboutActivity" />
+                android:targetPackage="com.aga.hcp.home_control_prototype"
+                android:targetClass="com.aga.hcp.home_control_prototype.AboutActivity" />
         </Preference>
 
         <Preference
@@ -48,8 +48,8 @@
             android:title="Sign out">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="com.example.hcp.home_control_prototype"
-                android:targetClass="com.example.hcp.home_control_prototype.LogoutActivity" />
+                android:targetPackage="com.aga.hcp.home_control_prototype"
+                android:targetClass="com.aga.hcp.home_control_prototype.LogoutActivity" />
         </Preference>
 
     </PreferenceCategory>

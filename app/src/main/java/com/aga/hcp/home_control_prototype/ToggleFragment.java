@@ -1,6 +1,7 @@
 package com.aga.hcp.home_control_prototype;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -41,7 +42,6 @@ public class ToggleFragment extends Fragment {
 
     public ToggleFragment() {
         // Required empty public constructor
-
     }
 
     @Override
@@ -52,12 +52,15 @@ public class ToggleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_toggle_light_page, container, false);
         ImageView bulbImg = (ImageView)rootView.findViewById(R.id.bulbImgFragment);
         final ImageView bulbSettings = (ImageView)rootView.findViewById(R.id.bulb_settings);
 
         spinningFan = AnimationUtils.loadAnimation(this.getActivity(), R.anim.clockwise_anim);
+
         spinningFan.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {

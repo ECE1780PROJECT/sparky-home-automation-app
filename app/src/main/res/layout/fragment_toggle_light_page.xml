@@ -10,31 +10,35 @@
         android:layout_height="150dp"
         android:id="@+id/bulbImgFragment"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/bulb_off_img"
+        android:src="@drawable/bulb_on_img"
         android:layout_above="@+id/fan_settings"
         android:layout_toLeftOf="@+id/bulb_settings"
         android:layout_toStartOf="@+id/bulb_settings"
         android:layout_marginBottom="54dp" />
 
     <ImageView
-        android:layout_width="113dp"
-        android:layout_height="113dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/bulb_settings"
         android:layout_gravity="right|top"
-        android:src="@drawable/abc_ic_menu_moreoverflow_normal_holo_dark"
+        android:src="@drawable/ic_settings"
         android:layout_toEndOf="@+id/fanImage"
+        android:layout_marginTop="43dp"
         android:layout_alignTop="@+id/bulbImgFragment"
-        android:layout_toRightOf="@+id/fanImage" />
+        android:layout_toRightOf="@+id/fanImage"
+        android:layout_marginLeft="35dp" />
 
     <ImageView
-        android:layout_width="113dp"
-        android:layout_height="113dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/fan_settings"
         android:layout_gravity="right|center_vertical"
-        android:src="@drawable/abc_ic_menu_moreoverflow_normal_holo_dark"
+        android:src="@drawable/ic_settings"
         android:layout_toEndOf="@+id/fanImage"
         android:layout_alignTop="@+id/fanImage"
-        android:layout_toRightOf="@+id/fanImage" />
+        android:layout_alignLeft="@+id/bulb_settings"
+        android:layout_alignStart="@+id/bulb_settings"
+        android:layout_marginTop="45dp" />
 
     <ImageView
         android:layout_width="150dp"
