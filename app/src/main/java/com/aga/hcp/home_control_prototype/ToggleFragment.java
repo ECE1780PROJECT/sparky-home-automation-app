@@ -37,6 +37,7 @@ public class ToggleFragment extends Fragment {
     private static final String TAG = "ToggleLightFragment";
     private OnTaskCompleted lightListener, fanListener;
     private View view;
+    private Animation spinningFan;
 
     public ToggleFragment() {
         // Required empty public constructor
@@ -55,6 +56,25 @@ public class ToggleFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_toggle_light_page, container, false);
         ImageView bulbImg = (ImageView)rootView.findViewById(R.id.bulbImgFragment);
         final ImageView bulbSettings = (ImageView)rootView.findViewById(R.id.bulb_settings);
+
+        spinningFan = AnimationUtils.loadAnimation(this.getActivity(), R.anim.clockwise_anim);
+        spinningFan.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Log.i(TAG, "onAnimationEnd() -> animation has ended. Turning off fan.");
+                fanOff();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
 
         //listeners for toggle responses
         if(fanListener == null && lightListener == null){
@@ -153,9 +173,8 @@ public class ToggleFragment extends Fragment {
 
     private void fanOn() {
         ImageView bulbImg = (ImageView) view.findViewById(R.id.fanImage);
-        Animation rotate = AnimationUtils.loadAnimation(this.getActivity(), R.anim.clockwise_anim);
         bulbImg.setImageResource(R.drawable.fan_on_img);
-        bulbImg.startAnimation(rotate);
+        bulbImg.startAnimation(spinningFan);
     }
 
     private void fanOff() {
@@ -179,10 +198,11 @@ public class ToggleFragment extends Fragment {
                     switch (status) {
                         case 0:
                             Log.i(TAG, "Fan is off!");
-                            fanOff();
+                            spinningFan.setRepeatCount(0);
                             break;
                         case 1:
                             Log.i(TAG, "Fan is on!");
+                            spinningFan.setRepeatCount(Animation.INFINITE);
                             fanOn();
                             break;
                         default:
