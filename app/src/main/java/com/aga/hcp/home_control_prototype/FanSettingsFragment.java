@@ -20,7 +20,7 @@ public class FanSettingsFragment extends PreferenceFragment implements SharedPre
         addPreferencesFromResource(R.xml.fanpreferences);
 
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("fan_disable_pref");
-        CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("fan_background_services_pref");
+        CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("background_services_pref");
         Preference gestureSelect = findPreference("fan_gesture_select_pref");
        // Preference signOut = findPreference("signout_pref");
 
