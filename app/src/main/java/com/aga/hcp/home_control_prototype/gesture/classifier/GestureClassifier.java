@@ -98,8 +98,8 @@ public class GestureClassifier {
 				trainingSet = new ArrayList<Gesture>();
 			}
 		}
-        trainingSet.add(g);
         trainingSet.add(g1);
+        trainingSet.add(g);
 	}
     public void addDefaultData()
     {
@@ -125,7 +125,7 @@ public class GestureClassifier {
         gest1_hard.add(temp1_26);gest1_hard.add(temp1_27);gest1_hard.add(temp1_28);
         gest1_hard.add(temp1_29);gest1_hard.add(temp1_30);gest1_hard.add(temp1_31);
         gest1_hard.add(temp1_32);
-        g=new Gesture(gest1_hard,"BUMP_LEFT");
+        g=new Gesture(gest1_hard,"Bump Left");
 
         float[] temp2_1={0.16953915f,0.13082302f,0.8412639f}; float[] temp2_2={0.17328587f,0.115836136f,0.8618709f}; float[] temp2_3={0.17703259f,0.100849256f,0.88247776f};
         float[] temp2_4={0.18515049f,0.07712001f,0.89783937f}; float[] temp2_5={0.19358061f,0.052766323f,0.9128262f}; float[] temp2_6={0.18739852f,0.036530536f,0.9018358f};
@@ -150,7 +150,7 @@ public class GestureClassifier {
         gest2_hard.add(temp2_26);gest2_hard.add(temp2_27);gest2_hard.add(temp2_28);
         gest2_hard.add(temp2_29);gest2_hard.add(temp2_30);gest2_hard.add(temp2_31);
         gest2_hard.add(temp2_32);
-        g1=new Gesture(gest2_hard,"BUMP_FRONT");
+        g1=new Gesture(gest2_hard,"Bump Front");
     }
 	public boolean checkForLabel(String trainingSetName, String label) {
 		loadTrainingSet(trainingSetName);
