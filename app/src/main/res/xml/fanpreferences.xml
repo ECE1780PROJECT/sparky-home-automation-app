@@ -23,7 +23,7 @@
 
 
         <CheckBoxPreference
-            android:key="fan_background_services_pref"
+            android:key="background_services_pref"
             android:title="Work in Background"
             android:summary="Choose behaviour when sparky is not in the foreground"/>
 

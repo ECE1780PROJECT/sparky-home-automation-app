@@ -20,7 +20,7 @@ public class LightSettingsFragment extends PreferenceFragment implements SharedP
         addPreferencesFromResource(R.xml.lightpreferences);
 
         CheckBoxPreference disableGestures = (CheckBoxPreference) findPreference("light_disable_pref");
-        CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("light_background_services_pref");
+        CheckBoxPreference backgroundPrefs = (CheckBoxPreference) findPreference("background_services_pref");
         Preference gestureSelect = findPreference("light_gesture_select_pref");
       //  Preference signOut = findPreference("signout_pref");
 
