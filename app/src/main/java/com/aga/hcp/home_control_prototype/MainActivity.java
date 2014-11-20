@@ -34,6 +34,8 @@ public class MainActivity extends Activity implements OnTaskCompleted {
 
         //grab tokens from prefs.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        initializeDefaultGesturePreference(prefs);
+
         Set<String> tokenStrings = prefs.getStringSet("tokens", new HashSet<String>());
 
         Log.i(TAG, Spark.getInstance().getTokenValues().toString());
@@ -62,6 +64,23 @@ public class MainActivity extends Activity implements OnTaskCompleted {
 
 
     }
+
+    private void initializeDefaultGesturePreference(SharedPreferences gSharedPreferences){
+        SharedPreferences.Editor editor = gSharedPreferences.edit();
+
+        for (int i=0; i < Global.DeviceList.length; i++) {
+            String globalGesturePrefSelect = Global.DeviceList[i] + "_" + Global.PREFERENCE_GESTURE_SELECT;
+            String globalGesturePrefSelectName = Global.DeviceList[i] + "_" + Global.PREFERENCE_GESTURE_SELECT_NAME;
+            if (gSharedPreferences.getString(globalGesturePrefSelectName, null) == null ) {
+                editor.putInt(globalGesturePrefSelect, 0);
+                editor.putString(globalGesturePrefSelectName, Global.DEFAULT_GESTURE_LIST[0]);
+            }
+
+        }
+        editor.commit();
+        Log.i(TAG, "initializeDefaultGesturePreference() -> Initialization completed");
+    }
+
 
     @Override
     protected void onPause() {
