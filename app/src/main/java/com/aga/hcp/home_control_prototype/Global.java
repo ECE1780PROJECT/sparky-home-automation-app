@@ -15,7 +15,7 @@ public class Global {
     public static final String PREFERENCE_GESTURE_SELECT_NAME = "gesture_select_name";
     public static final String FAN_NAME = "fan";
     public static final String LIGHT_NAME = "light";
-    public static String[] DeviceList = {FAN_NAME, LIGHT_NAME};
+    public static String[] DeviceList = {LIGHT_NAME, FAN_NAME};
     public static void showToast(Context applicationContext, CharSequence text, int duration){
         Toast toast = Toast.makeText(applicationContext, text, duration);
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
