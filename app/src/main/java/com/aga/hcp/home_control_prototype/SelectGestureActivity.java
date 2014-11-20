@@ -183,6 +183,16 @@ public class SelectGestureActivity extends Activity {
 
     }
 
+    private String checkGestureInUsed(int position) {
+        for(int i = 0;i < Global.DeviceList.length;i++) {
+            String prefSelectStr = Global.DeviceList[i] + "_" + Global.PREFERENCE_GESTURE_SELECT;
+            int prefSelected = gSharedPreferences.getInt(prefSelectStr, -1);
+            if (prefSelected == position) {
+                return Global.DeviceList[i];
+            }
+        }
+        return null;
+    }
 
     private void updateOtherPreferenceChoice(int removedPosition) {
         SharedPreferences.Editor editor = gSharedPreferences.edit();
@@ -325,23 +335,33 @@ public class SelectGestureActivity extends Activity {
 
         if (item.getItemId() == 0) {
             try {
-                int position = adapter.getSelectedIndex();
-                recognitionService.deleteGesture(Global.trainingSet, adapter.getGestureName(info.position));
-                if(info.position < adapter.getSelectedIndex()) {
-                    adapter.setSelectedIndex(adapter.getSelectedIndex()-1);
-                    position = adapter.getSelectedIndex();
-                    adapter.notifyDataSetChanged();
+
+                String gestureUsedInDevice = checkGestureInUsed(info.position);
+                if (info.position < 2) {
+                    Global.showToast(this, "Delete failed, this is a default gesture", Toast.LENGTH_LONG);
+                } else if (info.position == adapter.getSelectedIndex()) {
+                    Global.showToast(this, "Delete failed, cannot delete selected gesture", Toast.LENGTH_LONG);
+                }else if(gestureUsedInDevice != null) {
+                    Global.showToast(this, "Delete failed, gesture is used by device: "+gestureUsedInDevice, Toast.LENGTH_LONG);
+                } else {
+                    int position = adapter.getSelectedIndex();
+                    recognitionService.deleteGesture(Global.trainingSet, adapter.getGestureName(info.position));
+                    if (info.position < adapter.getSelectedIndex()) {
+                        adapter.setSelectedIndex(adapter.getSelectedIndex() - 1);
+                        position = adapter.getSelectedIndex();
+                        adapter.notifyDataSetChanged();
+                    }
+                    if (info.position == adapter.getSelectedIndex()) {
+                        adapter.setSelectedIndex(0);
+                        position = adapter.getSelectedIndex();
+                        adapter.notifyDataSetChanged();
+                    }
+                    List<String> items = recognitionService.getGestureList(Global.trainingSet);
+                    default_gesture_list = items;
+                    updateListView(default_gesture_list);
+                    commitPreferenceChoice(position);
+                    updateOtherPreferenceChoice(info.position);
                 }
-                if(info.position == adapter.getSelectedIndex()) {
-                    adapter.setSelectedIndex(0);
-                    position = adapter.getSelectedIndex();
-                    adapter.notifyDataSetChanged();
-                }
-                List<String> items = recognitionService.getGestureList(Global.trainingSet);
-                default_gesture_list=items;
-                updateListView(default_gesture_list);
-                commitPreferenceChoice(position);
-                updateOtherPreferenceChoice(info.position);
             } catch (RemoteException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
