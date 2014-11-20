@@ -72,8 +72,8 @@ public class MainActivity extends Activity implements OnTaskCompleted {
             String globalGesturePrefSelect = Global.DeviceList[i] + "_" + Global.PREFERENCE_GESTURE_SELECT;
             String globalGesturePrefSelectName = Global.DeviceList[i] + "_" + Global.PREFERENCE_GESTURE_SELECT_NAME;
             if (gSharedPreferences.getString(globalGesturePrefSelectName, null) == null ) {
-                editor.putInt(globalGesturePrefSelect, 0);
-                editor.putString(globalGesturePrefSelectName, Global.DEFAULT_GESTURE_LIST[0]);
+                editor.putInt(globalGesturePrefSelect, i);
+                editor.putString(globalGesturePrefSelectName, Global.DEFAULT_GESTURE_LIST[i]);
             }
 
         }
