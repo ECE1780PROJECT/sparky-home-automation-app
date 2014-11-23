@@ -16,14 +16,50 @@
         android:icon="@drawable/bulb_on_img"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <receiver android:name="com.aga.hcp.home_control_prototype.WidgetProvider" >
+
+        <!--
+        <receiver android:name=".FanWidgetProvider"
+                  android:label="Spark Fan"
+                  android:icon="@drawable/fan_off_img">
+
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/homecontrol_appwidget_info" >
+                android:resource="@xml/fan_appwidget_info" >
+            </meta-data>
+        </receiver>
+        -->
+
+        <receiver android:name=".FanWidget"
+            android:label="Spark Fan"
+            android:icon="@drawable/fan_off_img">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/fan_appwidget_info" >
+            </meta-data>
+        </receiver>
+
+
+
+        <receiver android:name=".LightWidget"
+                  android:label="Spark Light"
+                  android:icon="@drawable/bulb_off_img">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/light_appwidget_info" >
             </meta-data>
         </receiver>
 
@@ -32,7 +68,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar" >
-        </activity>1
+        </activity>
         <activity
             android:name="com.aga.hcp.home_control_prototype.LightSettingsFragment"
             android:screenOrientation="portrait" >
