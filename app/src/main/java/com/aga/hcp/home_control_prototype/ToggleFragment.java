@@ -1,7 +1,6 @@
 package com.aga.hcp.home_control_prototype;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -37,6 +36,7 @@ public class ToggleFragment extends Fragment {
 
     private static final String TAG = "ToggleLightFragment";
     private OnTaskCompleted lightListener, fanListener;
+    private static String listenerId = "toggleFragment";
     private View view;
     private Animation spinningFan;
 
@@ -131,8 +131,8 @@ public class ToggleFragment extends Fragment {
         });
 
 
-        FanToggleTask.registerForToggleEvent(new FanToggleListener(), this.getActivity().getBaseContext());
-        LightToggleTask.registerForToggleEvent(new LightToggleListener(), this.getActivity().getBaseContext());
+        FanToggleTask.registerForToggleEvent(listenerId, new FanToggleListener(), this.getActivity().getBaseContext());
+        LightToggleTask.registerForToggleEvent(listenerId, new LightToggleListener(), this.getActivity().getBaseContext());
 
         view = rootView;
         return rootView;
