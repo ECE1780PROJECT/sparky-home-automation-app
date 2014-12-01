@@ -1,136 +1,165 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  30 NOV 2014 17:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.11.12)  30 NOV 2014 20:39
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**report.tex
-(./report.tex
-LaTeX2e <2014/05/01>
-Babel <3.9k> and hyphenation patterns for 78 languages loaded.
-(/usr/local/texlive/2014/texmf-dist/tex/latex/IEEEtran/IEEEtran.cls
-Document Class: IEEEtran 2012/12/27 V1.8 by Michael Shell
+**D:/GitHub/home-control-prototype/project-report-latex/report.tex
+(D:/GitHub/home-control-prototype/project-report-latex/report.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\ieeetran\IEEEtran.cls"
+Document Class: IEEEtran 2014/09/17 V1.8a by Michael Shell
 -- See the "IEEEtran_HOWTO" manual for usage information.
 -- http://www.michaelshell.org/tex/ieeetran/
 \@IEEEtrantmpdimenA=\dimen102
 \@IEEEtrantmpdimenB=\dimen103
+\@IEEEtrantmpdimenC=\dimen104
 \@IEEEtrantmpcountA=\count79
 \@IEEEtrantmpcountB=\count80
+\@IEEEtrantmpcountC=\count81
 \@IEEEtrantmptoksA=\toks14
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 368.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 458.
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 -- Using 8.5in x 11in (letter) paper.
 -- Using PDF output.
-\@IEEEnormalsizeunitybaselineskip=\dimen104
+\@IEEEnormalsizeunitybaselineskip=\dimen105
 -- This is a 10 point document.
-\CLASSINFOnormalsizebaselineskip=\dimen105
-\CLASSINFOnormalsizeunitybaselineskip=\dimen106
-\IEEEnormaljot=\dimen107
+\CLASSINFOnormalsizebaselineskip=\dimen106
+\CLASSINFOnormalsizeunitybaselineskip=\dimen107
+\IEEEnormaljot=\dimen108
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1039.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
-\IEEEilabelindentA=\dimen108
-\IEEEilabelindentB=\dimen109
-\IEEEilabelindent=\dimen110
-\IEEEelabelindent=\dimen111
-\IEEEdlabelindent=\dimen112
-\IEEElabelindent=\dimen113
-\IEEEiednormlabelsep=\dimen114
-\IEEEiedmathlabelsep=\dimen115
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1039.
+
+\IEEEquantizedlength=\dimen109
+\IEEEquantizedlengthdiff=\dimen110
+\IEEEquantizedtextheightdiff=\dimen111
+\IEEEilabelindentA=\dimen112
+\IEEEilabelindentB=\dimen113
+\IEEEilabelindent=\dimen114
+\IEEEelabelindent=\dimen115
+\IEEEdlabelindent=\dimen116
+\IEEElabelindent=\dimen117
+\IEEEiednormlabelsep=\dimen118
+\IEEEiedmathlabelsep=\dimen119
 \IEEEiedtopsep=\skip41
-\c@section=\count81
-\c@subsection=\count82
-\c@subsubsection=\count83
-\c@paragraph=\count84
-\c@IEEEsubequation=\count85
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@IEEEsubequation=\count86
 \abovecaptionskip=\skip42
 \belowcaptionskip=\skip43
-\c@figure=\count86
-\c@table=\count87
-\@IEEEeqnnumcols=\count88
-\@IEEEeqncolcnt=\count89
-\@IEEEsubeqnnumrollback=\count90
-\@IEEEtmpitemindent=\dimen116
-\c@IEEEbiography=\count91
-\@IEEEtranrubishbin=\box26
-) (/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+\c@figure=\count87
+\c@table=\count88
+\@IEEEeqnnumcols=\count89
+\@IEEEeqncolcnt=\count90
+\@IEEEsubeqnnumrollback=\count91
+\@IEEEquantizeheightA=\dimen120
+\@IEEEquantizeheightB=\dimen121
+\@IEEEquantizeheightC=\dimen122
+\@IEEEquantizeprevdepth=\dimen123
+\@IEEEquantizemultiple=\count92
+\@IEEEquantizeboxA=\box26
+\@IEEEtmpitemindent=\dimen124
+\c@IEEEbiography=\count93
+\@IEEEtranrubishbin=\box27
+) ("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks15
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
+("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
+("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
+("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+("D:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+("D:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count92
+\Gread@gobject=\count94
 ))
-\Gin@req@height=\dimen117
-\Gin@req@width=\dimen118
+\Gin@req@height=\dimen125
+\Gin@req@width=\dimen126
 )
-(/usr/local/texlive/2014/texmf-dist/tex/latex/float/float.sty
+("D:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count93
+\c@float@type=\count95
 \float@exts=\toks16
-\float@box=\box27
+\float@box=\box28
 \@float@everytoks=\toks17
-\@floatcapt=\box28
-) (./report.aux
+\@floatcapt=\box29
+)
+(D:\GitHub\home-control-prototype\project-report-latex\report.aux
 
 LaTeX Warning: Label `fig2' multiply defined.
 
@@ -153,8 +182,6 @@ LaTeX Warning: Label `fig2' multiply defined.
 LaTeX Warning: Label `fig2' multiply defined.
 
 )
-\openout1 = `report.aux'.
-
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 308.
 LaTeX Font Info:    ... okay on input line 308.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 308.
@@ -167,71 +194,26 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 308.
 LaTeX Font Info:    ... okay on input line 308.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 308.
 LaTeX Font Info:    ... okay on input line 308.
- (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+
+-- Lines per column: 58 (exact).
+("D:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count94
-\scratchdimen=\dimen119
-\scratchbox=\box29
-\nofMPsegments=\count95
-\nofMParguments=\count96
+\scratchcounter=\count96
+\scratchdimen=\dimen127
+\scratchbox=\box30
+\nofMPsegments=\count97
+\nofMParguments=\count98
 \everyMPshowfont=\toks18
-\MPscratchCnt=\count97
-\MPscratchDim=\dimen120
-\MPnumerator=\count98
-\makeMPintoPDFobject=\count99
+\MPscratchCnt=\count99
+\MPscratchDim=\dimen128
+\MPnumerator=\count100
+\makeMPintoPDFobject=\count101
 \everyMPtoPDFconversion=\toks19
-) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
-
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-
-(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.jpeg,.png,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
-[1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+) [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
-<Workflow.png, id=9, 525.965pt x 388.45125pt>
+<Workflow.png, id=8, 525.965pt x 388.45125pt>
 File: Workflow.png Graphic file (type png)
  <use Workflow.png>
 Package pdftex.def Info: Workflow.png used on input line 461.
@@ -241,103 +223,111 @@ Overfull \hbox (0.94499pt too wide) in paragraph at lines 461--462
  [][] 
  []
 
-<S1.jpg, id=11, 542.025pt x 963.6pt>
+<S1.jpg, id=10, 542.025pt x 963.6pt>
 File: S1.jpg Graphic file (type jpg)
  <use S1.jpg>
 Package pdftex.def Info: S1.jpg used on input line 494.
 (pdftex.def)             Requested size: 108.405pt x 192.71658pt.
- [2 <./Workflow.png> <./S1.jpg>] <threshold.png, id=16, 455.7828pt x 358.4592pt
->
+ [2 <D:/GitHub/home-control-prototype/project-report-latex/Workflow.png> <D:/Gi
+tHub/home-control-prototype/project-report-latex/S1.jpg>] <threshold.png, id=15
+, 455.7828pt x 358.4592pt>
 File: threshold.png Graphic file (type png)
- <use threshold.png>
+
+<use threshold.png>
 Package pdftex.def Info: threshold.png used on input line 508.
 (pdftex.def)             Requested size: 216.81pt x 170.51054pt.
-
-<R1.jpg, id=17, 337.26pt x 289.08pt>
+ <R1.jpg, id=16, 337.26pt x 289.08pt>
 File: R1.jpg Graphic file (type jpg)
  <use R1.jpg>
-Package pdftex.def Info: R1.jpg used on input line 538.
+Package pdftex.def Info: R1.jpg used on input line 537.
 (pdftex.def)             Requested size: 216.81pt x 185.83983pt.
 
-<R2.jpg, id=18, 334.24875pt x 290.08376pt>
+<R2.jpg, id=17, 334.24875pt x 290.08376pt>
 File: R2.jpg Graphic file (type jpg)
  <use R2.jpg>
-Package pdftex.def Info: R2.jpg used on input line 544.
+Package pdftex.def Info: R2.jpg used on input line 543.
 (pdftex.def)             Requested size: 216.81pt x 188.16711pt.
 
-<R3.jpg, id=19, 334.24875pt x 290.08376pt>
+<R3.jpg, id=18, 334.24875pt x 290.08376pt>
 File: R3.jpg Graphic file (type jpg)
  <use R3.jpg>
-Package pdftex.def Info: R3.jpg used on input line 550.
+Package pdftex.def Info: R3.jpg used on input line 549.
 (pdftex.def)             Requested size: 216.81pt x 188.16711pt.
 
-<R4.jpg, id=20, 335.2525pt x 290.08376pt>
+<R4.jpg, id=19, 335.2525pt x 290.08376pt>
 File: R4.jpg Graphic file (type jpg)
  <use R4.jpg>
-Package pdftex.def Info: R4.jpg used on input line 556.
+Package pdftex.def Info: R4.jpg used on input line 555.
 (pdftex.def)             Requested size: 216.81pt x 187.59612pt.
 
-<R5.jpg, id=21, 333.245pt x 290.08376pt>
+<R5.jpg, id=20, 333.245pt x 290.08376pt>
 File: R5.jpg Graphic file (type jpg)
  <use R5.jpg>
-Package pdftex.def Info: R5.jpg used on input line 562.
+Package pdftex.def Info: R5.jpg used on input line 561.
 (pdftex.def)             Requested size: 216.81pt x 188.73367pt.
 
-<R7.jpg, id=22, 332.24126pt x 289.08pt>
+<R7.jpg, id=21, 332.24126pt x 289.08pt>
 File: R7.jpg Graphic file (type jpg)
  <use R7.jpg>
-Package pdftex.def Info: R7.jpg used on input line 568.
+Package pdftex.def Info: R7.jpg used on input line 567.
 (pdftex.def)             Requested size: 216.81pt x 188.64522pt.
 
-<R6.jpg, id=23, 333.245pt x 290.08376pt>
+<R6.jpg, id=22, 333.245pt x 290.08376pt>
 File: R6.jpg Graphic file (type jpg)
  <use R6.jpg>
-Package pdftex.def Info: R6.jpg used on input line 574.
+Package pdftex.def Info: R6.jpg used on input line 573.
 (pdftex.def)             Requested size: 216.81pt x 188.73367pt.
- [3 <./threshold.png> <./R1.jpg>]
-Overfull \vbox (6.02654pt too high) has occurred while \output is active []
-
-
-[4 <./R2.jpg> <./R3.jpg> <./R4.jpg> <./R5.jpg> <./R7.jpg> <./R6.jpg>]
+ [3 <D:/GitHub/home-control-prototype/project-report-latex/threshold.png>] [4 <
+D:/GitHub/home-control-prototype/project-report-latex/R1.jpg> <D:/GitHub/home-c
+ontrol-prototype/project-report-latex/R2.jpg> <D:/GitHub/home-control-prototype
+/project-report-latex/R3.jpg> <D:/GitHub/home-control-prototype/project-report-
+latex/R4.jpg> <D:/GitHub/home-control-prototype/project-report-latex/R5.jpg> <D
+:/GitHub/home-control-prototype/project-report-latex/R7.jpg>]
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ™ in font ptmr7t!
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no ™ in font ptmr7t!
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 597.
+(Font)              <8> on input line 596.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 597.
+(Font)              <6> on input line 596.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 597.
+(Font)              <5> on input line 596.
 
-Underfull \hbox (badness 10000) in paragraph at lines 597--601
+Underfull \hbox (badness 10000) in paragraph at lines 596--600
 []\OT1/ptm/m/n/8 H. Kopka and P. W. Daly, \OT1/ptm/m/it/8 A Guide to L[]T[]X\OT
 1/ptm/m/n/8 , 3rd ed.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 597--601
+Underfull \hbox (badness 10000) in paragraph at lines 596--600
 \OT1/ptm/m/n/8 Har-low, Eng-land: Addison-Wesley, 1999. https://www.spark.io/
  []
 
-[5] (./report.aux)
+[5 <D:/GitHub/home-control-prototype/project-report-latex/R6.jpg>]
+(D:\GitHub\home-control-prototype\project-report-latex\report.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 2299 strings out of 493117
- 36545 string characters out of 6135433
- 100920 words of memory out of 5000000
- 5742 multiletter control sequences out of 15000+600000
- 40873 words of font info for 75 fonts, out of 8000000 for 9000
- 1144 hyphenation exceptions out of 8191
- 37i,6n,23p,1131b,213s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2014/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/201
-4/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2014/texmf-d
-ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/
-type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (5 pages, 248668 bytes).
+ 2044 strings out of 493921
+ 32737 string characters out of 3144878
+ 93306 words of memory out of 3000000
+ 5349 multiletter control sequences out of 15000+200000
+ 40873 words of font info for 75 fonts, out of 3000000 for 9000
+ 844 hyphenation exceptions out of 8191
+ 27i,5n,21p,1356b,208s stack positions out of 5000i,500n,10000p,200000b,50000s
+{D:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<D:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><D:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><D:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/urw/times/utmr8a.pfb><D:/Program Files (x86)/MiKTeX 2.9/fonts/t
+ype1/urw/times/utmri8a.pfb>
+Output written on report.pdf (5 pages, 254161 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+ 48 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

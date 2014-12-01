@@ -309,7 +309,7 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Sparky - Gesture Based Home Automation Application}
+\title{Sparky: Gesture-Based Home Automation Application}
 %
 %
 % author names and IEEE memberships
@@ -380,7 +380,7 @@
 
 \begin{abstract}
 %\boldmath
-Traditional home automation applications mainly use buttons on the mobile phone touch display to toggle the state of home devices. These applications usually require users to navigate through clusters of buttons to control the specific device. Most users would rather flip the switches on their home wall to toggle the specific devices instead of going into their applications to find the correct button. We built an Android application to utilize motion gestures to control the home devices. This will eliminate the process of users trying to find the correct button on the screen. With our application, users can toggle a specific device by simply performing a unique gesture with their mobile phone. Our application connects to a Spark Core, which we use for our home automation system. Spark Core is an Arduino-compatible Wi-Fi enabled device that can be used for developing internet-connected hardware. This device enables our application to let users control their home devices anywhere with internet access.
+Traditional home automation applications mainly use buttons on the mobile phone touch display to toggle the state of home devices. These applications usually require users to navigate through clusters of buttons to control the specific device. Most users would rather flip the switches on their home wall to toggle the specific device instead of going into their applications to find the correct button. We built an Android application to utilize motion gestures to control the home devices. This will eliminate the process of users trying to find the correct button on the screen. With our application, users can toggle a specific device by simply performing a unique gesture with their mobile phone. Our application connects to a Spark Core, which we use for our home automation system. Spark Core is an Arduino-compatible Wi-Fi enabled device that can be used for developing internet-connected hardware. This device enables our application to let users control their home devices anywhere with internet access.
 
 
 \end{abstract}
@@ -431,14 +431,14 @@ Android, Arduino, Gesture, Home Automation, Spark Core.
 % and "HIS" in caps to complete the first word.
 \IEEEPARstart{W}{}ith the development of our application, we wanted to address what we believe to be an up and coming problem in the world of Internet of Things (IoT). In the home automation space, there are many manufacturers. Each of these manufacturers typically develop applications to support their proprietary devices. However, a quick search on the mobile applications stores show that the UI and usability of these applications leave much to be desired[2]. Cluttered interfaces with no regard to user experience abound. With this in mind, our goal was to create a home automation application that is not only more aesthetically pleasing, but also more functional.
 
-Traditional home automation applications have stuck to the tried and tested method of utilizing buttons inside an application, typically on a mobile device, to toggle the state of devices at home. However, we have many more ways to interact with our mobile devices than simple taps. The overarching goal for home automation is to make the experience seamless for users. If it is not faster or more convenient to use your mobile phone to toggle a device, then why bother? If users want to turn off a light, and it takes them two seconds to take out their phone, 5 seconds to scroll over to the application and open it, 1 second for it to load, and 1 second for users to tap on the correct button; they have taken 9-10 seconds to do something they could have done in the same time by simply standing up and going to flip the switch manually. We believe that using gesture-based triggers, combined with widgets, users can achieve a more satisfactory experience, while reducing the time it takes to actually perform the task at hand. 
+Traditional home automation applications have stuck to the tried and tested method of utilizing buttons inside an application, typically on a mobile device, to toggle the state of devices at home. However, we have many more ways to interact with our mobile devices than simple taps. The overarching goal for home automation is to make the experience seamless for users. If it is not faster or more convenient to use your mobile phone to toggle a device, then why bother? If users want to turn off a light, and it takes them two seconds to take out their phone, 5 seconds to scroll over to the application and open it, 1 second for it to load, and 1 second for users to tap on the correct button, then they have taken 9-10 seconds to do something they could have done in the same time by simply standing up and going to flip the switch manually. We believe that using gesture-based triggers combined with widgets, users can achieve a more satisfactory experience, while reducing the time it takes to actually perform the task at hand. 
 
-For the purpose of demonstration, we will only use the 3-Axis accelerometer data available in our Android device to perform gesture recognition. The algorithm we use is a simple discrete time series data matching algorithm called Dynamic Time Warping (DTW). It should be noted that gesture recognition is non-trivial and high degrees of accuracy will require using advanced machine learning techniques. 
+For the purpose of demonstration, we will only use the 3-Axis accelerometer data available in our Android phones to perform gesture recognition. The algorithm we use is a simple discrete time series data matching algorithm called Dynamic Time Warping (DTW). It should be noted that gesture recognition is non-trivial and high degrees of accuracy will require using advanced machine learning techniques. 
 
-This paper gives an overview of our application, explaining how we setup and connect to the Spark Core home automation system. This paper also explains how we implement our gesture based cognition to control a Spark Core and show results of user experience tests.
+This paper gives an overview of our application, explaining how we setup and connect to the Spark Core home automation system. This paper also explains how we implement our gesture based interface to control a Spark Core. Finally, we  show results of user experience tests, and reveal directions for future work.
 
 \section{Overview of the application}
-The goal of this application is quite straightforward; improve the current state of home automation user interaction. To perform this, we go about it in three ways. Firstly, we improve the communications between mobile and the physical devices at home. Secondly, we implement gesture recognition as a device-toggling mechanism. Third, we build our prototype using publically available devices, which will allow users to extend our work.  
+The goal of this application is to improve the current state of home automation user interaction. To perform this, we go about it in three ways. Firstly, we improve the communications between mobile and the physical devices at home. Secondly, we implement gesture recognition as a device-toggling mechanism. Third, we build our prototype using publically available devices, which will allow users to extend our work.  
 
 The prototype of the device involves the following:
 \begin{enumerate}
@@ -448,17 +448,16 @@ The prototype of the device involves the following:
 	\item Android Device
 \end{enumerate}
 
-Users can plug any of their devices into either one outlet or the other. Then, within the android application, they can toggle the power to each of the outlets individually, and become informed if the status of one of the outlets changes.
+Users can plug any of their devices into either one outlet or the other. Then, within the android application, they can toggle the power to each of the outlets individually, and become informed via graphical representation if the status of one of the outlets has changed.
 
 For user interaction, we have decided on a multi-faceted approach. The novelty of the application comes from our gesture recognition system which allows the mobile device to register gestures even while the phone is asleep. This in turn toggles power to the devices.  Beyond this, we have also implemented widgets, which allows users to define their own interface on their home screens. For example, you can split half your home screen between two widgets for easy access to the functionality, even when not inside the app. Furthermore, we allow users to toggle devices in the traditional sense, using buttons inside the application itself. 
 
 To begin with, we discuss the communications method used. To build our prototype, we used a Spark Core[1]. The device exposes a REpresentational State Transfer(REST) API to anybody who has the credentials, and operates over a Wi-Fi network. The advantage of this is that it is extremely light-weight, and requires no proprietary technology. The Spark Core, being an Arduino-based microcontroller, also allows us to quickly and remotely modify the code running on it. 
 
-In this section we give an overview of our Android application prototype, Sparky. We omit low-level implementation details in favour of providing a high-level overview of the interactions. In order to allow the mobile phone to communicate, we have written a communications library that allows us to interact with the Spark Core. It is upon this interaction which the backbone of the application rests. Whenever an intent to toggle is registered, whether by gesture recognition or otherwise, a call is made to the library, which handles request and response. Since we have many UI elements indicating the status of the device(in-app, multiple widgets), we use the observer pattern to handle notifying all listeners as to the status of the device. For the in-app and widget UI, we use minimalistic icons that represent the devices they are toggling. This declutters the interface and provides an intuitive idea of how to use the appplication. Fig. \ref{fig1} shows the overall basic usage of the application.
+In this section we give an overview of our Android application prototype, Sparky. We omit low-level implementation details in favour of providing a high-level overview of the interactions. In order to allow the mobile phone to communicate with the Spark Core, we have written a communications library. It is upon this interaction which the backbone of the application rests. Whenever an intent to toggle is registered, whether by gesture recognition or otherwise, a call is made to the library, which handles request and response. Since we have many UI elements indicating the status of the device (in-app, multiple widgets), we use the observer pattern to handle notifying all listeners as to the status of the device. For the in-app and widget UI, we use minimalistic icons that represent the devices they are toggling. This declutters the interface and provides an intuitive idea of how to use the appplication. Fig. \ref{fig1} shows the overall basic usage of the application.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=3.5in]{Workflow.png}
 \caption{Application workflow diagram}
 \label{fig1}
 \end{figure}
@@ -469,7 +468,7 @@ There are equivalent workflows for other tasks, for example changing the current
 
 \section{Gesture Recognition}
 
-Our application uses the DTW algorithm to do gesture recognition. DTW was originally developed for speech recognition by measuring the similarity between two discrete time series data. Instead of speech, we compare accelerometer data for gesture recognition. DTW is relatively simple to implement and it works for simple gestures. Below is a pseudo-code algorithm for DTW:\\
+Our application uses the DTW algorithm to perform gesture recognition. DTW was originally developed for speech recognition. It works by measuring the similarity between two sets of discrete time series data. Instead of speech, we opt to compare accelerometer data in order to recognize gestures. DTW is relatively simple to implement and it works for simple gestures. Below is the pseudocode algorithm for DTW:\\
 \noindent 
 	double DTW(double 01[1...T1], double O2[1...T2])\\
  	\hspace*{0.25cm}declare double DTW[0...T1, 0....T2]\\
@@ -485,9 +484,9 @@ Our application uses the DTW algorithm to do gesture recognition. DTW was origin
  	\hspace*{1cm}minimum(DTW[i-1,j]), DTW[i,j-1], DTW[i-1,j-1])\\
  	\hspace*{0.25cm}return DTW[T1,T2]
 
-Since the data reading is in 3-Dimensional space, we treat each time interval reading as a 3-Dimensional point. The distance function we use in the pseudo code takes the norm between the two points. 
+Since the data reading is in three dimensions, we treat each time interval reading as a three-dimensional point. The distance function we use in the pseudocode simply takes the norm between the two points. 
 
-Before gesture recognition, we train a gesture by obtaining and storing 32 discrete accelerometer data. This accelerometer data combined with a gesture label form a gesture object. Our application, by default, contains two predefined gestures: Bump Front and Bump Left. We choose these two gestures as default because it is very simple for another person to repeat the movement and it is unique enough that when someone puts their phone in their pocket for example, they will not accidentally trigger the gesture.
+Before gesture recognition, we train a gesture by obtaining and storing 32 discrete points of accelerometer data. This accelerometer data combined with a gesture label form a single gesture object. By default, our application contains two predefined gestures: Bump Front and Bump Left. We choose these two gestures as default because it is very simple for another person to repeat the movement and it is unique enough that when someone puts their phone in their pocket, they will not accidentally trigger the gesture.
 
 \begin{figure}[H]
 \centering
@@ -497,11 +496,11 @@ Before gesture recognition, we train a gesture by obtaining and storing 32 discr
 \end{figure}
 
 
-Bump Front in fig. \ref{fig2} is defined by holding the device straight, tilting it forward by 90 degrees and back to the original position within 2 seconds. Bump Left is defined similarly, tilting the phone to the left by 90 degrees and back to the original position within 2 seconds. Users have the option of creating their own custom gestures.
+Bump Front in fig. \ref{fig2} is defined by holding the device straight, tilting it forward by 90 degrees and back to the original position within two seconds. Bump Left is defined similarly, tilting the phone to the left by 90 degrees and back to the original position within two seconds. Users also have the option of creating their own custom gestures via the Start Training button found in fig. \ref{fig2}.
 
-Once users select the gesture for a particular device, and make their preference about listening to gestures being performed in the background, the application listens to the accelerometer data. This data is compared with the stored gestures using the DTW algorithm. DTW will return the distance for every stored gestures. This distance indicates how similar the two gestures are, with a smaller distance indicating they are very similar and vice versa. We take the geture with the smallest distance as the recognized gesture. 
+Once the user selects a gesture for a particular device,  the application will constantly poll the accelerometer data. This data is compared with the stored gestures created using the DTW algorithm. We return will return the distance for every stored gesture. This distance metric indicates how similar the two gestures are, with a smaller distance indicating they are very similar and vice versa. We take the geture with the smallest distance as the recognized gesture. 
 
-DTW allows some variance in gesture motion and speed when a person tries to repeat the gesture they trained. The variance is controlled by a threshold variable in our program. We find that small variance will allow us to get high percentage of true positive recognition but we realize that it takes multiple tries for users to re-do the same gesture they trained. On the other hand, large variance will allow users to easily get their gesture recognized but will also have high chance of getting false positive recognition. 
+DTW allows some variance in gesture motion and speed when a person tries to repeat the gesture they have trained. The variance is controlled by a threshold variable in our program. We find that using a small variance allows us to get a high percentage of true positive results, but we have found that it sometimes takes multiple tries for users to re-create the same gesture they trained. On the other hand, large variance allows users to easily get their gesture recognized but also has a higher chance of generating false positives.
 
 \begin{figure}[H]
 \centering
@@ -510,19 +509,18 @@ DTW allows some variance in gesture motion and speed when a person tries to repe
 \label{fig3}
 \end{figure}
 
-	We set the distance threshold by experiementation. We try to set the threshold so that we minimize both the number of tries to get true positive recognition and the number of accidental false positive recognition. In fig. \ref{fig3}, the diamond scatter plot is the average number of tries to get a proper gesture recognized. We have a person train their own gesture and try to reproduce the same gesture at different thresholds multiple times. We then take the average of this set to the threshold. The square scatter plot is having a person doing 10 random gestures and see how many gestures will get recognized (these are false positive results). We can see in fig. \ref{fig3} that the ideal threshold value is around 12.  
+	For our aplpication, we have set the distance threshold by experiementation. We try to set the threshold so that we minimize both the number of tries to get true positive recognition and the number of accidental false positive recognitions. In fig. \ref{fig3}, the diamond scatter plot is the average number of tries to get a gesture properly recognized. We have a person train their own gesture and try to reproduce the same gesture at different thresholds multiple times. We then take the average of this set to the threshold. The square scatter plot is having a person doing 10 random gestures and see how many gestures will get recognized (these are false positive results). We can see in fig. \ref{fig3} that the ideal threshold value is around 12.  
 
  
 
 
 \section{User Experience Tests}
 
-The application was tested by 17 users aged between 21-27 and we obtained their feedback. The participants of the testing consisted of mainly graduate students with a strong technical background. 
+The application was tested by 17 users aged between 21-27, all of which consented for us to use the feedback we obtained from them. The participants of the testing consisted of mainly graduate students with a strong technical background. However, we also included several non-technical users as well.
 
 \subsection{Methodology}
 
-The participants tested the application individually and not more than two participants were in the testing room at a particular point of time. The participants were initially briefed about the overall idea of the application. The team demonstrated the functioning of the application first and explained how to perform the default gestures. Then the participants were given access to the mobile device on which the application is running. The participants tested the entire functionality of the application including changing the assigned gestures and creating their own custom gestures. There was no set time limit for the participants to use the application. Upon their stating that they have completed testing the application, they were directed to fill in an online feedback form. The questions on the feedback form were structured to get the users' rating on factors such as the intuitiveness of the application, their comfort using the default gestures, their willingness/interest in adapting such technology to control home appliances using our mobile application.
-
+The participants tested the application individually and no more than two participants were in the testing room at a particular point in time. The participants were initially briefed about the overall idea of the application. The team demonstrated how to use the application first and explained how to perform the default gestures. Then the participants were given access to the mobile device on which the application is running. The participants tested the entire functionality of the application including changing the assigned gestures and creating their own custom gestures. There was no set time limit for the participants to use the application. Upon their stating that they have completed testing the application, they were directed to fill in an online feedback form. The questions on the feedback form were structured to get the users' rating on factors such as the intuitiveness of the application, their comfort using the default gestures, and their willingness/interest to adopt such a technology to control home appliances.
 \subsection{User Feedback}
 
 Users submitted their feedback and comments online. Users also provided their consent on the form before submitting their feedback.
@@ -531,7 +529,7 @@ Some comments from the users are: ``Takes a bit of trial and error to figure out
 
 \subsection{Inference}
 
-The application experience rating on a scale of 10 was found to have a mean of 8.58,  and median of 9. Although users rated the default gesture experience at a mean of 7.88 and median of 8, about 53\% of the users needed multiple attempts to get accustomed to the way the default gestures have been defined. This is attested by the rating on the ease of figuring out the default gesture, with a mean of 7.5 and median of 8. Since the data obtained when a gesture is performed is reliant on orientation and the starting position at the time of doing the gesture, users needed practice before being comfortable. Once they learnt the default gestures, the usability of the application became smooth. The application's intuitiveness received a mean rating of 8.11 with a median of 8. On being comfortable to use the application in a real life setting, users gave a positive 70.5\% yes. It is interesting to note that 76.47\% of the users were comfortable using our application to control household devices, albeit this can be due to the users being in the 21-27 age group and most users being from a technical background. 
+The application experience rating on a scale of 10 was found to have a mean of 8.58,  and median of 9. Although users rated the default gesture experience at a mean of 7.88 and median of 8, about 53\% of the users needed multiple attempts to get accustomed to the way the default gestures have been defined. This is attested by the rating on the ease of figuring out the default gesture, with a mean of 7.5 and median of 8. Since the data obtained when a gesture is performed is reliant on orientation and the starting position at the time of doing the gesture, users needed practice before being comfortable. Once they learnt the default gestures, the usability of the application greatly increased. The application's intuitiveness received a mean rating of 8.11 with a median of 8. On being comfortable to use the application in a real life setting, users gave a positive 70.5\% yes. It is interesting to note that 76.47\% of the users were comfortable using our application to control household devices, albeit this can be due to the users being in the 21-27 age group and most users being from a technical background. It is important to note that our numbers may have been accidentally inflated due to the fact that the primary portion of our testers are technically included people. 
 
 \begin{figure}[!t]
 \centering
@@ -578,16 +576,16 @@ The application experience rating on a scale of 10 was found to have a mean of 8
 
 
 \section{Future Work}
-We aim to improve our application in the future by providing an interface for multiple Spark Cores to be connected to our application. Functionality to add more devices, with corresponding images, are also targeted. 
+We aim to improve our application in the future by providing an interface for multiple Spark Cores to be connected to our application. The ability to add devices dynamically, and the ability to customize the icons for each device are more features that could be worked on in the future.
 
-We aim to improve the accuracy of the gesture recognition by incorporating the 3-Axis gyrometer. We would also want to have an option for users to utilize the magnetometer to control multiple devices with the same gesture but perform the gesture at a particular direction. 
+Another direction for future work is to improve the accuracy of the gesture recognition by incorporating the three-axis gyroscope. We also want to have an option for users to utilize the magnetometer to control multiple devices with the same gesture but perform the gesture in a particular direction. This would allow a user to point their phone at a particular device, perform a generic gesture, and have that specific device toggled.
 
-DTW is an effective algorithm when the gesture is a simple motion. It allows small variation in speed and motion. However, our user feedback results show that the default gestures are minimally comfortable because the algorithm generally performs poorly when the moving rate and motion have a large variation; as is common among different users. Also, with more complicated gestures DTW will not work effectively. One alternative is to do gesture recognition is Hidden Markov Models (a machine learning technique). This technique is better because it uses knowledge in probability and stastics to account for larger variation of speed and motion, but still retain the accuracy of recognizing gestures. 
+DTW is an effective algorithm when the gesture is a simple motion, as it allows some small variation in speed and motion. However, our user feedback results show that the default gestures are minimally comfortable because the algorithm generally performs poorly when the moving rate and motion have a large variation, as is common among different users. Furthermore, with more complex gestures DTW does not work effectively. One alternative is to do gesture recognition via Hidden Markov Models.Using this, we may realize some accuracy gains, because it uses knowledge of probability and stastics to account for larger variation of speed and motion, while still retaining the ability to accurately recognize gestures. 
 
-We also aim to test the application among a wider audience to observe how much this technology/application is acceptable to the greater populace.
+We would also like to test the application among a wider audience to observe how much this technology is applicable to the greater populace.
 \section{Conclusion}
 
-
+In this paper and it’s accompanying mobile app, we have shown that not only is it possible to replace traditional home automation application usage patterns with gestures, but also that it is generally effective. The feedback we’ve received gives a few important insights that point towards future work. Clearly, the level of accuracy for the gesture recognition, while acceptable, has a long way to go in order to be adopted by any sizeable segment of the home automation market. Given the current state of the smart home and the huge recent advancements in the world of IoT, we feel that gesture-based recognition points the way towards the future of home interactions. We also feel that our application demonstrates that it is very feasible, once accuracy levels become high enough. 
 
 
 \newpage
