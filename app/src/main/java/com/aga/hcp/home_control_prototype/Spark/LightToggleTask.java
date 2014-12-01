@@ -17,31 +17,38 @@ import java.util.Set;
  */
 public class LightToggleTask extends SparkAPITask {
     private static String api_path = "toggle";
-    private static HashMap<OnTaskCompleted, Context> statusListeners = new HashMap<OnTaskCompleted, Context>();
+    private static HashMap<String, ListenerAndContext> statusListeners = new HashMap<String, ListenerAndContext>();
     
     
     public LightToggleTask(String deviceID, OnTaskCompleted listener) {
         super(deviceID, api_path, listener);
-        //statusListeners.put(listener, null);
     }
     public LightToggleTask(String deviceID,OnTaskCompleted listener, Context context) {
         super(deviceID, api_path, listener, context);
-        //statusListeners.put(listener, context);
     }
 
     @Override
     public void onPostExecute(JSONArray jsonArray){
         Set entries = statusListeners.entrySet();
         Iterator i = entries.iterator();
+        OnTaskCompleted listener;
+        Context context;
+
         while(i.hasNext()){
 
             Map.Entry entry = (Map.Entry)i.next();
             Log.i(TAG, "onPostExecute() -> Notifying observer that task has completed: " + entry.toString());
-            ((OnTaskCompleted)entry.getKey()).onTaskCompleted(jsonArray, (Context)entry.getValue());
+            listener = ((ListenerAndContext)entry.getValue()).getListener();
+            context = ((ListenerAndContext)entry.getValue()).getContext();
+            listener.onTaskCompleted(jsonArray, context);
         }
     }
 
-    public static void registerForToggleEvent(OnTaskCompleted listener, Context context){
-        statusListeners.put(listener, context);
+    public static void registerForToggleEvent(String id, OnTaskCompleted listener, Context context){
+        statusListeners.put(id, new ListenerAndContext(listener, context));
+    }
+
+    public static boolean isRegistered(String id){
+        return statusListeners.containsKey(id);
     }
 }

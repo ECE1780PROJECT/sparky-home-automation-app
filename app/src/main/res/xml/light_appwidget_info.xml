@@ -5,8 +5,8 @@
     android:minHeight="40dp"
     android:updatePeriodMillis="86400000"
     android:previewImage="@drawable/bulb_off_img"
-    android:initialLayout="@layout/app_widget_layout"
+    android:initialLayout="@layout/app_widget_layout_light"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen|keyguard"
-    android:initialKeyguardLayout="@layout/app_widget_layout">
+    android:initialKeyguardLayout="@layout/app_widget_layout_light">
 </appwidget-provider>
