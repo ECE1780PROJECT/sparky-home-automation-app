@@ -469,21 +469,29 @@ There are equivalent workflows for other tasks, for example changing the current
 \section{Gesture Recognition}
 
 Our application uses the Dynamic Time Warping (DTW) algorithm to perform gesture recognition. DTW was originally developed for speech recognition, but we apply it here to gesture recognition. It works by measuring the similarity between two sets of discrete time series data. Instead of speech, we opt to compare accelerometer data in order to recognize gestures. DTW is relatively simple to implement and it works for simple gestures. Below is the pseudocode algorithm for DTW:\\
+
 \noindent 
 	double DTW(double 01[1...T1], double O2[1...T2])\\
  	\hspace*{0.25cm}declare double DTW[0...T1, 0....T2]\\
  	\hspace*{0.25cm}declare integer i, j\\
+ 	
+ 	\noindent 
  	\hspace*{0.25cm}for i:=1 to T1\\
  	\hspace*{0.5cm}DTW[i,0] := positive infinity\\
  	\hspace*{0.25cm}for j:=1 to T2\\
- 	\hspace*{0.25cm}DTW[0,j] := positive infinity\\
+ 	\hspace*{0.5cm}DTW[0,j] := positive infinity\\
  	\hspace*{0.25cm}DTW[0,0] := 0\\
+ 	
+ 	\noindent 
  	\hspace*{0.25cm}for i:=1 to T1\\
  	\hspace*{0.5cm}for j:= 1 to T2\\
  	\hspace*{0.75cm}DTW[i,j] := distance(O1[i], O2[j]) +\\
  	\hspace*{1cm}minimum(DTW[i-1,j]), DTW[i,j-1], DTW[i-1,j-1])\\
- 	\hspace*{0.25cm}return DTW[T1,T2]
-
+ 	
+ 	\noindent 
+ 	\hspace*{0.25cm}return DTW[T1,T2]\\
+ 	
+\noindent 
 Since the data reading is in three dimensions, we treat each time interval reading as a three-dimensional point. The distance function we use in the pseudocode simply takes the norm between the two points. 
 
 Before gesture recognition, we train a gesture by obtaining and storing 32 discrete points of accelerometer data. This accelerometer data combined with a gesture label form a single gesture object. By default, our application contains two predefined gestures: Bump Front and Bump Left. We choose these two gestures as default because it is very simple for another person to repeat the movement and it is unique enough that when someone puts their phone in their pocket, they will not accidentally trigger the gesture.
@@ -530,42 +538,14 @@ Some comments from the users are: ``Takes a bit of trial and error to figure out
 
 The application experience rating on a scale of 10 was found to have a mean of 8.58,  and median of 9. Although users rated the default gesture experience at a mean of 7.88 and median of 8, about 53\% of the users needed multiple attempts to get accustomed to the way the default gestures have been defined. This is attested to by the rating we received for the ease of figuring out the default gesture, with a mean of 7.5 and median of 8. Since the data obtained when a gesture is performed is reliant on orientation and the starting position at the time of doing the gesture, users needed practice before being comfortable. Once they learnt the default gestures, the usability of the application greatly increased. The application's intuitiveness received a mean rating of 8.11 with a median of 8. On being comfortable to use the application in a real life setting, users gave a positive 70.5\% yes. It is interesting to note that 76.47\% of the users were comfortable using our application to control household devices, albeit this may be due to the users being in the 21-27 age group and most users being from a technical background. It is important to note that our numbers may have been accidentally inflated due to the fact that the primary portion of our testers are technically-inclined people. 
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=3in]{R1.jpg}
-\caption{C1}
-\label{fig2}
-\end{figure}
-\begin{figure}[!t]
-\centering
-\includegraphics[width=3in]{R2.jpg}
-\caption{C2}
-\label{fig2}
-\end{figure}
-\begin{figure}[!t]
-\centering
-\includegraphics[width=3in]{R3.jpg}
-\caption{C3}
-\label{fig2}
-\end{figure}
-\begin{figure}[!t]
-\centering
-\includegraphics[width=3in]{R4.jpg}
-\caption{C4}
-\label{fig2}
-\end{figure}
+
 \begin{figure}[!t]
 \centering
 \includegraphics[width=3in]{R5.jpg}
 \caption{C5}
 \label{fig2}
 \end{figure}
-\begin{figure}[!t]
-\centering
-\includegraphics[width=3in]{R7.jpg}
-\caption{C6}
-\label{fig2}
-\end{figure}
+
 \begin{figure}[!t]
 \centering
 \includegraphics[width=3in]{R6.jpg}
